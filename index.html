@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Football Daily Summary</title>
+<style>
+:root{--bg:#0e1117;--card:#161b25;--fg:#e8ecf3;--muted:#93a1b5;
+--accent:#4ade80;--accent2:#60a5fa;--line:#242c3a;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+line-height:1.5}
+.wrap{max-width:880px;margin:0 auto;padding:24px 16px 64px}
+header{text-align:center;padding:40px 16px 28px}
+header h1{margin:0 0 6px;font-size:2rem;letter-spacing:-.02em}
+header .sub{color:var(--muted);margin:0;font-size:1rem}
+main{display:grid;gap:18px}
+main section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+main h2{margin:0 0 14px;font-size:1.15rem}
+main ul{margin:0;padding-left:22px}
+main li{margin:8px 0}
+main a{color:var(--accent2);text-decoration:none}
+main a:hover{text-decoration:underline}
+.lead{color:var(--muted);margin:0 0 14px}
+footer{margin-top:36px;text-align:center;color:var(--muted);font-size:.85rem}
+footer a{color:var(--accent2)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>⚽ Football Daily Summary</h1>
+    <p class="sub">Europe &amp; MENA results, insights, fixtures and standings — refreshed every day at 03:00 local time.</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>Latest digest</h2>
+      <p class="lead">The most recent daily summary, generated from the public FotMob JSON API. Each file is a self-contained responsive page: completed results with scorers and stats, match insights, the next 24 hours of fixtures, and league standings.</p>
+      <p><a href="summaries/football_summary_20261010.html">View 10 October 2026 →</a></p>
+    </section>
+
+    <section>
+      <h2>Archive</h2>
+      <p class="lead">Past digests, newest first.</p>
+      <ul>
+        <li><a href="summaries/football_summary_20261010.html">10 October 2026</a></li>
+        <li><a href="summaries/football_summary_20261009.html">09 October 2026</a></li>
+        <li><a href="summaries/football_summary_20261007.html">07 October 2026</a></li>
+        <li><a href="summaries/football_summary_20261006.html">06 October 2026</a></li>
+        <li><a href="summaries/football_summary_20261005.html">05 October 2026</a></li>
+        <li><a href="summaries/football_summary_20261004.html">04 October 2026</a></li>
+        <li><a href="summaries/football_summary_20261003.html">03 October 2026</a></li>
+        <li><a href="summaries/football_summary_20261002.html">02 October 2026</a></li>
+        <li><a href="summaries/football_summary_20261001.html">01 October 2026</a></li>
+        <li><a href="summaries/football_summary_20260930.html">30 September 2026</a></li>
+        <li><a href="summaries/football_summary_20260929.html">29 September 2026</a></li>
+        <li><a href="summaries/football_summary_20260928.html">28 September 2026</a></li>
+        <li><a href="summaries/football_summary_20260927.html">27 September 2026</a></li>
+        <li><a href="summaries/football_summary_20260926.html">26 September 2026</a></li>
+        <li><a href="summaries/football_summary_20260925.html">25 September 2026</a></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>What it covers</h2>
+      <ul>
+        <li><strong>Europe (club):</strong> Premier League, LaLiga, Serie A, Bundesliga, Ligue 1, Champions League, Europa League, Conference League</li>
+        <li><strong>Europe (national):</strong> UEFA Nations League A/B/C/D, World Cup Qualification UEFA</li>
+        <li><strong>MENA (club):</strong> Saudi Pro League, UAE Pro League, Qatar Stars League, Egyptian Premier League, Moroccan Botola Pro, Tunisia Ligue 1</li>
+        <li><strong>MENA (national):</strong> AFCON Qualification, World Cup Qualification CAF, Asian Cup Qualification, World Cup Qualification AFC/CONCACAF, Arabian Gulf Cup</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>Data: public <a href="https://www.fotmob.com">FotMob</a> JSON API · No API key required.<br>
+    Source: <a href="https://github.com/mrmakrider/football-summary-daily">github.com/mrmakrider/football-summary-daily</a> · Generated at 03:00 local.</p>
+  </footer>
+</div>
+</body>
+</html>
