@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Football Daily Summary &ndash; 25 September 2026</title>
+<style>
+:root{--bg:#0e1117;--card:#161b25;--card2:#1c2230;--fg:#e8ecf3;--muted:#93a1b5;
+--accent:#4ade80;--accent2:#60a5fa;--line:#242c3a;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+line-height:1.5;}
+.wrap{max-width:1080px;margin:0 auto;padding:16px}
+header.page{background:linear-gradient(135deg,#16233c,#0e1117);padding:28px 16px;
+border-bottom:1px solid var(--line)}
+header.page .wrap{padding-bottom:4px}
+h1{margin:0 0 6px;font-size:1.6rem;letter-spacing:-.02em}
+.sub{color:var(--muted);margin:0;font-size:.95rem}
+h2{font-size:1.2rem;margin:28px 0 12px;padding-bottom:6px;
+border-bottom:1px solid var(--line)}
+h2 .count{color:var(--muted);font-size:.85rem;font-weight:400;margin-left:8px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+padding:14px}
+.card-head{display:flex;align-items:center;gap:8px;margin-bottom:10px;
+font-size:.75rem;color:var(--muted);flex-wrap:wrap}
+.league{color:var(--accent2);font-weight:600;text-transform:uppercase;
+letter-spacing:.04em}
+.badge{padding:1px 7px;border-radius:999px;font-size:.68rem;font-weight:700;
+background:#2a3346;color:#cbd5e1}
+.badge.ft{background:#14532d;color:#86efac}
+.badge.live{background:#7f1d1d;color:#fecaca}
+.badge.pen,.badge.aet{background:#4a2a0b;color:#fdba74}
+.pens{display:inline-block;margin:0 0 6px;padding:2px 9px;border-radius:8px;
+font-size:.78rem;background:#3a2410;color:#fdba74;font-weight:600;
+font-variant-numeric:tabular-nums}
+.pens b{color:#fff}
+.kickoff{margin-left:auto}
+/* Home / score / away share one column grid, so a long club name can never
+   push the score onto its own line or duplicate it. */
+.scorebox{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+gap:2px 10px;margin:0 0 2px}
+.scorebox .tname{font-weight:600;min-width:0;overflow-wrap:break-word}
+/* The away name is the second <span class="tname">, i.e. the 3rd grid child. */
+.scorebox .tname:nth-child(3){text-align:right}
+@media (max-width:400px){
+ .scorebox{grid-template-columns:1fr;gap:2px;text-align:center}
+ .scorebox .tname:nth-child(3){text-align:center}
+ .scorebox .sc{justify-self:center}
+}
+.scorebox .sc{font-variant-numeric:tabular-nums;font-weight:700;
+background:var(--card2);padding:2px 10px;border-radius:6px;min-width:62px;
+text-align:center}
+.scorebox.pending .sc{color:var(--muted);font-weight:400}
+.badge.tally{background:#1e3a5f;color:#93c5fd;padding:0 5px;font-size:.7rem;
+margin-left:2px}
+.meta{color:var(--muted);font-size:.78rem;margin:8px 0 0}
+.insight{margin:8px 0 0;font-size:.85rem;color:#cbd5e1;border-left:3px solid var(--accent);
+padding-left:8px}
+.scorers{list-style:none;margin:10px 0 0;padding:0;font-size:.85rem}
+.scorer{display:flex;gap:8px;padding:2px 0}
+.min{color:var(--muted);min-width:34px;text-align:right;
+font-variant-numeric:tabular-nums}
+.assist{color:var(--muted);font-size:.95em}
+.statgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:4px 12px;
+margin-top:10px;font-size:.8rem}
+.stat{display:flex;align-items:center;gap:6px}
+.stat .sv{min-width:26px;text-align:right;font-variant-numeric:tabular-nums;
+color:#cbd5e1}
+.stat .st{flex:1;text-align:center;color:var(--muted);font-size:.72rem}
+table.tbl,table.fx{width:100%;border-collapse:collapse;font-size:.83rem}
+table.tbl th{color:var(--muted);font-weight:600;font-size:.72rem;text-align:right;
+padding:4px 6px;border-bottom:1px solid var(--line);white-space:nowrap}
+table.tbl th:nth-child(2),table.tbl td.tm{text-align:left}
+table.tbl td{padding:4px 6px;text-align:right;border-bottom:1px solid #1e2534;
+font-variant-numeric:tabular-nums;white-space:nowrap}
+table.tbl td.pos{width:26px;min-width:26px}
+table.tbl td.tm{min-width:130px;white-space:normal}
+table.tbl td.pts{font-weight:700;color:var(--accent)}
+table.tbl tr:nth-child(even){background:#131824}
+.dot{display:inline-block;width:7px;height:7px;border-radius:2px;
+margin-left:4px;vertical-align:middle}
+.standings{background:var(--card);border:1px solid var(--line);border-radius:12px;
+padding:12px;overflow-x:auto}
+.standings h3{margin:0 0 8px;font-size:.95rem}
+.standings-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+gap:12px}
+table.fx td{padding:6px 8px;border-bottom:1px solid #1e2534}
+tr.fxgroup td{color:var(--accent2);font-size:.75rem;font-weight:600;
+text-transform:uppercase;letter-spacing:.04em;padding-top:12px}
+.fx-time{color:var(--muted);font-size:.78rem;white-space:nowrap;width:90px}
+.fx-teams{font-weight:600}
+.legend{margin:8px 0 0;font-size:.7rem;color:var(--muted);
+display:flex;flex-wrap:wrap;gap:4px 10px}
+.chip{display:inline-flex;align-items:center;gap:4px}
+.muted{color:var(--muted)}
+.small{font-size:.8rem}
+.empty{background:var(--card);border:1px dashed var(--line);border-radius:12px;
+padding:18px;color:var(--muted)}
+footer.page{margin-top:36px;padding:16px;border-top:1px solid var(--line);
+color:var(--muted);font-size:.78rem}
+a{color:var(--accent2)}
+@media (max-width:640px){
+ header.page h1{font-size:1.3rem}
+ .cards{grid-template-columns:1fr}
+ .wrap{padding:12px}
+ .statgrid{grid-template-columns:1fr}
+ .standings{padding:10px}
+ table.tbl{font-size:.76rem}
+ table.tbl td,table.tbl th{padding:4px 3px}
+ table.tbl td.tm{min-width:96px}
+ .fx-teams{font-size:.9rem}
+}
+</style>
+</head><body>
+<header class="page"><div class="wrap">
+<h1>&#9917; Football Daily Summary</h1>
+<p class="sub">Friday 25 September 2026 &middot; generated 13:39 +03 &middot;
+50 completed, 0 live, 16 upcoming
+&middot; Europe + MENA</p>
+</div></header>
+<div class="wrap"><h2>Results &middot; Europe<span class="count">16 matches</span></h2><div class="cards">
+    <article class="card">
+      <header class="card-head">
+        <span class="league">UEFA Nations League A</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 24 Sep · 21:45</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Netherlands</span><span class="sc">1 &ndash; 1</span><span class="tname">Germany</span></span>
+      
+      <p class="meta">Johan Cruijff ArenA · Att. 51437</p>
+      <p class="insight">Honours were even in a draw. Shot count 22-10 favoured Netherlands.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">32&#x27;</span><span class="pname">Felix Nmecha <span class="assist">(ast. Karim Adeyemi)</span></span></li><li class="scorer"><span class="min">90+2&#x27;</span><span class="pname">Cody Gakpo <span class="assist">(ast. Ruben van Bommel)</span></span></li></ul>
+      <div class="statgrid"><div class="stat"><span class="sv">54</span><span class="st">Ball possession</span><span class="sv">46</span></div><div class="stat"><span class="sv">3.18</span><span class="st">Expected goals (xG)</span><span class="sv">1.45</span></div><div class="stat"><span class="sv">22</span><span class="st">Total shots</span><span class="sv">10</span></div><div class="stat"><span class="sv">10</span><span class="st">Shots on target</span><span class="sv">2</span></div><div class="stat"><span class="sv">43</span><span class="st">Touches in opposition box</span><span class="sv">26</span></div><div class="stat"><span class="sv">5</span><span class="st">Big chances</span><span class="sv">2</span></div><div class="stat"><span class="sv">4</span><span class="st">Big chances missed</span><span class="sv">1</span></div><div class="stat"><span class="sv">348 (85%)</span><span class="st">Accurate passes</span><span class="sv">303 (82%)</span></div><div class="stat"><span class="sv">3</span><span class="st">Yellow cards</span><span class="sv">1</span></div><div class="stat"><span class="sv">12</span><span class="st">Corners</span><span class="sv">1</span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">UEFA Nations League A</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 24 Sep · 21:45</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Norway</span><span class="sc">3 &ndash; 2</span><span class="tname">Denmark</span></span>
+      
+      <p class="meta">Ullevaal Stadion · Att. 25002</p>
+      <p class="insight">Norway edged it by a single goal against Denmark. Shot count 13-13 favoured Norway.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">14&#x27;</span><span class="pname">Oscar Bobb <span class="assist">(ast. Martin Ødegaard)</span></span></li><li class="scorer"><span class="min">18&#x27;</span><span class="pname">Erling Haaland <span class="badge tally" title="multiple goals">2&times;</span> <span class="assist">(ast. Antonio Nusa)</span></span></li><li class="scorer"><span class="min">25&#x27;</span><span class="pname">Mikkel Damsgaard</span></li><li class="scorer"><span class="min">60&#x27;</span><span class="pname">Rasmus Højlund</span></li><li class="scorer"><span class="min">74&#x27;</span><span class="pname">Erling Haaland <span class="badge tally" title="multiple goals">2&times;</span> <span class="assist">(ast. Martin Ødegaard)</span></span></li></ul>
+      <div class="statgrid"><div class="stat"><span class="sv">49</span><span class="st">Ball possession</span><span class="sv">51</span></div><div class="stat"><span class="sv">1.41</span><span class="st">Expected goals (xG)</span><span class="sv">1.09</span></div><div class="stat"><span class="sv">13</span><span class="st">Total shots</span><span class="sv">13</span></div><div class="stat"><span class="sv">7</span><span class="st">Shots on target</span><span class="sv">7</span></div><div class="stat"><span class="sv">34</span><span class="st">Touches in opposition box</span><span class="sv">26</span></div><div class="stat"><span class="sv">1</span><span class="st">Big chances</span><span class="sv">1</span></div><div class="stat"><span class="sv">1</span><span class="st">Big chances missed</span><span class="sv">0</span></div><div class="stat"><span class="sv">448 (88%)</span><span class="st">Accurate passes</span><span class="sv">464 (89%)</span></div><div class="stat"><span class="sv">0</span><span class="st">Yellow cards</span><span class="sv">3</span></div><div class="stat"><span class="sv">4</span><span class="st">Corners</span><span class="sv">7</span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">UEFA Nations League A</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 24 Sep · 21:45</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Portugal</span><span class="sc">1 &ndash; 0</span><span class="tname">Wales</span></span>
+      
+      <p class="meta">Estádio José Alvalade · Att. 47725</p>
+      <p class="insight">Portugal edged it by a single goal against Wales. In a low-scoring affair. Shot count 23-5 favoured Portugal.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">22&#x27;</span><span class="pname">Joao Félix <span class="assist">(ast. Nuno Mendes)</span></span></li></ul>
+      <div class="statgrid"><div class="stat"><span class="sv">62</span><span class="st">Ball possession</span><span class="sv">38</span></div><div class="stat"><span class="sv">1.93</span><span class="st">Expected goals (xG)</span><span class="sv">0.85</span></div><div class="stat"><span class="sv">23</span><span class="st">Total shots</span><span class="sv">5</span></div><div class="stat"><span class="sv">5</span><span class="st">Shots on target</span><span class="sv">1</span></div><div class="stat"><span class="sv">39</span><span class="st">Touches in opposition box</span><span class="sv">10</span></div><div class="stat"><span class="sv">1</span><span class="st">Big chances</span><span class="sv">3</span></div><div class="stat"><span class="sv">1</span><span class="st">Big chances missed</span><span class="sv">3</span></div><div class="stat"><span class="sv">569 (91%)</span><span class="st">Accurate passes</span><span class="sv">325 (83%)</span></div><div class="stat"><span class="sv">0</span><span class="st">Yellow cards</span><span class="sv">1</span></div><div class="stat"><span class="sv">10</span><span class="st">Corners</span><span class="sv">2</span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">UEFA Nations League A</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 24 Sep · 21:45</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Serbia</span><span class="sc">1 &ndash; 2</span><span class="tname">Greece</span></span>
+      
+      <p class="meta">Stadion Rajko Mitić · Att. 5701</p>
+      <p class="insight">Greece edged it by a single goal against Serbia. Shot count 9-26 favoured Greece.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">4&#x27;</span><span class="pname">Andrija Živković <span class="assist">(ast. Dušan Tadić)</span></span></li><li class="scorer"><span class="min">74&#x27;</span><span class="pname">Christos Tzolis <span class="assist">(ast. Vangelis Pavlidis)</span></span></li><li class="scorer"><span class="min">90+5&#x27;</span><span class="pname">Anastasios Douvikas <span class="assist">(ast. Konstantinos Tsimikas)</span></span></li></ul>
+      <div class="statgrid"><div class="stat"><span class="sv">39</span><span class="st">Ball possession</span><span class="sv">61</span></div><div class="stat"><span class="sv">1.42</span><span class="st">Expected goals (xG)</span><span class="sv">2.51</span></div><div class="stat"><span class="sv">9</span><span class="st">Total shots</span><span class="sv">26</span></div><div class="stat"><span class="sv">4</span><span class="st">Shots on target</span><span class="sv">9</span></div><div class="stat"><span class="sv">19</span><span class="st">Touches in opposition box</span><span class="sv">44</span></div><div class="stat"><span class="sv">4</span><span class="st">Big chances</span><span class="sv">2</span></div><div class="stat"><span class="sv">3</span><span class="st">Big chances missed</span><span class="sv">1</span></div><div class="stat"><span class="sv">323 (85%)</span><span class="st">Accurate passes</span><span class="sv">525 (89%)</span></div><div class="stat"><span class="sv">2</span><span class="st">Yellow cards</span><span class="sv">1</span></div><div class="stat"><span class="sv">2</span><span class="st">Corners</span><span class="sv">6</span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">UEFA Nations League A</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Fri 25 Sep · 21:45</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Italy</span><span class="sc">0 &ndash; 2</span><span class="tname">Belgium</span></span>
+      
+      <p class="meta">Stadio Olimpico · Att. 47155</p>
+      <p class="insight">Belgium beat Italy by two goals. Shot count 21-19 favoured Italy.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">20&#x27;</span><span class="pname">Mika Godts <span class="assist">(ast. Kevin De Bruyne)</span></span></li><li class="scorer"><span class="min">69&#x27;</span><span class="pname">Dodi Lukébakio</span></li></ul>
+      <div class="statgrid"><div class="stat"><span class="sv">56</span><span class="st">Ball possession</span><span class="sv">44</span></div><div class="stat"><span class="sv">1.70</span><span class="st">Expected goals (xG)</span><span class="sv">2.76</span></div><div class="stat"><span class="sv">21</span><span class="st">Total shots</span><span class="sv">19</span></div><div class="stat"><span class="sv">6</span><span class="st">Shots on target</span><span class="sv">8</span></div><div class="stat"><span class="sv">34</span><span class="st">Touches in opposition box</span><span class="sv">25</span></div><div class="stat"><span class="sv">4</span><span class="st">Big chances</span><span class="sv">5</span></div><div class="stat"><span class="sv">4</span><span class="st">Big chances missed</span><span class="sv">4</span></div><div class="stat"><span class="sv">537 (91%)</span><span class="st">Accurate passes</span><span class="sv">407 (88%)</span></div><div class="stat"><span class="sv">3</span><span class="st">Yellow cards</span><span class="sv">5</span></div><div class="stat"><span class="sv">4</span><span class="st">Corners</span><span class="sv">8</span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">UEFA Nations League A</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Fri 25 Sep · 21:45</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Turkiye</span><span class="sc">0 &ndash; 1</span><span class="tname">France</span></span>
+      
+      <p class="meta">Turka Arac Muayene Kocaeli Stadyumu · Att. 28205</p>
+      <p class="insight">France edged it by a single goal against Turkiye. In a low-scoring affair. Shot count 12-12 favoured Turkiye.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">54&#x27;</span><span class="pname">Kylian Mbappé <span class="assist">(ast. Michael Olise)</span></span></li></ul>
+      <div class="statgrid"><div class="stat"><span class="sv">36</span><span class="st">Ball possession</span><span class="sv">64</span></div><div class="stat"><span class="sv">1.21</span><span class="st">Expected goals (xG)</span><span class="sv">1.17</span></div><div class="stat"><span class="sv">12</span><span class="st">Total shots</span><span class="sv">12</span></div><div class="stat"><span class="sv">3</span><span class="st">Shots on target</span><span class="sv">4</span></div><div class="stat"><span class="sv">22</span><span class="st">Touches in opposition box</span><span class="sv">25</span></div><div class="stat"><span class="sv">2</span><span class="st">Big chances</span><span class="sv">2</span></div><div class="stat"><span class="sv">2</span><span class="st">Big chances missed</span><span class="sv">2</span></div><div class="stat"><span class="sv">272 (75%)</span><span class="st">Accurate passes</span><span class="sv">560 (86%)</span></div><div class="stat"><span class="sv">2</span><span class="st">Yellow cards</span><span class="sv">3</span></div><div class="stat"><span class="sv">5</span><span class="st">Corners</span><span class="sv">3</span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">UEFA Nations League B</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 24 Sep · 21:45</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Austria</span><span class="sc">3 &ndash; 1</span><span class="tname">Israel</span></span>
+      
+      <p class="meta">Raiffeisen Arena · Att. 15200</p>
+      <p class="insight">Austria beat Israel by two goals. Shot count 19-5 favoured Austria.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">43&#x27;</span><span class="pname">Romano Schmid</span></li><li class="scorer"><span class="min">55&#x27;</span><span class="pname">Sayed Abu Farkhi</span></li><li class="scorer"><span class="min">90&#x27;</span><span class="pname">Phillipp Mwene <span class="assist">(ast. Paul Wanner)</span></span></li><li class="scorer"><span class="min">90+3&#x27;</span><span class="pname">Saša Kalajdžić <span class="assist">(ast. Christoph Lang)</span></span></li></ul>
+      <div class="statgrid"><div class="stat"><span class="sv">52</span><span class="st">Ball possession</span><span class="sv">48</span></div><div class="stat"><span class="sv">2.78</span><span class="st">Expected goals (xG)</span><span class="sv">0.20</span></div><div class="stat"><span class="sv">19</span><span class="st">Total shots</span><span class="sv">5</span></div><div class="stat"><span class="sv">9</span><span class="st">Shots on target</span><span class="sv">1</span></div><div class="stat"><span class="sv">42</span><span class="st">Touches in opposition box</span><span class="sv">5</span></div><div class="stat"><span class="sv">6</span><span class="st">Big chances</span><span class="sv">1</span></div><div class="stat"><span class="sv">4</span><span class="st">Big chances missed</span><span class="sv">0</span></div><div class="stat"><span class="sv">397 (87%)</span><span class="st">Accurate passes</span><span class="sv">370 (84%)</span></div><div class="stat"><span class="sv">3</span><span class="st">Yellow cards</span><span class="sv">2</span></div><div class="stat"><span class="sv">4</span><span class="st">Corners</span><span class="sv">2</span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">UEFA Nations League B</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 24 Sep · 21:45</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Kosovo</span><span class="sc">1 &ndash; 0</span><span class="tname">Ireland</span></span>
+      
+      <p class="meta">Stadiumi Fadil Vokrri · Att. 12627</p>
+      <p class="insight">Kosovo edged it by a single goal against Ireland. In a low-scoring affair. Shot count 22-3 favoured Kosovo.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">83&#x27;</span><span class="pname">Vedat Muriqi</span></li></ul>
+      <div class="statgrid"><div class="stat"><span class="sv">57</span><span class="st">Ball possession</span><span class="sv">43</span></div><div class="stat"><span class="sv">2.74</span><span class="st">Expected goals (xG)</span><span class="sv">0.25</span></div><div class="stat"><span class="sv">22</span><span class="st">Total shots</span><span class="sv">3</span></div><div class="stat"><span class="sv">8</span><span class="st">Shots on target</span><span class="sv">1</span></div><div class="stat"><span class="sv">32</span><span class="st">Touches in opposition box</span><span class="sv">10</span></div><div class="stat"><span class="sv">3</span><span class="st">Big chances</span><span class="sv">0</span></div><div class="stat"><span class="sv">2</span><span class="st">Big chances missed</span><span class="sv">0</span></div><div class="stat"><span class="sv">409 (83%)</span><span class="st">Accurate passes</span><span class="sv">293 (77%)</span></div><div class="stat"><span class="sv">0</span><span class="st">Yellow cards</span><span class="sv">2</span></div><div class="stat"><span class="sv">1</span><span class="st">Corners</span><span class="sv">0</span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">UEFA Nations League B</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Fri 25 Sep · 19:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Georgia</span><span class="sc">0 &ndash; 1</span><span class="tname">Northern Ireland</span></span>
+      
+      <p class="meta">Boris Paichadze Dinamo Arena · Att. 7470</p>
+      <p class="insight">Northern Ireland edged it by a single goal against Georgia. In a low-scoring affair. Shot count 11-12 favoured Northern Ireland.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">90+9&#x27;</span><span class="pname">Shea Charles <span class="assist">(ast. Trai Hume)</span></span></li></ul>
+      <div class="statgrid"><div class="stat"><span class="sv">62</span><span class="st">Ball possession</span><span class="sv">38</span></div><div class="stat"><span class="sv">1.71</span><span class="st">Expected goals (xG)</span><span class="sv">1.10</span></div><div class="stat"><span class="sv">11</span><span class="st">Total shots</span><span class="sv">12</span></div><div class="stat"><span class="sv">5</span><span class="st">Shots on target</span><span class="sv">5</span></div><div class="stat"><span class="sv">14</span><span class="st">Touches in opposition box</span><span class="sv">10</span></div><div class="stat"><span class="sv">3</span><span class="st">Big chances</span><span class="sv">2</span></div><div class="stat"><span class="sv">3</span><span class="st">Big chances missed</span><span class="sv">1</span></div><div class="stat"><span class="sv">514 (88%)</span><span class="st">Accurate passes</span><span class="sv">292 (82%)</span></div><div class="stat"><span class="sv">1</span><span class="st">Yellow cards</span><span class="sv">3</span></div><div class="stat"><span class="sv">9</span><span class="st">Corners</span><span class="sv">1</span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">UEFA Nations League B</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Fri 25 Sep · 21:45</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Hungary</span><span class="sc">0 &ndash; 1</span><span class="tname">Ukraine</span></span>
+      
+      <p class="meta">Puskás Aréna · Att. 56796</p>
+      <p class="insight">Ukraine edged it by a single goal against Hungary. In a low-scoring affair. Shot count 17-10 favoured Hungary.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">42&#x27;</span><span class="pname">Danylo Sikan <span class="assist">(ast. Georgiy Sudakov)</span></span></li></ul>
+      <div class="statgrid"><div class="stat"><span class="sv">57</span><span class="st">Ball possession</span><span class="sv">43</span></div><div class="stat"><span class="sv">2.03</span><span class="st">Expected goals (xG)</span><span class="sv">1.29</span></div><div class="stat"><span class="sv">17</span><span class="st">Total shots</span><span class="sv">10</span></div><div class="stat"><span class="sv">4</span><span class="st">Shots on target</span><span class="sv">3</span></div><div class="stat"><span class="sv">33</span><span class="st">Touches in opposition box</span><span class="sv">10</span></div><div class="stat"><span class="sv">1</span><span class="st">Big chances</span><span class="sv">3</span></div><div class="stat"><span class="sv">1</span><span class="st">Big chances missed</span><span class="sv">2</span></div><div class="stat"><span class="sv">450 (85%)</span><span class="st">Accurate passes</span><span class="sv">336 (84%)</span></div><div class="stat"><span class="sv">4</span><span class="st">Yellow cards</span><span class="sv">4</span></div><div class="stat"><span class="sv">4</span><span class="st">Corners</span><span class="sv">2</span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">UEFA Nations League B</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Fri 25 Sep · 21:45</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Poland</span><span class="sc">0 &ndash; 0</span><span class="tname">Bosnia and Herzegovina</span></span>
+      
+      
+      <p class="insight">Honours were even in a draw. In a cagey goalless contest.</p>
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">UEFA Nations League B</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Fri 25 Sep · 21:45</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Sweden</span><span class="sc">2 &ndash; 1</span><span class="tname">Romania</span></span>
+      
+      
+      <p class="insight">Sweden edged it by a single goal against Romania.</p>
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">UEFA Nations League C</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Fri 25 Sep · 19:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Armenia</span><span class="sc">2 &ndash; 0</span><span class="tname">Latvia</span></span>
+      
+      <p class="meta">Vazgen Sargsyan anvan Hanrapetakan Marzadasht · Att. 11093</p>
+      <p class="insight">Armenia beat Latvia by two goals. Shot count 14-5 favoured Armenia.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">31&#x27;</span><span class="pname">Georgiy Arutiunian <span class="assist">(ast. Eduard Spertsyan)</span></span></li><li class="scorer"><span class="min">75&#x27;</span><span class="pname">Artur Gharibyan <span class="assist">(ast. Zhirayr Shaghoyan)</span></span></li></ul>
+      <div class="statgrid"><div class="stat"><span class="sv">56</span><span class="st">Ball possession</span><span class="sv">44</span></div><div class="stat"><span class="sv">0.93</span><span class="st">Expected goals (xG)</span><span class="sv">0.20</span></div><div class="stat"><span class="sv">14</span><span class="st">Total shots</span><span class="sv">5</span></div><div class="stat"><span class="sv">4</span><span class="st">Shots on target</span><span class="sv">1</span></div><div class="stat"><span class="sv">13</span><span class="st">Touches in opposition box</span><span class="sv">7</span></div><div class="stat"><span class="sv">3</span><span class="st">Big chances</span><span class="sv">0</span></div><div class="stat"><span class="sv">2</span><span class="st">Big chances missed</span><span class="sv">0</span></div><div class="stat"><span class="sv">449 (87%)</span><span class="st">Accurate passes</span><span class="sv">334 (82%)</span></div><div class="stat"><span class="sv">1</span><span class="st">Yellow cards</span><span class="sv">0</span></div><div class="stat"><span class="sv">10</span><span class="st">Corners</span><span class="sv">2</span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">UEFA Nations League C</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Fri 25 Sep · 21:45</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Montenegro</span><span class="sc">2 &ndash; 1</span><span class="tname">Cyprus</span></span>
+      
+      
+      <p class="insight">Montenegro edged it by a single goal against Cyprus.</p>
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">UEFA Nations League D</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 24 Sep · 19:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Andorra</span><span class="sc">1 &ndash; 2</span><span class="tname">Malta</span></span>
+      
+      <p class="meta">Estadi de la FAF d&#x27;Encamp · Att. 905</p>
+      <p class="insight">Malta edged it by a single goal against Andorra. Shot count 13-13 favoured Andorra.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">17&#x27;</span><span class="pname">Guillaume López</span></li><li class="scorer"><span class="min">37&#x27;</span><span class="pname">Irvin Cardona <span class="assist">(ast. Teddy Teuma)</span></span></li><li class="scorer"><span class="min">81&#x27;</span><span class="pname">Teddy Teuma <span class="assist">(ast. Irvin Cardona)</span></span></li></ul>
+      <div class="statgrid"><div class="stat"><span class="sv">41</span><span class="st">Ball possession</span><span class="sv">59</span></div><div class="stat"><span class="sv">0.76</span><span class="st">Expected goals (xG)</span><span class="sv">3.48</span></div><div class="stat"><span class="sv">13</span><span class="st">Total shots</span><span class="sv">13</span></div><div class="stat"><span class="sv">5</span><span class="st">Shots on target</span><span class="sv">8</span></div><div class="stat"><span class="sv">21</span><span class="st">Touches in opposition box</span><span class="sv">24</span></div><div class="stat"><span class="sv">3</span><span class="st">Big chances</span><span class="sv">7</span></div><div class="stat"><span class="sv">2</span><span class="st">Big chances missed</span><span class="sv">5</span></div><div class="stat"><span class="sv">281 (80%)</span><span class="st">Accurate passes</span><span class="sv">410 (81%)</span></div><div class="stat"><span class="sv">5</span><span class="st">Yellow cards</span><span class="sv">2</span></div><div class="stat"><span class="sv">3</span><span class="st">Corners</span><span class="sv">2</span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">UEFA Nations League D</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 24 Sep · 21:45</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Liechtenstein</span><span class="sc">0 &ndash; 2</span><span class="tname">Lithuania</span></span>
+      
+      <p class="meta">Rheinpark Stadion · Att. 1055</p>
+      <p class="insight">Lithuania beat Liechtenstein by two goals. Shot count 4-16 favoured Lithuania.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">53&#x27;</span><span class="pname">Lukas Michelbrink <span class="assist">(ast. Armandas Kučys)</span></span></li><li class="scorer"><span class="min">66&#x27;</span><span class="pname">Artūr Dolžnikov <span class="assist">(ast. Gvidas Gineitis)</span></span></li></ul>
+      <div class="statgrid"><div class="stat"><span class="sv">27</span><span class="st">Ball possession</span><span class="sv">73</span></div><div class="stat"><span class="sv">0.09</span><span class="st">Expected goals (xG)</span><span class="sv">1.62</span></div><div class="stat"><span class="sv">4</span><span class="st">Total shots</span><span class="sv">16</span></div><div class="stat"><span class="sv">0</span><span class="st">Shots on target</span><span class="sv">7</span></div><div class="stat"><span class="sv">1</span><span class="st">Touches in opposition box</span><span class="sv">41</span></div><div class="stat"><span class="sv">0</span><span class="st">Big chances</span><span class="sv">2</span></div><div class="stat"><span class="sv">0</span><span class="st">Big chances missed</span><span class="sv">1</span></div><div class="stat"><span class="sv">211 (73%)</span><span class="st">Accurate passes</span><span class="sv">674 (89%)</span></div><div class="stat"><span class="sv">1</span><span class="st">Yellow cards</span><span class="sv">1</span></div><div class="stat"><span class="sv">0</span><span class="st">Corners</span><span class="sv">8</span></div></div>
+    </article></div><h2>Results &middot; MENA<span class="count">25 matches</span></h2><div class="cards">
+    <article class="card">
+      <header class="card-head">
+        <span class="league">Moroccan Botola Pro</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 24 Sep · 23:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">US Amal Tiznit</span><span class="sc">1 &ndash; 3</span><span class="tname">Ittihad Tanger</span></span>
+      
+      <p class="meta">Stade El Massira</p>
+      <p class="insight">Ittihad Tanger beat US Amal Tiznit by two goals. Shot count 9-10 favoured Ittihad Tanger.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">9&#x27;</span><span class="pname">Saad Ait Khorsa</span></li><li class="scorer"><span class="min">45+2&#x27;</span><span class="pname">Soufiane El Azhari</span></li><li class="scorer"><span class="min">47&#x27;</span><span class="pname">Abdel Maâli <span class="assist">(ast. Younes Najari)</span></span></li><li class="scorer"><span class="min">55&#x27;</span><span class="pname">Ibrahima Dieng <span class="assist">(ast. Younes Najari)</span></span></li></ul>
+      <div class="statgrid"><div class="stat"><span class="sv">57</span><span class="st">Ball possession</span><span class="sv">43</span></div><div class="stat"><span class="sv">9</span><span class="st">Total shots</span><span class="sv">10</span></div><div class="stat"><span class="sv">6</span><span class="st">Shots on target</span><span class="sv">5</span></div><div class="stat"><span class="sv">4</span><span class="st">Corners</span><span class="sv">5</span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">Africa Cup of Nations Qualification</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 24 Sep · 16:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Namibia</span><span class="sc">1 &ndash; 0</span><span class="tname">Congo</span></span>
+      
+      <p class="meta">Botswana National Stadium</p>
+      <p class="insight">Namibia edged it by a single goal against Congo. In a low-scoring affair. Shot count 9-11 favoured Congo.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">47&#x27;</span><span class="pname">Bethuel Muzeu</span></li></ul>
+      <div class="statgrid"><div class="stat"><span class="sv">53</span><span class="st">Ball possession</span><span class="sv">47</span></div><div class="stat"><span class="sv">9</span><span class="st">Total shots</span><span class="sv">11</span></div><div class="stat"><span class="sv">5</span><span class="st">Shots on target</span><span class="sv">2</span></div><div class="stat"><span class="sv">23</span><span class="st">Touches in opposition box</span><span class="sv">16</span></div><div class="stat"><span class="sv">2</span><span class="st">Big chances</span><span class="sv">1</span></div><div class="stat"><span class="sv">1</span><span class="st">Big chances missed</span><span class="sv">1</span></div><div class="stat"><span class="sv">263 (76%)</span><span class="st">Accurate passes</span><span class="sv">215 (72%)</span></div><div class="stat"><span class="sv">2</span><span class="st">Yellow cards</span><span class="sv">1</span></div><div class="stat"><span class="sv">9</span><span class="st">Corners</span><span class="sv">7</span></div><div class="stat"><span class="sv"></span><span class="st">Shots</span><span class="sv"></span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">Africa Cup of Nations Qualification</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 24 Sep · 19:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">DR Congo</span><span class="sc">2 &ndash; 0</span><span class="tname">Equatorial Guinea</span></span>
+      
+      <p class="meta">Stade des Martyrs de la Pentecôte</p>
+      <p class="insight">DR Congo beat Equatorial Guinea by two goals. Shot count 16-5 favoured DR Congo.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">4&#x27;</span><span class="pname">Chancel Mbemba</span></li><li class="scorer"><span class="min">72&#x27;</span><span class="pname">Yoane Wissa</span></li></ul>
+      <div class="statgrid"><div class="stat"><span class="sv">58</span><span class="st">Ball possession</span><span class="sv">42</span></div><div class="stat"><span class="sv">16</span><span class="st">Total shots</span><span class="sv">5</span></div><div class="stat"><span class="sv">5</span><span class="st">Shots on target</span><span class="sv">2</span></div><div class="stat"><span class="sv">31</span><span class="st">Touches in opposition box</span><span class="sv">5</span></div><div class="stat"><span class="sv">1</span><span class="st">Big chances</span><span class="sv">1</span></div><div class="stat"><span class="sv">0</span><span class="st">Big chances missed</span><span class="sv">1</span></div><div class="stat"><span class="sv">495 (92%)</span><span class="st">Accurate passes</span><span class="sv">339 (86%)</span></div><div class="stat"><span class="sv">1</span><span class="st">Yellow cards</span><span class="sv">2</span></div><div class="stat"><span class="sv">4</span><span class="st">Corners</span><span class="sv">3</span></div><div class="stat"><span class="sv"></span><span class="st">Shots</span><span class="sv"></span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">Africa Cup of Nations Qualification</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 24 Sep · 19:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Libya</span><span class="sc">2 &ndash; 2</span><span class="tname">Botswana</span></span>
+      
+      <p class="meta">11 June Stadium</p>
+      <p class="insight">Honours were even in a draw. Shot count 24-6 favoured Libya.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">30&#x27;</span><span class="pname">Tumisang Orebonye <span class="badge tally" title="multiple goals">2&times;</span></span></li><li class="scorer"><span class="min">42&#x27;</span><span class="pname">Tumisang Orebonye <span class="badge tally" title="multiple goals">2&times;</span></span></li><li class="scorer"><span class="min">87&#x27;</span><span class="pname">Maruwan Al-Hbeishi</span></li><li class="scorer"><span class="min">90+6&#x27;</span><span class="pname">Ezzeddin El Maremi</span></li></ul>
+      <div class="statgrid"><div class="stat"><span class="sv">70</span><span class="st">Ball possession</span><span class="sv">30</span></div><div class="stat"><span class="sv">24</span><span class="st">Total shots</span><span class="sv">6</span></div><div class="stat"><span class="sv">7</span><span class="st">Shots on target</span><span class="sv">3</span></div><div class="stat"><span class="sv">41</span><span class="st">Touches in opposition box</span><span class="sv">6</span></div><div class="stat"><span class="sv">4</span><span class="st">Big chances</span><span class="sv">1</span></div><div class="stat"><span class="sv">3</span><span class="st">Big chances missed</span><span class="sv">0</span></div><div class="stat"><span class="sv">591 (88%)</span><span class="st">Accurate passes</span><span class="sv">187 (65%)</span></div><div class="stat"><span class="sv">1</span><span class="st">Yellow cards</span><span class="sv">2</span></div><div class="stat"><span class="sv">9</span><span class="st">Corners</span><span class="sv">4</span></div><div class="stat"><span class="sv"></span><span class="st">Shots</span><span class="sv"></span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">Africa Cup of Nations Qualification</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 24 Sep · 19:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Mauritania</span><span class="sc">3 &ndash; 1</span><span class="tname">Central African Republic</span></span>
+      
+      <p class="meta">Stade Larbi Zaouli</p>
+      <p class="insight">Mauritania beat Central African Republic by two goals. Shot count 19-14 favoured Mauritania.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">32&#x27;</span><span class="pname">Aboubakary Koïta</span></li><li class="scorer"><span class="min">48&#x27;</span><span class="pname">Goduine Koyalipou</span></li><li class="scorer"><span class="min">69&#x27;</span><span class="pname">Djeidi Gassama</span></li><li class="scorer"><span class="min">89&#x27;</span><span class="pname">Mamadou Diallo</span></li></ul>
+      <div class="statgrid"><div class="stat"><span class="sv">59</span><span class="st">Ball possession</span><span class="sv">41</span></div><div class="stat"><span class="sv">19</span><span class="st">Total shots</span><span class="sv">14</span></div><div class="stat"><span class="sv">8</span><span class="st">Shots on target</span><span class="sv">5</span></div><div class="stat"><span class="sv">20</span><span class="st">Touches in opposition box</span><span class="sv">20</span></div><div class="stat"><span class="sv">4</span><span class="st">Big chances</span><span class="sv">0</span></div><div class="stat"><span class="sv">2</span><span class="st">Big chances missed</span><span class="sv">0</span></div><div class="stat"><span class="sv">362 (80%)</span><span class="st">Accurate passes</span><span class="sv">222 (73%)</span></div><div class="stat"><span class="sv">1</span><span class="st">Yellow cards</span><span class="sv">3</span></div><div class="stat"><span class="sv">3</span><span class="st">Corners</span><span class="sv">4</span></div><div class="stat"><span class="sv"></span><span class="st">Shots</span><span class="sv"></span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">Africa Cup of Nations Qualification</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 24 Sep · 22:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Cameroon</span><span class="sc">3 &ndash; 1</span><span class="tname">Comoros</span></span>
+      
+      <p class="meta">Stade Omnisports Roumdé Adjia</p>
+      <p class="insight">Cameroon beat Comoros by two goals. Shot count 24-7 favoured Cameroon.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">39&#x27;</span><span class="pname">David Nyengue</span></li><li class="scorer"><span class="min">48&#x27;</span><span class="pname">Bryan Mbeumo</span></li><li class="scorer"><span class="min">51&#x27;</span><span class="pname">Warmed Omari</span></li><li class="scorer"><span class="min">81&#x27;</span><span class="pname">Danny Namaso</span></li></ul>
+      <div class="statgrid"><div class="stat"><span class="sv">66</span><span class="st">Ball possession</span><span class="sv">34</span></div><div class="stat"><span class="sv">24</span><span class="st">Total shots</span><span class="sv">7</span></div><div class="stat"><span class="sv">4</span><span class="st">Shots on target</span><span class="sv">3</span></div><div class="stat"><span class="sv">38</span><span class="st">Touches in opposition box</span><span class="sv">12</span></div><div class="stat"><span class="sv">5</span><span class="st">Big chances</span><span class="sv">1</span></div><div class="stat"><span class="sv">3</span><span class="st">Big chances missed</span><span class="sv">0</span></div><div class="stat"><span class="sv">498 (91%)</span><span class="st">Accurate passes</span><span class="sv">241 (83%)</span></div><div class="stat"><span class="sv">2</span><span class="st">Yellow cards</span><span class="sv">1</span></div><div class="stat"><span class="sv">9</span><span class="st">Corners</span><span class="sv">3</span></div><div class="stat"><span class="sv"></span><span class="st">Shots</span><span class="sv"></span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">Africa Cup of Nations Qualification</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 24 Sep · 22:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Ivory Coast</span><span class="sc">2 &ndash; 0</span><span class="tname">Ghana</span></span>
+      
+      <p class="meta">Stade de Bouaké (Stade de la Paix)</p>
+      <p class="insight">Ivory Coast beat Ghana by two goals. Shot count 12-11 favoured Ivory Coast.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">44&#x27;</span><span class="pname">Malick Junior Yalcouyé</span></li><li class="scorer"><span class="min">58&#x27;</span><span class="pname">Franck Kessié</span></li></ul>
+      <div class="statgrid"><div class="stat"><span class="sv">59</span><span class="st">Ball possession</span><span class="sv">41</span></div><div class="stat"><span class="sv">12</span><span class="st">Total shots</span><span class="sv">11</span></div><div class="stat"><span class="sv">3</span><span class="st">Shots on target</span><span class="sv">2</span></div><div class="stat"><span class="sv">26</span><span class="st">Touches in opposition box</span><span class="sv">15</span></div><div class="stat"><span class="sv">2</span><span class="st">Big chances</span><span class="sv">1</span></div><div class="stat"><span class="sv">1</span><span class="st">Big chances missed</span><span class="sv">1</span></div><div class="stat"><span class="sv">448 (88%)</span><span class="st">Accurate passes</span><span class="sv">298 (84%)</span></div><div class="stat"><span class="sv">2</span><span class="st">Yellow cards</span><span class="sv">3</span></div><div class="stat"><span class="sv">6</span><span class="st">Corners</span><span class="sv">1</span></div><div class="stat"><span class="sv"></span><span class="st">Shots</span><span class="sv"></span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">Africa Cup of Nations Qualification</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 24 Sep · 22:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Sierra Leone</span><span class="sc">2 &ndash; 3</span><span class="tname">Zimbabwe</span></span>
+      
+      <p class="meta">Stade Ben Ahmed El Abdi</p>
+      <p class="insight">Zimbabwe edged it by a single goal against Sierra Leone. Shot count 9-16 favoured Zimbabwe.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">7&#x27;</span><span class="pname">Alie Conteh</span></li><li class="scorer"><span class="min">27&#x27;</span><span class="pname">Sallieu Tarawallie</span></li><li class="scorer"><span class="min">72&#x27;</span><span class="pname">Marshall Munetsi <span class="badge tally" title="multiple goals">2&times;</span></span></li><li class="scorer"><span class="min">76&#x27;</span><span class="pname">Tawanda Chirewa</span></li><li class="scorer"><span class="min">88&#x27;</span><span class="pname">Marshall Munetsi <span class="badge tally" title="multiple goals">2&times;</span></span></li></ul>
+      <div class="statgrid"><div class="stat"><span class="sv">44</span><span class="st">Ball possession</span><span class="sv">56</span></div><div class="stat"><span class="sv">9</span><span class="st">Total shots</span><span class="sv">16</span></div><div class="stat"><span class="sv">3</span><span class="st">Shots on target</span><span class="sv">4</span></div><div class="stat"><span class="sv">13</span><span class="st">Touches in opposition box</span><span class="sv">27</span></div><div class="stat"><span class="sv">1</span><span class="st">Big chances</span><span class="sv">0</span></div><div class="stat"><span class="sv">0</span><span class="st">Big chances missed</span><span class="sv">0</span></div><div class="stat"><span class="sv">288 (83%)</span><span class="st">Accurate passes</span><span class="sv">367 (86%)</span></div><div class="stat"><span class="sv">0</span><span class="st">Yellow cards</span><span class="sv">2</span></div><div class="stat"><span class="sv">2</span><span class="st">Corners</span><span class="sv">4</span></div><div class="stat"><span class="sv"></span><span class="st">Shots</span><span class="sv"></span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">Africa Cup of Nations Qualification</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 24 Sep · 22:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Tunisia</span><span class="sc">1 &ndash; 1</span><span class="tname">Uganda</span></span>
+      
+      <p class="meta">Stade olympique Hammadi-Agrebi</p>
+      <p class="insight">Honours were even in a draw. Shot count 13-9 favoured Tunisia.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">12&#x27;</span><span class="pname">Adem Arous</span></li><li class="scorer"><span class="min">68&#x27;</span><span class="pname">Rogers Mato</span></li></ul>
+      <div class="statgrid"><div class="stat"><span class="sv">55</span><span class="st">Ball possession</span><span class="sv">45</span></div><div class="stat"><span class="sv">13</span><span class="st">Total shots</span><span class="sv">9</span></div><div class="stat"><span class="sv">4</span><span class="st">Shots on target</span><span class="sv">3</span></div><div class="stat"><span class="sv">23</span><span class="st">Touches in opposition box</span><span class="sv">15</span></div><div class="stat"><span class="sv">1</span><span class="st">Big chances</span><span class="sv">0</span></div><div class="stat"><span class="sv">0</span><span class="st">Big chances missed</span><span class="sv">0</span></div><div class="stat"><span class="sv">412 (84%)</span><span class="st">Accurate passes</span><span class="sv">324 (80%)</span></div><div class="stat"><span class="sv">1</span><span class="st">Yellow cards</span><span class="sv">1</span></div><div class="stat"><span class="sv">6</span><span class="st">Corners</span><span class="sv">5</span></div><div class="stat"><span class="sv"></span><span class="st">Shots</span><span class="sv"></span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">Africa Cup of Nations Qualification</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Fri 25 Sep · 16:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Mozambique</span><span class="sc">1 &ndash; 1</span><span class="tname">Senegal</span></span>
+      
+      <p class="meta">Estádio Nacional do Zimpeto</p>
+      <p class="insight">Honours were even in a draw. Shot count 7-14 favoured Senegal.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">33&#x27;</span><span class="pname">Nicolas Jackson</span></li><li class="scorer"><span class="min">45+2&#x27;</span><span class="pname">Geny Catamo</span></li></ul>
+      <div class="statgrid"><div class="stat"><span class="sv">34</span><span class="st">Ball possession</span><span class="sv">66</span></div><div class="stat"><span class="sv">7</span><span class="st">Total shots</span><span class="sv">14</span></div><div class="stat"><span class="sv">2</span><span class="st">Shots on target</span><span class="sv">5</span></div><div class="stat"><span class="sv">6</span><span class="st">Touches in opposition box</span><span class="sv">31</span></div><div class="stat"><span class="sv">0</span><span class="st">Big chances</span><span class="sv">3</span></div><div class="stat"><span class="sv">0</span><span class="st">Big chances missed</span><span class="sv">2</span></div><div class="stat"><span class="sv">202 (77%)</span><span class="st">Accurate passes</span><span class="sv">457 (89%)</span></div><div class="stat"><span class="sv">3</span><span class="st">Yellow cards</span><span class="sv">2</span></div><div class="stat"><span class="sv">1</span><span class="st">Corners</span><span class="sv">10</span></div><div class="stat"><span class="sv"></span><span class="st">Shots</span><span class="sv"></span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">Africa Cup of Nations Qualification</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Fri 25 Sep · 16:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Sudan</span><span class="sc">1 &ndash; 0</span><span class="tname">Ethiopia</span></span>
+      
+      <p class="meta">Juba Stadium</p>
+      <p class="insight">Sudan edged it by a single goal against Ethiopia. In a low-scoring affair. Shot count 13-13 favoured Sudan.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">86&#x27;</span><span class="pname">Mohamed Eisa</span></li></ul>
+      <div class="statgrid"><div class="stat"><span class="sv">61</span><span class="st">Ball possession</span><span class="sv">39</span></div><div class="stat"><span class="sv">13</span><span class="st">Total shots</span><span class="sv">13</span></div><div class="stat"><span class="sv">2</span><span class="st">Shots on target</span><span class="sv">5</span></div><div class="stat"><span class="sv">16</span><span class="st">Touches in opposition box</span><span class="sv">14</span></div><div class="stat"><span class="sv">2</span><span class="st">Big chances</span><span class="sv">4</span></div><div class="stat"><span class="sv">1</span><span class="st">Big chances missed</span><span class="sv">4</span></div><div class="stat"><span class="sv">397 (86%)</span><span class="st">Accurate passes</span><span class="sv">215 (76%)</span></div><div class="stat"><span class="sv">1</span><span class="st">Yellow cards</span><span class="sv">4</span></div><div class="stat"><span class="sv">5</span><span class="st">Corners</span><span class="sv">5</span></div><div class="stat"><span class="sv"></span><span class="st">Shots</span><span class="sv"></span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">Africa Cup of Nations Qualification</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Fri 25 Sep · 16:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Tanzania</span><span class="sc">0 &ndash; 2</span><span class="tname">Guinea-Bissau</span></span>
+      
+      <p class="meta">Amaan Stadium</p>
+      <p class="insight">Guinea-Bissau beat Tanzania by two goals. Shot count 20-10 favoured Tanzania.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">33&#x27;</span><span class="pname">Franculino</span></li><li class="scorer"><span class="min">58&#x27;</span><span class="pname">Mama Baldé</span></li></ul>
+      <div class="statgrid"><div class="stat"><span class="sv">60</span><span class="st">Ball possession</span><span class="sv">40</span></div><div class="stat"><span class="sv">20</span><span class="st">Total shots</span><span class="sv">10</span></div><div class="stat"><span class="sv">4</span><span class="st">Shots on target</span><span class="sv">2</span></div><div class="stat"><span class="sv">23</span><span class="st">Touches in opposition box</span><span class="sv">12</span></div><div class="stat"><span class="sv">2</span><span class="st">Big chances</span><span class="sv">1</span></div><div class="stat"><span class="sv">2</span><span class="st">Big chances missed</span><span class="sv">0</span></div><div class="stat"><span class="sv">513 (88%)</span><span class="st">Accurate passes</span><span class="sv">316 (82%)</span></div><div class="stat"><span class="sv">1</span><span class="st">Yellow cards</span><span class="sv">1</span></div><div class="stat"><span class="sv">3</span><span class="st">Corners</span><span class="sv">0</span></div><div class="stat"><span class="sv"></span><span class="st">Shots</span><span class="sv"></span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">Africa Cup of Nations Qualification</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Fri 25 Sep · 18:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Niger</span><span class="sc">2 &ndash; 1</span><span class="tname">Lesotho</span></span>
+      
+      <p class="meta">Accra Sports Stadium</p>
+      <p class="insight">Niger edged it by a single goal against Lesotho. Shot count 8-14 favoured Lesotho.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">38&#x27;</span><span class="pname">Daniel Sosah</span></li><li class="scorer"><span class="min">45&#x27;</span><span class="pname">Oumar Sako</span></li><li class="scorer"><span class="min">85&#x27;</span><span class="pname">Sera Motebang</span></li></ul>
+      <div class="statgrid"><div class="stat"><span class="sv">51</span><span class="st">Ball possession</span><span class="sv">49</span></div><div class="stat"><span class="sv">8</span><span class="st">Total shots</span><span class="sv">14</span></div><div class="stat"><span class="sv">5</span><span class="st">Shots on target</span><span class="sv">4</span></div><div class="stat"><span class="sv">14</span><span class="st">Touches in opposition box</span><span class="sv">25</span></div><div class="stat"><span class="sv">3</span><span class="st">Big chances</span><span class="sv">1</span></div><div class="stat"><span class="sv">1</span><span class="st">Big chances missed</span><span class="sv">0</span></div><div class="stat"><span class="sv">304 (80%)</span><span class="st">Accurate passes</span><span class="sv">264 (78%)</span></div><div class="stat"><span class="sv">0</span><span class="st">Yellow cards</span><span class="sv">3</span></div><div class="stat"><span class="sv">1</span><span class="st">Corners</span><span class="sv">5</span></div><div class="stat"><span class="sv"></span><span class="st">Shots</span><span class="sv"></span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">Africa Cup of Nations Qualification</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Fri 25 Sep · 19:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Gambia</span><span class="sc">2 &ndash; 1</span><span class="tname">Somalia</span></span>
+      
+      <p class="meta">Independence Stadium</p>
+      <p class="insight">Gambia edged it by a single goal against Somalia. Shot count 11-6 favoured Gambia.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">19&#x27;</span><span class="pname">Ebrima Colley</span></li><li class="scorer"><span class="min">72&#x27;</span><span class="pname">Bilal Njie</span></li><li class="scorer"><span class="min">83&#x27;</span><span class="pname">Mohamed Badamosi</span></li></ul>
+      <div class="statgrid"><div class="stat"><span class="sv">56</span><span class="st">Ball possession</span><span class="sv">44</span></div><div class="stat"><span class="sv">11</span><span class="st">Total shots</span><span class="sv">6</span></div><div class="stat"><span class="sv">4</span><span class="st">Shots on target</span><span class="sv">1</span></div><div class="stat"><span class="sv">13</span><span class="st">Touches in opposition box</span><span class="sv">6</span></div><div class="stat"><span class="sv">3</span><span class="st">Big chances</span><span class="sv">1</span></div><div class="stat"><span class="sv">1</span><span class="st">Big chances missed</span><span class="sv">0</span></div><div class="stat"><span class="sv">367 (87%)</span><span class="st">Accurate passes</span><span class="sv">262 (79%)</span></div><div class="stat"><span class="sv">1</span><span class="st">Yellow cards</span><span class="sv">2</span></div><div class="stat"><span class="sv">1</span><span class="st">Corners</span><span class="sv">3</span></div><div class="stat"><span class="sv"></span><span class="st">Shots</span><span class="sv"></span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">Africa Cup of Nations Qualification</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Fri 25 Sep · 19:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Malawi</span><span class="sc">2 &ndash; 1</span><span class="tname">South Sudan</span></span>
+      
+      <p class="meta">Bingu National Stadium</p>
+      <p class="insight">Malawi edged it by a single goal against South Sudan. Shot count 6-0 favoured Malawi.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">20&#x27;</span><span class="pname">Babatunde Adepoju</span></li><li class="scorer"><span class="min">48&#x27;</span><span class="pname">Joseph Dhata</span></li><li class="scorer"><span class="min">64&#x27;</span><span class="pname">Lloyd Njaliwa</span></li></ul>
+      <div class="statgrid"><div class="stat"><span class="sv">68</span><span class="st">Ball possession</span><span class="sv">32</span></div><div class="stat"><span class="sv">6</span><span class="st">Total shots</span><span class="sv">0</span></div><div class="stat"><span class="sv">3</span><span class="st">Shots on target</span><span class="sv">0</span></div><div class="stat"><span class="sv">2</span><span class="st">Corners</span><span class="sv">0</span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">Africa Cup of Nations Qualification</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Fri 25 Sep · 19:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Nigeria</span><span class="sc">2 &ndash; 1</span><span class="tname">Madagascar</span></span>
+      
+      <p class="meta">Godswill Akpabio International Stadium</p>
+      <p class="insight">Nigeria edged it by a single goal against Madagascar. Shot count 22-4 favoured Nigeria.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">16&#x27;</span><span class="pname">Ehsan Kari</span></li><li class="scorer"><span class="min">45+1&#x27;</span><span class="pname">George Ilenikhena</span></li><li class="scorer"><span class="min">65&#x27;</span><span class="pname">Moses Usor</span></li></ul>
+      <div class="statgrid"><div class="stat"><span class="sv">55</span><span class="st">Ball possession</span><span class="sv">45</span></div><div class="stat"><span class="sv">22</span><span class="st">Total shots</span><span class="sv">4</span></div><div class="stat"><span class="sv">4</span><span class="st">Shots on target</span><span class="sv">1</span></div><div class="stat"><span class="sv">34</span><span class="st">Touches in opposition box</span><span class="sv">6</span></div><div class="stat"><span class="sv">4</span><span class="st">Big chances</span><span class="sv">1</span></div><div class="stat"><span class="sv">3</span><span class="st">Big chances missed</span><span class="sv">0</span></div><div class="stat"><span class="sv">404 (88%)</span><span class="st">Accurate passes</span><span class="sv">327 (83%)</span></div><div class="stat"><span class="sv">1</span><span class="st">Yellow cards</span><span class="sv">2</span></div><div class="stat"><span class="sv">5</span><span class="st">Corners</span><span class="sv">2</span></div><div class="stat"><span class="sv"></span><span class="st">Shots</span><span class="sv"></span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">Africa Cup of Nations Qualification</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Fri 25 Sep · 19:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Rwanda</span><span class="sc">3 &ndash; 1</span><span class="tname">Liberia</span></span>
+      
+      <p class="meta">Stade Amahoro</p>
+      <p class="insight">Rwanda beat Liberia by two goals. Shot count 12-17 favoured Liberia.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">2&#x27;</span><span class="pname">Abeddy Biramahire</span></li><li class="scorer"><span class="min">33&#x27;</span><span class="pname">Leroy-Jacques Mickels <span class="badge tally" title="multiple goals">2&times;</span></span></li><li class="scorer"><span class="min">38&#x27;</span><span class="pname">Sylvanus Nimely</span></li><li class="scorer"><span class="min">44&#x27;</span><span class="pname">Leroy-Jacques Mickels <span class="badge tally" title="multiple goals">2&times;</span></span></li></ul>
+      <div class="statgrid"><div class="stat"><span class="sv">48</span><span class="st">Ball possession</span><span class="sv">52</span></div><div class="stat"><span class="sv">12</span><span class="st">Total shots</span><span class="sv">17</span></div><div class="stat"><span class="sv">4</span><span class="st">Shots on target</span><span class="sv">5</span></div><div class="stat"><span class="sv">25</span><span class="st">Touches in opposition box</span><span class="sv">17</span></div><div class="stat"><span class="sv">3</span><span class="st">Big chances</span><span class="sv">4</span></div><div class="stat"><span class="sv">0</span><span class="st">Big chances missed</span><span class="sv">3</span></div><div class="stat"><span class="sv">328 (87%)</span><span class="st">Accurate passes</span><span class="sv">352 (86%)</span></div><div class="stat"><span class="sv">3</span><span class="st">Yellow cards</span><span class="sv">1</span></div><div class="stat"><span class="sv">1</span><span class="st">Corners</span><span class="sv">5</span></div><div class="stat"><span class="sv"></span><span class="st">Shots</span><span class="sv"></span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">Africa Cup of Nations Qualification</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Fri 25 Sep · 19:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Togo</span><span class="sc">1 &ndash; 0</span><span class="tname">Burundi</span></span>
+      
+      <p class="meta">Stade de Kégué</p>
+      <p class="insight">Togo edged it by a single goal against Burundi. In a low-scoring affair. Shot count 13-16 favoured Burundi.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">17&#x27;</span><span class="pname">Dermane Karim</span></li></ul>
+      <div class="statgrid"><div class="stat"><span class="sv">52</span><span class="st">Ball possession</span><span class="sv">48</span></div><div class="stat"><span class="sv">13</span><span class="st">Total shots</span><span class="sv">16</span></div><div class="stat"><span class="sv">3</span><span class="st">Shots on target</span><span class="sv">5</span></div><div class="stat"><span class="sv">28</span><span class="st">Touches in opposition box</span><span class="sv">24</span></div><div class="stat"><span class="sv">1</span><span class="st">Big chances</span><span class="sv">3</span></div><div class="stat"><span class="sv">1</span><span class="st">Big chances missed</span><span class="sv">3</span></div><div class="stat"><span class="sv">254 (78%)</span><span class="st">Accurate passes</span><span class="sv">233 (74%)</span></div><div class="stat"><span class="sv">2</span><span class="st">Yellow cards</span><span class="sv">2</span></div><div class="stat"><span class="sv">9</span><span class="st">Corners</span><span class="sv">6</span></div><div class="stat"><span class="sv"></span><span class="st">Shots</span><span class="sv"></span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">Africa Cup of Nations Qualification</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Fri 25 Sep · 22:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Algeria</span><span class="sc">3 &ndash; 1</span><span class="tname">Zambia</span></span>
+      
+      
+      <p class="insight">Algeria beat Zambia by two goals.</p>
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">Africa Cup of Nations Qualification</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Fri 25 Sep · 22:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Burkina Faso</span><span class="sc">1 &ndash; 1</span><span class="tname">Benin</span></span>
+      
+      
+      <p class="insight">Honours were even in a draw.</p>
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">Africa Cup of Nations Qualification</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Fri 25 Sep · 22:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Egypt</span><span class="sc">0 &ndash; 0</span><span class="tname">Angola</span></span>
+      
+      
+      <p class="insight">Honours were even in a draw. In a cagey goalless contest.</p>
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">Africa Cup of Nations Qualification</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Fri 25 Sep · 22:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Mali</span><span class="sc">3 &ndash; 1</span><span class="tname">Cape Verde</span></span>
+      
+      
+      <p class="insight">Mali beat Cape Verde by two goals.</p>
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">Africa Cup of Nations Qualification</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Fri 25 Sep · 22:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Morocco</span><span class="sc">2 &ndash; 0</span><span class="tname">Gabon</span></span>
+      
+      
+      <p class="insight">Morocco beat Gabon by two goals.</p>
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">Arabian Gulf Cup (Khaleeji)</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 24 Sep · 18:55</span>
+      </header>
+      <span class="scorebox final"><span class="tname">UAE</span><span class="sc">4 &ndash; 0</span><span class="tname">Yemen</span></span>
+      
+      <p class="meta">Alinma Bank Stadium at King Abdullah Sport City · Att. 10138</p>
+      <p class="insight">UAE produced a comprehensive 4-goal victory over Yemen. Shot count 12-2 favoured UAE.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">26&#x27;</span><span class="pname">Nicolás Giménez <span class="badge tally" title="multiple goals">2&times;</span></span></li><li class="scorer"><span class="min">36&#x27;</span><span class="pname">Nader Yahya Omar Sahal (OG)</span></li><li class="scorer"><span class="min">45+4&#x27;</span><span class="pname">Luanzinho</span></li><li class="scorer"><span class="min">51&#x27;</span><span class="pname">Nicolás Giménez <span class="badge tally" title="multiple goals">2&times;</span></span></li></ul>
+      <div class="statgrid"><div class="stat"><span class="sv">61</span><span class="st">Ball possession</span><span class="sv">39</span></div><div class="stat"><span class="sv">12</span><span class="st">Total shots</span><span class="sv">2</span></div><div class="stat"><span class="sv">5</span><span class="st">Shots on target</span><span class="sv">0</span></div><div class="stat"><span class="sv">15</span><span class="st">Touches in opposition box</span><span class="sv">6</span></div><div class="stat"><span class="sv">4</span><span class="st">Big chances</span><span class="sv">0</span></div><div class="stat"><span class="sv">1</span><span class="st">Big chances missed</span><span class="sv">0</span></div><div class="stat"><span class="sv">530 (90%)</span><span class="st">Accurate passes</span><span class="sv">310 (83%)</span></div><div class="stat"><span class="sv">1</span><span class="st">Yellow cards</span><span class="sv">1</span></div><div class="stat"><span class="sv">1</span><span class="st">Corners</span><span class="sv">2</span></div><div class="stat"><span class="sv"></span><span class="st">Shots</span><span class="sv"></span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">Arabian Gulf Cup (Khaleeji)</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 24 Sep · 21:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Qatar</span><span class="sc">2 &ndash; 0</span><span class="tname">Bahrain</span></span>
+      
+      <p class="meta">Prince Abdullah Al Faisal Sports City Stadium · Att. 1918</p>
+      <p class="insight">Qatar beat Bahrain by two goals. Shot count 12-9 favoured Qatar.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">61&#x27;</span><span class="pname">Boualem Khoukhi</span></li><li class="scorer"><span class="min">90+9&#x27;</span><span class="pname">Hassan Al-Haydos</span></li></ul>
+      <div class="statgrid"><div class="stat"><span class="sv">41</span><span class="st">Ball possession</span><span class="sv">59</span></div><div class="stat"><span class="sv">12</span><span class="st">Total shots</span><span class="sv">9</span></div><div class="stat"><span class="sv">4</span><span class="st">Shots on target</span><span class="sv">1</span></div><div class="stat"><span class="sv">24</span><span class="st">Touches in opposition box</span><span class="sv">13</span></div><div class="stat"><span class="sv">4</span><span class="st">Big chances</span><span class="sv">2</span></div><div class="stat"><span class="sv">2</span><span class="st">Big chances missed</span><span class="sv">2</span></div><div class="stat"><span class="sv">331 (85%)</span><span class="st">Accurate passes</span><span class="sv">488 (88%)</span></div><div class="stat"><span class="sv">1</span><span class="st">Yellow cards</span><span class="sv">3</span></div><div class="stat"><span class="sv">2</span><span class="st">Corners</span><span class="sv">2</span></div><div class="stat"><span class="sv"></span><span class="st">Shots</span><span class="sv"></span></div></div>
+    </article></div><h2>Results &middot; International<span class="count">9 matches</span></h2><div class="cards">
+    <article class="card">
+      <header class="card-head">
+        <span class="league">International Friendlies</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 24 Sep · 12:30</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Palestine</span><span class="sc">2 &ndash; 2</span><span class="tname">New Zealand</span></span>
+      
+      <p class="meta">Tongliang Long Stadium</p>
+      <p class="insight">Honours were even in a draw.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">5&#x27;</span><span class="pname">Ben Waine</span></li><li class="scorer"><span class="min">27&#x27;</span><span class="pname">Assad Al Hamlawi</span></li><li class="scorer"><span class="min">35&#x27;</span><span class="pname">Jesse Randall</span></li><li class="scorer"><span class="min">39&#x27;</span><span class="pname">Oday Dabbagh</span></li></ul>
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">International Friendlies</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 24 Sep · 13:05</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Japan</span><span class="sc">3 &ndash; 1</span><span class="tname">Uruguay</span></span>
+      
+      <p class="meta">Miyagi Stadium · Att. 44070</p>
+      <p class="insight">Japan beat Uruguay by two goals. Shot count 8-19 favoured Uruguay.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">12&#x27;</span><span class="pname">Kuryu Matsuki</span></li><li class="scorer"><span class="min">42&#x27;</span><span class="pname">Maxi Araújo</span></li><li class="scorer"><span class="min">90+1&#x27;</span><span class="pname">Kento Shiogai</span></li><li class="scorer"><span class="min">90+6&#x27;</span><span class="pname">Ayase Ueda</span></li></ul>
+      <div class="statgrid"><div class="stat"><span class="sv">54</span><span class="st">Ball possession</span><span class="sv">46</span></div><div class="stat"><span class="sv">8</span><span class="st">Total shots</span><span class="sv">19</span></div><div class="stat"><span class="sv">3</span><span class="st">Shots on target</span><span class="sv">8</span></div><div class="stat"><span class="sv">16</span><span class="st">Touches in opposition box</span><span class="sv">26</span></div><div class="stat"><span class="sv">3</span><span class="st">Big chances</span><span class="sv">0</span></div><div class="stat"><span class="sv">1</span><span class="st">Big chances missed</span><span class="sv">0</span></div><div class="stat"><span class="sv">397 (86%)</span><span class="st">Accurate passes</span><span class="sv">306 (78%)</span></div><div class="stat"><span class="sv">2</span><span class="st">Yellow cards</span><span class="sv">2</span></div><div class="stat"><span class="sv">2</span><span class="st">Corners</span><span class="sv">4</span></div><div class="stat"><span class="sv"></span><span class="st">Shots</span><span class="sv"></span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">International Friendlies</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 24 Sep · 14:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">South Korea</span><span class="sc">3 &ndash; 0</span><span class="tname">Ecuador</span></span>
+      
+      <p class="meta">Suwon World Cup Stadium · Att. 33953</p>
+      <p class="insight">South Korea produced a comprehensive 3-goal victory over Ecuador. Shot count 11-10 favoured South Korea.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">54&#x27;</span><span class="pname">Hyeon-Gyu Oh</span></li><li class="scorer"><span class="min">58&#x27;</span><span class="pname">Heung-Min Son</span></li><li class="scorer"><span class="min">86&#x27;</span><span class="pname">Dong-Gyeong Lee</span></li></ul>
+      <div class="statgrid"><div class="stat"><span class="sv">59</span><span class="st">Ball possession</span><span class="sv">41</span></div><div class="stat"><span class="sv">11</span><span class="st">Total shots</span><span class="sv">10</span></div><div class="stat"><span class="sv">5</span><span class="st">Shots on target</span><span class="sv">3</span></div><div class="stat"><span class="sv">13</span><span class="st">Touches in opposition box</span><span class="sv">9</span></div><div class="stat"><span class="sv">2</span><span class="st">Big chances</span><span class="sv">0</span></div><div class="stat"><span class="sv">1</span><span class="st">Big chances missed</span><span class="sv">0</span></div><div class="stat"><span class="sv">441 (89%)</span><span class="st">Accurate passes</span><span class="sv">280 (83%)</span></div><div class="stat"><span class="sv">4</span><span class="st">Yellow cards</span><span class="sv">5</span></div><div class="stat"><span class="sv">2</span><span class="st">Corners</span><span class="sv">5</span></div><div class="stat"><span class="sv"></span><span class="st">Shots</span><span class="sv"></span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">International Friendlies</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 24 Sep · 14:35</span>
+      </header>
+      <span class="scorebox final"><span class="tname">China</span><span class="sc">3 &ndash; 0</span><span class="tname">Maldives</span></span>
+      
+      <p class="meta">Chongqing Longxing Football Stadium · Att. 11680</p>
+      <p class="insight">China produced a comprehensive 3-goal victory over Maldives. Shot count 25-1 favoured China.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">50&#x27;</span><span class="pname">Ziming Wang <span class="badge tally" title="multiple goals">3&times;</span></span></li><li class="scorer"><span class="min">56&#x27;</span><span class="pname">Ziming Wang <span class="badge tally" title="multiple goals">3&times;</span></span></li><li class="scorer"><span class="min">64&#x27;</span><span class="pname">Ziming Wang <span class="badge tally" title="multiple goals">3&times;</span></span></li></ul>
+      <div class="statgrid"><div class="stat"><span class="sv">68</span><span class="st">Ball possession</span><span class="sv">32</span></div><div class="stat"><span class="sv">25</span><span class="st">Total shots</span><span class="sv">1</span></div><div class="stat"><span class="sv">10</span><span class="st">Shots on target</span><span class="sv">1</span></div><div class="stat"><span class="sv">47</span><span class="st">Touches in opposition box</span><span class="sv">1</span></div><div class="stat"><span class="sv">7</span><span class="st">Big chances</span><span class="sv">0</span></div><div class="stat"><span class="sv">4</span><span class="st">Big chances missed</span><span class="sv">0</span></div><div class="stat"><span class="sv">488 (88%)</span><span class="st">Accurate passes</span><span class="sv">199 (69%)</span></div><div class="stat"><span class="sv">1</span><span class="st">Yellow cards</span><span class="sv">0</span></div><div class="stat"><span class="sv">15</span><span class="st">Corners</span><span class="sv">0</span></div><div class="stat"><span class="sv"></span><span class="st">Shots</span><span class="sv"></span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">International Friendlies</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 24 Sep · 17:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Uzbekistan</span><span class="sc">3 &ndash; 1</span><span class="tname">Iran</span></span>
+      
+      <p class="meta">Istiqlol stadioni</p>
+      <p class="insight">Uzbekistan beat Iran by two goals.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">10&#x27;</span><span class="pname">Eldor Shomurodov <span class="badge tally" title="multiple goals">2&times;</span></span></li><li class="scorer"><span class="min">49&#x27;</span><span class="pname">Jakhongir Urozov (OG)</span></li><li class="scorer"><span class="min">58&#x27;</span><span class="pname">Eldor Shomurodov <span class="badge tally" title="multiple goals">2&times;</span></span></li><li class="scorer"><span class="min">90+4&#x27;</span><span class="pname">Khuisain Norchaev</span></li></ul>
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">International Friendlies</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Fri 25 Sep · 13:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Australia</span><span class="sc">1 &ndash; 1</span><span class="tname">Brazil</span></span>
+      
+      <p class="meta">Queensland Country Bank Stadium · Att. 25440</p>
+      <p class="insight">Honours were even in a draw. Shot count 7-16 favoured Brazil.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">68&#x27;</span><span class="pname">Nestory Irankunda</span></li><li class="scorer"><span class="min">90+5&#x27;</span><span class="pname">Rayan <span class="assist">(ast. Raphinha)</span></span></li></ul>
+      <div class="statgrid"><div class="stat"><span class="sv">35</span><span class="st">Ball possession</span><span class="sv">65</span></div><div class="stat"><span class="sv">7</span><span class="st">Total shots</span><span class="sv">16</span></div><div class="stat"><span class="sv">2</span><span class="st">Shots on target</span><span class="sv">5</span></div><div class="stat"><span class="sv">14</span><span class="st">Touches in opposition box</span><span class="sv">18</span></div><div class="stat"><span class="sv">2</span><span class="st">Big chances</span><span class="sv">2</span></div><div class="stat"><span class="sv">2</span><span class="st">Big chances missed</span><span class="sv">1</span></div><div class="stat"><span class="sv">251 (76%)</span><span class="st">Accurate passes</span><span class="sv">554 (88%)</span></div><div class="stat"><span class="sv">1</span><span class="st">Yellow cards</span><span class="sv">0</span></div><div class="stat"><span class="sv">9</span><span class="st">Corners</span><span class="sv">8</span></div><div class="stat"><span class="sv"></span><span class="st">Shots</span><span class="sv"></span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">International Friendlies</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Fri 25 Sep · 17:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">India</span><span class="sc">1 &ndash; 1</span><span class="tname">Panama</span></span>
+      
+      <p class="meta">Sree Kanteerava Stadium</p>
+      <p class="insight">Honours were even in a draw.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">41&#x27;</span><span class="pname">Ryan Williams <span class="assist">(ast. Akash Mishra)</span></span></li><li class="scorer"><span class="min">68&#x27;</span><span class="pname">Omar Valencia <span class="assist">(ast. Andrés Andrade)</span></span></li></ul>
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">International Friendlies</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Sun 04 Oct · 03:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Argentina</span><span class="sc">7 &ndash; 0</span><span class="tname">Burkina Faso</span></span>
+      
+      
+      <p class="insight">Argentina produced a comprehensive 7-goal victory over Burkina Faso. It was a high-scoring thriller.</p>
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">International Friendlies</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Sun 04 Oct · 05:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">USA</span><span class="sc">3 &ndash; 0</span><span class="tname">Mexico</span></span>
+      
+      
+      <p class="insight">USA produced a comprehensive 3-goal victory over Mexico.</p>
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article></div><h2>Match Reports &amp; Insights</h2><div class="standings"><ul class="insight-list"><li><strong>Argentina 7&ndash;0 Burkina Faso</strong> (International Friendlies): Argentina produced a comprehensive 7-goal victory over Burkina Faso. It was a high-scoring thriller.</li><li><strong>UAE 4&ndash;0 Yemen</strong> (Arabian Gulf Cup (Khaleeji)): UAE produced a comprehensive 4-goal victory over Yemen. Shot count 12-2 favoured UAE. Scorers: Nicolás Giménez 26, 51; Nader Yahya Omar Sahal (OG) 36; Luanzinho 45+4.</li><li><strong>Japan 3&ndash;1 Uruguay</strong> (International Friendlies): Japan beat Uruguay by two goals. Shot count 8-19 favoured Uruguay. Scorers: Kuryu Matsuki 12; Maxi Araújo 42; Kento Shiogai 90+1; Ayase Ueda 90+6.</li><li><strong>South Korea 3&ndash;0 Ecuador</strong> (International Friendlies): South Korea produced a comprehensive 3-goal victory over Ecuador. Shot count 11-10 favoured South Korea. Scorers: Hyeon-Gyu Oh 54; Heung-Min Son 58; Dong-Gyeong Lee 86.</li><li><strong>China 3&ndash;0 Maldives</strong> (International Friendlies): China produced a comprehensive 3-goal victory over Maldives. Shot count 25-1 favoured China. Scorers: Ziming Wang 50, 56, 64.</li><li><strong>Uzbekistan 3&ndash;1 Iran</strong> (International Friendlies): Uzbekistan beat Iran by two goals. Scorers: Eldor Shomurodov 10, 58; Jakhongir Urozov (OG) 49; Khuisain Norchaev 90+4.</li></ul></div><h2>Upcoming Fixtures &middot; next 24 hours</h2><p class="muted small window-note">Sun 04 Oct 13:39 &rarr; Mon 05 Oct 13:39 (+03)</p><div class="standings"><table class="fx"><tr class="fxgroup"><td colspan="2">UEFA Nations League A</td></tr>
+      <tr>
+        <td class="fx-time">21:45</td>
+        <td class="fx-teams">Greece <span class="muted">vs</span> Germany</td>
+      </tr>
+      <tr>
+        <td class="fx-time">21:45</td>
+        <td class="fx-teams">Netherlands <span class="muted">vs</span> Serbia</td>
+      </tr>
+      <tr>
+        <td class="fx-time">21:45</td>
+        <td class="fx-teams">Portugal <span class="muted">vs</span> Norway</td>
+      </tr>
+      <tr>
+        <td class="fx-time">21:45</td>
+        <td class="fx-teams">Wales <span class="muted">vs</span> Denmark</td>
+      </tr><tr class="fxgroup"><td colspan="2">UEFA Nations League B</td></tr>
+      <tr>
+        <td class="fx-time">19:00</td>
+        <td class="fx-teams">Kosovo <span class="muted">vs</span> Austria</td>
+      </tr>
+      <tr>
+        <td class="fx-time">21:45</td>
+        <td class="fx-teams">Ireland <span class="muted">vs</span> Israel</td>
+      </tr><tr class="fxgroup"><td colspan="2">UEFA Nations League D</td></tr>
+      <tr>
+        <td class="fx-time">16:00</td>
+        <td class="fx-teams">Azerbaijan <span class="muted">vs</span> Lithuania</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:00</td>
+        <td class="fx-teams">Malta <span class="muted">vs</span> Andorra</td>
+      </tr><tr class="fxgroup"><td colspan="2">International Friendlies</td></tr>
+      <tr>
+        <td class="fx-time">16:00</td>
+        <td class="fx-teams">Senegal <span class="muted">vs</span> Comoros</td>
+      </tr>
+      <tr>
+        <td class="fx-time">17:00</td>
+        <td class="fx-teams">Kyrgyzstan <span class="muted">vs</span> Lebanon</td>
+      </tr>
+      <tr>
+        <td class="fx-time">21:00</td>
+        <td class="fx-teams">Egypt <span class="muted">vs</span> South Africa</td>
+      </tr>
+      <tr>
+        <td class="fx-time">21:00</td>
+        <td class="fx-teams">Morocco <span class="muted">vs</span> Mali</td>
+      </tr>
+      <tr>
+        <td class="fx-time">01:30</td>
+        <td class="fx-teams">Bolivia <span class="muted">vs</span> Gambia</td>
+      </tr>
+      <tr>
+        <td class="fx-time">09:30</td>
+        <td class="fx-teams">Ecuador <span class="muted">vs</span> Panama</td>
+      </tr>
+      <tr>
+        <td class="fx-time">13:00</td>
+        <td class="fx-teams">Uganda <span class="muted">vs</span> DR Congo</td>
+      </tr>
+      <tr>
+        <td class="fx-time">13:30</td>
+        <td class="fx-teams">Japan <span class="muted">vs</span> New Zealand</td>
+      </tr></table></div><h2>League Standings</h2><div class="standings-grid">
+    <div class="standings">
+      <h3>Premier League</h3>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
+        <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
+        <tbody><tr><td class="pos">1<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Manchester City</td><td>5</td><td>5</td><td>0</td><td>0</td><td>13-5</td><td>8</td><td class="pts">15</td></tr><tr><td class="pos">2<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Arsenal</td><td>5</td><td>4</td><td>0</td><td>1</td><td>8-4</td><td>4</td><td class="pts">12</td></tr><tr><td class="pos">3<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Brighton &amp; Hove Albion</td><td>5</td><td>3</td><td>1</td><td>1</td><td>16-5</td><td>11</td><td class="pts">10</td></tr><tr><td class="pos">4<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Brentford</td><td>5</td><td>2</td><td>3</td><td>0</td><td>10-4</td><td>6</td><td class="pts">9</td></tr><tr><td class="pos">5<span class="dot" style="background:#0046A7" title="European competition place"></span></td><td class="tm">Leeds United</td><td>5</td><td>2</td><td>3</td><td>0</td><td>7-3</td><td>4</td><td class="pts">9</td></tr><tr><td class="pos">6</td><td class="tm">Liverpool</td><td>5</td><td>2</td><td>3</td><td>0</td><td>7-4</td><td>3</td><td class="pts">9</td></tr><tr><td class="pos">7</td><td class="tm">Everton</td><td>5</td><td>2</td><td>3</td><td>0</td><td>6-3</td><td>3</td><td class="pts">9</td></tr><tr><td class="pos">8</td><td class="tm">Hull City</td><td>5</td><td>2</td><td>2</td><td>1</td><td>6-4</td><td>2</td><td class="pts">8</td></tr></tbody>
+      </table>
+      <p class="legend"><span class="chip"><span class="dot" style="background:#2AD572"></span>Champions League</span><span class="chip"><span class="dot" style="background:#0046A7"></span>Europa League</span><span class="chip"><span class="dot" style="background:#FF4646"></span>Relegation</span></p>
+    </div>
+    <div class="standings">
+      <h3>LaLiga</h3>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
+        <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
+        <tbody><tr><td class="pos">1<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Barcelona</td><td>7</td><td>7</td><td>0</td><td>0</td><td>31-7</td><td>24</td><td class="pts">21</td></tr><tr><td class="pos">2<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Atlético Madrid</td><td>7</td><td>5</td><td>1</td><td>1</td><td>16-7</td><td>9</td><td class="pts">16</td></tr><tr><td class="pos">3<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Real Betis</td><td>7</td><td>5</td><td>1</td><td>1</td><td>9-7</td><td>2</td><td class="pts">16</td></tr><tr><td class="pos">4<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Real Madrid</td><td>7</td><td>5</td><td>0</td><td>2</td><td>18-8</td><td>10</td><td class="pts">15</td></tr><tr><td class="pos">5<span class="dot" style="background:#0046A7" title="European competition place"></span></td><td class="tm">Sevilla</td><td>7</td><td>4</td><td>1</td><td>2</td><td>10-9</td><td>1</td><td class="pts">13</td></tr><tr><td class="pos">6<span class="dot" style="background:#02CCF0" title="European competition place"></span></td><td class="tm">Deportivo Alavés</td><td>7</td><td>3</td><td>2</td><td>2</td><td>11-6</td><td>5</td><td class="pts">11</td></tr><tr><td class="pos">7</td><td class="tm">Deportivo A Coruña</td><td>7</td><td>2</td><td>4</td><td>1</td><td>10-8</td><td>2</td><td class="pts">10</td></tr><tr><td class="pos">8</td><td class="tm">Real Sociedad</td><td>7</td><td>3</td><td>1</td><td>3</td><td>9-13</td><td>-4</td><td class="pts">10</td></tr></tbody>
+      </table>
+      <p class="legend"><span class="chip"><span class="dot" style="background:#2AD572"></span>Champions League</span><span class="chip"><span class="dot" style="background:#0046A7"></span>Europa League</span><span class="chip"><span class="dot" style="background:#02CCF0"></span>Conference League qualification</span><span class="chip"><span class="dot" style="background:#FF4646"></span>Relegation</span></p>
+    </div>
+    <div class="standings">
+      <h3>Serie A</h3>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
+        <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
+        <tbody><tr><td class="pos">1<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Roma</td><td>5</td><td>4</td><td>1</td><td>0</td><td>14-3</td><td>11</td><td class="pts">13</td></tr><tr><td class="pos">2<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Inter</td><td>5</td><td>4</td><td>1</td><td>0</td><td>15-8</td><td>7</td><td class="pts">13</td></tr><tr><td class="pos">3<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Lazio</td><td>5</td><td>4</td><td>1</td><td>0</td><td>8-3</td><td>5</td><td class="pts">13</td></tr><tr><td class="pos">4<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Cagliari</td><td>5</td><td>4</td><td>0</td><td>1</td><td>5-2</td><td>3</td><td class="pts">12</td></tr><tr><td class="pos">5<span class="dot" style="background:#0046A7" title="European competition place"></span></td><td class="tm">Milan</td><td>5</td><td>3</td><td>2</td><td>0</td><td>10-4</td><td>6</td><td class="pts">11</td></tr><tr><td class="pos">6<span class="dot" style="background:#02CCF0" title="European competition place"></span></td><td class="tm">Frosinone</td><td>5</td><td>3</td><td>1</td><td>1</td><td>9-4</td><td>5</td><td class="pts">10</td></tr><tr><td class="pos">7</td><td class="tm">Juventus</td><td>5</td><td>3</td><td>1</td><td>1</td><td>8-4</td><td>4</td><td class="pts">10</td></tr><tr><td class="pos">8</td><td class="tm">Como</td><td>5</td><td>3</td><td>1</td><td>1</td><td>9-6</td><td>3</td><td class="pts">10</td></tr></tbody>
+      </table>
+      <p class="legend"><span class="chip"><span class="dot" style="background:#2AD572"></span>Champions League</span><span class="chip"><span class="dot" style="background:#0046A7"></span>Europa League</span><span class="chip"><span class="dot" style="background:#02CCF0"></span>Conference League qualification</span><span class="chip"><span class="dot" style="background:#FF4646"></span>Relegation</span></p>
+    </div>
+    <div class="standings">
+      <h3>Bundesliga</h3>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
+        <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
+        <tbody><tr><td class="pos">1<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Borussia Dortmund</td><td>4</td><td>4</td><td>0</td><td>0</td><td>9-2</td><td>7</td><td class="pts">12</td></tr><tr><td class="pos">2<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Bayern München</td><td>4</td><td>3</td><td>1</td><td>0</td><td>14-2</td><td>12</td><td class="pts">10</td></tr><tr><td class="pos">3<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Freiburg</td><td>4</td><td>3</td><td>1</td><td>0</td><td>12-3</td><td>9</td><td class="pts">10</td></tr><tr><td class="pos">4<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Augsburg</td><td>4</td><td>2</td><td>1</td><td>1</td><td>11-6</td><td>5</td><td class="pts">7</td></tr><tr><td class="pos">5<span class="dot" style="background:#0046A7" title="European competition place"></span></td><td class="tm">Bayer Leverkusen</td><td>4</td><td>2</td><td>1</td><td>1</td><td>10-5</td><td>5</td><td class="pts">7</td></tr><tr><td class="pos">6<span class="dot" style="background:#02CCF0" title="European competition place"></span></td><td class="tm">Mainz 05</td><td>4</td><td>2</td><td>1</td><td>1</td><td>10-6</td><td>4</td><td class="pts">7</td></tr><tr><td class="pos">7</td><td class="tm">Elversberg</td><td>4</td><td>2</td><td>1</td><td>1</td><td>8-7</td><td>1</td><td class="pts">7</td></tr><tr><td class="pos">8</td><td class="tm">Werder Bremen</td><td>4</td><td>2</td><td>1</td><td>1</td><td>8-8</td><td>0</td><td class="pts">7</td></tr></tbody>
+      </table>
+      <p class="legend"><span class="chip"><span class="dot" style="background:#2AD572"></span>Champions League</span><span class="chip"><span class="dot" style="background:#0046A7"></span>Europa League</span><span class="chip"><span class="dot" style="background:#02CCF0"></span>Conference League qualification</span><span class="chip"><span class="dot" style="background:#FFA72F"></span>Relegation qualification</span><span class="chip"><span class="dot" style="background:#FF4646"></span>Relegation</span></p>
+    </div>
+    <div class="standings">
+      <h3>Ligue 1</h3>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
+        <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
+        <tbody><tr><td class="pos">1<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Monaco</td><td>5</td><td>4</td><td>1</td><td>0</td><td>8-3</td><td>5</td><td class="pts">13</td></tr><tr><td class="pos">2<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Lyon</td><td>5</td><td>3</td><td>2</td><td>0</td><td>10-2</td><td>8</td><td class="pts">11</td></tr><tr><td class="pos">3<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Paris FC</td><td>5</td><td>3</td><td>2</td><td>0</td><td>8-3</td><td>5</td><td class="pts">11</td></tr><tr><td class="pos">4<span class="dot" style="background:#FFD908" title="European competition place"></span></td><td class="tm">Lille</td><td>5</td><td>3</td><td>1</td><td>1</td><td>8-4</td><td>4</td><td class="pts">10</td></tr><tr><td class="pos">5<span class="dot" style="background:#0046A7" title="European competition place"></span></td><td class="tm">Rennes</td><td>5</td><td>3</td><td>1</td><td>1</td><td>8-9</td><td>-1</td><td class="pts">10</td></tr><tr><td class="pos">6<span class="dot" style="background:#02CCF0" title="European competition place"></span></td><td class="tm">Paris Saint-Germain</td><td>5</td><td>2</td><td>2</td><td>1</td><td>8-7</td><td>1</td><td class="pts">8</td></tr><tr><td class="pos">7</td><td class="tm">Angers</td><td>5</td><td>2</td><td>1</td><td>2</td><td>6-5</td><td>1</td><td class="pts">7</td></tr><tr><td class="pos">8</td><td class="tm">Strasbourg</td><td>5</td><td>2</td><td>1</td><td>2</td><td>10-10</td><td>0</td><td class="pts">7</td></tr></tbody>
+      </table>
+      <p class="legend"><span class="chip"><span class="dot" style="background:#2AD572"></span>Champions League</span><span class="chip"><span class="dot" style="background:#FFD908"></span>Champions League qualification</span><span class="chip"><span class="dot" style="background:#0046A7"></span>Europa League</span><span class="chip"><span class="dot" style="background:#02CCF0"></span>Conference League qualification</span><span class="chip"><span class="dot" style="background:#FFA72F"></span>Relegation qualification</span><span class="chip"><span class="dot" style="background:#FF4646"></span>Relegation</span></p>
+    </div>
+    <div class="standings">
+      <h3>Champions League</h3>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
+        <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
+        <tbody><tr><td class="pos">1<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Paris Saint-Germain</td><td>1</td><td>1</td><td>0</td><td>0</td><td>6-1</td><td>5</td><td class="pts">3</td></tr><tr><td class="pos">2<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Bayern München</td><td>1</td><td>1</td><td>0</td><td>0</td><td>5-0</td><td>5</td><td class="pts">3</td></tr><tr><td class="pos">3<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Barcelona</td><td>1</td><td>1</td><td>0</td><td>0</td><td>5-1</td><td>4</td><td class="pts">3</td></tr><tr><td class="pos">4<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Manchester United</td><td>1</td><td>1</td><td>0</td><td>0</td><td>4-0</td><td>4</td><td class="pts">3</td></tr><tr><td class="pos">5<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Como</td><td>1</td><td>1</td><td>0</td><td>0</td><td>4-1</td><td>3</td><td class="pts">3</td></tr><tr><td class="pos">6<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Sporting CP</td><td>1</td><td>1</td><td>0</td><td>0</td><td>3-1</td><td>2</td><td class="pts">3</td></tr><tr><td class="pos">7<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">VfB Stuttgart</td><td>1</td><td>1</td><td>0</td><td>0</td><td>3-1</td><td>2</td><td class="pts">3</td></tr><tr><td class="pos">8<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Manchester City</td><td>1</td><td>1</td><td>0</td><td>0</td><td>2-0</td><td>2</td><td class="pts">3</td></tr></tbody>
+      </table>
+      <p class="legend"><span class="chip"><span class="dot" style="background:#2AD572"></span>Qualification to 1/8 finals</span><span class="chip"><span class="dot" style="background:#0294F0"></span>Qualification to 1/16 finals</span></p>
+    </div>
+    <div class="standings">
+      <h3>Saudi Pro League</h3>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
+        <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
+        <tbody><tr><td class="pos">1<span class="dot" style="background:#c9dd03" title="European competition place"></span></td><td class="tm">Al Hilal</td><td>7</td><td>6</td><td>0</td><td>1</td><td>23-5</td><td>18</td><td class="pts">18</td></tr><tr><td class="pos">2<span class="dot" style="background:#c9dd03" title="European competition place"></span></td><td class="tm">Al Ittihad</td><td>7</td><td>5</td><td>2</td><td>0</td><td>12-6</td><td>6</td><td class="pts">17</td></tr><tr><td class="pos">3<span class="dot" style="background:#c9dd03" title="European competition place"></span></td><td class="tm">Al Nassr FC</td><td>7</td><td>5</td><td>1</td><td>1</td><td>16-7</td><td>9</td><td class="pts">16</td></tr><tr><td class="pos">4<span class="dot" style="background:#FFD908" title="European competition place"></span></td><td class="tm">Al Qadsiah</td><td>7</td><td>5</td><td>1</td><td>1</td><td>16-8</td><td>8</td><td class="pts">16</td></tr><tr><td class="pos">5<span class="dot" style="background:#FFD908" title="European competition place"></span></td><td class="tm">Neom SC</td><td>7</td><td>5</td><td>0</td><td>2</td><td>13-6</td><td>7</td><td class="pts">15</td></tr><tr><td class="pos">6<span class="dot" style="background:#0046A7" title="European competition place"></span></td><td class="tm">Al Ahli</td><td>7</td><td>4</td><td>0</td><td>3</td><td>16-10</td><td>6</td><td class="pts">12</td></tr><tr><td class="pos">7</td><td class="tm">Al Kholood</td><td>7</td><td>3</td><td>3</td><td>1</td><td>12-10</td><td>2</td><td class="pts">12</td></tr><tr><td class="pos">8</td><td class="tm">Al Diriyah</td><td>7</td><td>3</td><td>2</td><td>2</td><td>7-5</td><td>2</td><td class="pts">11</td></tr></tbody>
+      </table>
+      <p class="legend"><span class="chip"><span class="dot" style="background:#c9dd03"></span>AFC Champions League</span><span class="chip"><span class="dot" style="background:#FFD908"></span>AFC Champions League Qualification</span><span class="chip"><span class="dot" style="background:#0046A7"></span>AFC Cup</span><span class="chip"><span class="dot" style="background:#FF4646"></span>Relegation</span></p>
+    </div>
+    <div class="standings">
+      <h3>UAE Pro League</h3>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
+        <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
+        <tbody><tr><td class="pos">1<span class="dot" style="background:#c9dd03" title="European competition place"></span></td><td class="tm">Al-Jazira</td><td>5</td><td>4</td><td>1</td><td>0</td><td>11-2</td><td>9</td><td class="pts">13</td></tr><tr><td class="pos">2<span class="dot" style="background:#c9dd03" title="European competition place"></span></td><td class="tm">Al-Ain</td><td>5</td><td>4</td><td>1</td><td>0</td><td>12-5</td><td>7</td><td class="pts">13</td></tr><tr><td class="pos">3<span class="dot" style="background:#FFD908" title="European competition place"></span></td><td class="tm">Shabab Al-Ahli Dubai FC</td><td>5</td><td>3</td><td>1</td><td>1</td><td>10-5</td><td>5</td><td class="pts">10</td></tr><tr><td class="pos">4<span class="dot" style="background:#0046A7" title="European competition place"></span></td><td class="tm">Al-Wasl</td><td>5</td><td>3</td><td>1</td><td>1</td><td>15-6</td><td>9</td><td class="pts">10</td></tr><tr><td class="pos">5</td><td class="tm">Sharjah Cultural Club</td><td>5</td><td>3</td><td>0</td><td>2</td><td>10-7</td><td>3</td><td class="pts">9</td></tr><tr><td class="pos">6</td><td class="tm">Al-Wahda</td><td>5</td><td>3</td><td>0</td><td>2</td><td>6-5</td><td>1</td><td class="pts">9</td></tr><tr><td class="pos">7</td><td class="tm">Ajman</td><td>5</td><td>3</td><td>0</td><td>2</td><td>11-12</td><td>-1</td><td class="pts">9</td></tr><tr><td class="pos">8</td><td class="tm">United FC</td><td>5</td><td>2</td><td>1</td><td>2</td><td>12-13</td><td>-1</td><td class="pts">7</td></tr></tbody>
+      </table>
+      <p class="legend"><span class="chip"><span class="dot" style="background:#c9dd03"></span>AFC Champions League</span><span class="chip"><span class="dot" style="background:#FFD908"></span>AFC Champions League Qualification</span><span class="chip"><span class="dot" style="background:#0046A7"></span>AFC Cup</span><span class="chip"><span class="dot" style="background:#FF4646"></span>Relegation</span></p>
+    </div>
+    <div class="standings">
+      <h3>Qatar Stars League</h3>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
+        <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
+        <tbody><tr><td class="pos">1<span class="dot" style="background:#c9dd03" title="European competition place"></span></td><td class="tm">Al-Sadd</td><td>4</td><td>4</td><td>0</td><td>0</td><td>19-7</td><td>12</td><td class="pts">12</td></tr><tr><td class="pos">2<span class="dot" style="background:#FFD908" title="European competition place"></span></td><td class="tm">Al-Rayyan</td><td>4</td><td>3</td><td>1</td><td>0</td><td>7-2</td><td>5</td><td class="pts">10</td></tr><tr><td class="pos">3<span class="dot" style="background:#0046A7" title="European competition place"></span></td><td class="tm">Al-Shamal</td><td>4</td><td>2</td><td>2</td><td>0</td><td>10-6</td><td>4</td><td class="pts">8</td></tr><tr><td class="pos">4</td><td class="tm">Al-Duhail SC</td><td>4</td><td>1</td><td>3</td><td>0</td><td>5-3</td><td>2</td><td class="pts">6</td></tr><tr><td class="pos">5</td><td class="tm">Al-Arabi</td><td>4</td><td>1</td><td>3</td><td>0</td><td>5-3</td><td>2</td><td class="pts">6</td></tr><tr><td class="pos">6</td><td class="tm">Lusail SC</td><td>4</td><td>1</td><td>2</td><td>1</td><td>7-4</td><td>3</td><td class="pts">5</td></tr><tr><td class="pos">7</td><td class="tm">Al-Shahaniya</td><td>4</td><td>1</td><td>1</td><td>2</td><td>7-9</td><td>-2</td><td class="pts">4</td></tr><tr><td class="pos">8</td><td class="tm">Al-Ahli</td><td>4</td><td>1</td><td>1</td><td>2</td><td>5-9</td><td>-4</td><td class="pts">4</td></tr></tbody>
+      </table>
+      <p class="legend"><span class="chip"><span class="dot" style="background:#c9dd03"></span>AFC Champions League</span><span class="chip"><span class="dot" style="background:#FFD908"></span>AFC Champions League Qualification</span><span class="chip"><span class="dot" style="background:#0046A7"></span>AFC Cup</span><span class="chip"><span class="dot" style="background:#FFA72F"></span>Relegation qualification</span><span class="chip"><span class="dot" style="background:#FF4646"></span>Relegation</span></p>
+    </div>
+    <div class="standings">
+      <h3>Egyptian Premier League</h3>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
+        <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
+        <tbody><tr><td class="pos">1<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Pyramids FC</td><td>5</td><td>5</td><td>0</td><td>0</td><td>9-1</td><td>8</td><td class="pts">15</td></tr><tr><td class="pos">2<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Zamalek SC</td><td>5</td><td>4</td><td>1</td><td>0</td><td>8-1</td><td>7</td><td class="pts">13</td></tr><tr><td class="pos">3<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Al Ahly SC</td><td>5</td><td>4</td><td>1</td><td>0</td><td>9-3</td><td>6</td><td class="pts">13</td></tr><tr><td class="pos">4<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Ceramica Cleopatra</td><td>5</td><td>4</td><td>0</td><td>1</td><td>10-3</td><td>7</td><td class="pts">12</td></tr><tr><td class="pos">5<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Modern Sport FC</td><td>5</td><td>3</td><td>1</td><td>1</td><td>7-4</td><td>3</td><td class="pts">10</td></tr><tr><td class="pos">6<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Al Ittihad Alexandria</td><td>5</td><td>3</td><td>1</td><td>1</td><td>6-3</td><td>3</td><td class="pts">10</td></tr><tr><td class="pos">7<span class="dot" style="background:#FFA72F" title="European competition place"></span></td><td class="tm">Al Mokawloon Al Arab</td><td>5</td><td>2</td><td>1</td><td>2</td><td>6-5</td><td>1</td><td class="pts">7</td></tr><tr><td class="pos">8<span class="dot" style="background:#FFA72F" title="European competition place"></span></td><td class="tm">Petrojet-Suez</td><td>5</td><td>2</td><td>1</td><td>2</td><td>8-8</td><td>0</td><td class="pts">7</td></tr></tbody>
+      </table>
+      <p class="legend"><span class="chip"><span class="dot" style="background:#2AD572"></span>Championship playoff</span><span class="chip"><span class="dot" style="background:#FFA72F"></span>Relegation qualification</span></p>
+    </div>
+    <div class="standings">
+      <h3>Moroccan Botola Pro</h3>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
+        <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
+        <tbody><tr><td class="pos">1<span class="dot" style="background:#FFD908" title="European competition place"></span></td><td class="tm">MAS Fès</td><td>2</td><td>2</td><td>0</td><td>0</td><td>4-2</td><td>2</td><td class="pts">6</td></tr><tr><td class="pos">2<span class="dot" style="background:#FFD908" title="European competition place"></span></td><td class="tm">Union Touarga Sport</td><td>2</td><td>2</td><td>0</td><td>0</td><td>3-1</td><td>2</td><td class="pts">6</td></tr><tr><td class="pos">3<span class="dot" style="background:#0294F0" title="European competition place"></span></td><td class="tm">Ittihad Tanger</td><td>2</td><td>1</td><td>1</td><td>0</td><td>4-2</td><td>2</td><td class="pts">4</td></tr><tr><td class="pos">4</td><td class="tm">CODM Meknès</td><td>2</td><td>1</td><td>0</td><td>1</td><td>6-3</td><td>3</td><td class="pts">3</td></tr><tr><td class="pos">5</td><td class="tm">Widad Temara</td><td>2</td><td>1</td><td>0</td><td>1</td><td>3-2</td><td>1</td><td class="pts">3</td></tr><tr><td class="pos">6</td><td class="tm">Raja Casablanca</td><td>1</td><td>1</td><td>0</td><td>0</td><td>1-0</td><td>1</td><td class="pts">3</td></tr><tr><td class="pos">7</td><td class="tm">Hassania Agadir</td><td>2</td><td>1</td><td>0</td><td>1</td><td>4-4</td><td>0</td><td class="pts">3</td></tr><tr><td class="pos">8</td><td class="tm">KACM</td><td>2</td><td>1</td><td>0</td><td>1</td><td>3-3</td><td>0</td><td class="pts">3</td></tr></tbody>
+      </table>
+      <p class="legend"><span class="chip"><span class="dot" style="background:#FFD908"></span>CAF Champions League qualification</span><span class="chip"><span class="dot" style="background:#0294F0"></span>CAF Confederation Cup qualification</span><span class="chip"><span class="dot" style="background:#FFA72F"></span>Relegation qualification</span><span class="chip"><span class="dot" style="background:#FF4646"></span>Relegation</span></p>
+    </div>
+    <div class="standings">
+      <h3>Tunisia Ligue Professionnelle 1</h3>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
+        <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
+        <tbody><tr><td class="pos">1<span class="dot" style="background:#FFD908" title="European competition place"></span></td><td class="tm">Club Africain</td><td>3</td><td>3</td><td>0</td><td>0</td><td>3-0</td><td>3</td><td class="pts">9</td></tr><tr><td class="pos">2<span class="dot" style="background:#FFD908" title="European competition place"></span></td><td class="tm">Espérance</td><td>4</td><td>3</td><td>0</td><td>1</td><td>7-6</td><td>1</td><td class="pts">9</td></tr><tr><td class="pos">3<span class="dot" style="background:#0294F0" title="European competition place"></span></td><td class="tm">Ben Guerdane</td><td>4</td><td>2</td><td>2</td><td>0</td><td>7-5</td><td>2</td><td class="pts">8</td></tr><tr><td class="pos">4</td><td class="tm">CS Sfaxien</td><td>4</td><td>2</td><td>2</td><td>0</td><td>6-3</td><td>3</td><td class="pts">8</td></tr><tr><td class="pos">5</td><td class="tm">US Monastir</td><td>4</td><td>2</td><td>2</td><td>0</td><td>7-5</td><td>2</td><td class="pts">8</td></tr><tr><td class="pos">6</td><td class="tm">PS Sakiet Eddaïer</td><td>4</td><td>2</td><td>2</td><td>0</td><td>4-1</td><td>3</td><td class="pts">8</td></tr><tr><td class="pos">7</td><td class="tm">JS Omrane</td><td>4</td><td>2</td><td>1</td><td>1</td><td>5-4</td><td>1</td><td class="pts">7</td></tr><tr><td class="pos">8</td><td class="tm">CA Bizertin</td><td>4</td><td>2</td><td>1</td><td>1</td><td>3-3</td><td>0</td><td class="pts">7</td></tr></tbody>
+      </table>
+      <p class="legend"><span class="chip"><span class="dot" style="background:#FFD908"></span>CAF Champions League qualification</span><span class="chip"><span class="dot" style="background:#0294F0"></span>CAF Confederation Cup qualification</span><span class="chip"><span class="dot" style="background:#FF4646"></span>Relegation</span></p>
+    </div></div>
+<footer class="page">
+<p><strong>Data sources:</strong> FotMob public JSON API (matches, matchDetails, league tables)</p>
+<p>Reporting window scanned: results (2 days), fixtures (3 days). Kick-off times shown in
++03. Standings are the latest published
+tables from the data provider.</p>
+<p>Match insight lines are auto-generated from scoreline, goal and stat data.
+Generated automatically &middot; this page is informational only.</p>
+</footer>
+</div></body></html>
