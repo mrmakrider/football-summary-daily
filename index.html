@@ -5,47 +5,122 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Football Daily Summary</title>
 <style>
-:root{--bg:#0e1117;--card:#161b25;--fg:#e8ecf3;--muted:#93a1b5;
---accent:#4ade80;--accent2:#60a5fa;--line:#242c3a;}
+:root{--bg:#0b0e14;--card:#161b25;--card2:#1e2533;--fg:#e8ecf3;--muted:#93a1b5;
+--line:#242c3a;--accent:#4ade80;--accent2:#60a5fa;--red:#ef4444;--gold:#f59e0b;}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);
 font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
 line-height:1.5}
-.wrap{max-width:880px;margin:0 auto;padding:24px 16px 64px}
-header{text-align:center;padding:40px 16px 28px}
-header h1{margin:0 0 6px;font-size:2rem;letter-spacing:-.02em}
-header .sub{color:var(--muted);margin:0;font-size:1rem}
+a{color:var(--accent2);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+/* Hero */
+.hero{position:relative;background:linear-gradient(135deg,#143d31,#0f1c2f);
+border-radius:20px;padding:40px 30px;margin:24px 0 16px;overflow:hidden;
+border:1px solid #1f4d3d;}
+.hero::before{content:"";position:absolute;top:0;left:0,right:0,bottom:0;
+background:radial-gradient(60% 60% at 50% -20%,#2d7a5e 0%,transparent 70%);
+pointer-events:none}
+.hero h1{margin:0;font-size:2.2rem;letter-spacing:-.025em}
+.hero .sub{margin:8px 0 18px;color:var(--muted);font-size:1.05rem}
+.hero .meta{display:flex;flex-wrap:wrap;gap:16px;font-size:.9rem;color:#cfd8cf}
+.hero .meta span{color:#9fb8ae}
+.hero .actions{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
+.hero .btn{display:inline-block;background:var(--accent);color:#042f17;
+font-weight:700;font-size:.95rem;padding:10px 16px;border-radius:10px;
+transition:transform .15s,box-shadow .15s}
+.hero .btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(74,222,128,.25);
+text-decoration:none}
+.hero .btn.secondary{background:#24314a;color:var(--accent2);
+border:1px solid #365074}
+/* Stat strip */
+.strip{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:10px 0 22px}
+.strip .card{background:var(--card2);border:1px solid var(--line);border-radius:14px;
+padding:16px;text-align:center}
+.strip .num{font-size:1.8rem;font-weight:800;color:var(--accent);display:block}
+.strip .lbl{color:var(--muted);font-size:.8rem;text-transform:uppercase;
+letter-spacing:.04em}
+/* Sections */
 main{display:grid;gap:18px}
-main section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
-main h2{margin:0 0 14px;font-size:1.15rem}
-main ul{margin:0;padding-left:22px}
-main li{margin:8px 0}
-main a{color:var(--accent2);text-decoration:none}
-main a:hover{text-decoration:underline}
-.lead{color:var(--muted);margin:0 0 14px}
-footer{margin-top:36px;text-align:center;color:var(--muted);font-size:.85rem}
+section{background:var(--card);border:1px solid var(--line);border-radius:14px;
+padding:20px}
+h2{margin=0 0 12px;font-size:1.15rem;display:flex;align-items:center;gap:8px}
+h2 .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);
+display:inline-block}
+.lead{color:var(--muted);margin:0 0 12px;font-size:.95rem}
+/* Feature box */
+.feature{background:linear-gradient(180deg,var(--card2) 0%,var(--card) 100%);
+border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:10px}
+.feature .head{display:flex;align-items:center;justify-content:space-between;
+margin-bottom:10px}
+.feature .tags{display:flex;gap:6px;flex-wrap:wrap}
+.feature .tag{font-size:.68rem;font-weight:700;color:#cbd5e1;background:#2a3346;
+padding:2px 7px;border-radius:999px}
+.feature ul{margin:8px 0 0;padding-left:20px;color:var(--muted);font-size:.9rem}
+.feature li{margin:4px 0}
+/* Archive */
+.archive{max-height:420px;overflow-y:auto}
+.archive li a{display:flex;justify-content:space-between;padding:8px 0;
+border-bottom:1px solid var(--line);color:var(--fg)}
+.archive li a:hover{color:var(--accent2)}
+.archive li:last-child a{border-bottom:none}
+.archive .note{color:var(--muted);font-size:.85rem}
+/* Regions */
+.regions{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.region h3{margin:0 0 8px;font-size:.95rem;color:var(--fg)}
+.region p{margin:0;color:var(--muted);font-size:.85rem}
+/* Footer */
+footer{margin-top:30px;text-align:center;color:var(--muted);font-size:.85rem}
 footer a{color:var(--accent2)}
+/* Mobile */
+@media (max-width:560px){
+ .strip{grid-template-columns:1fr}
+ .regions{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <header>
+  <div class="hero">
     <h1>⚽ Football Daily Summary</h1>
     <p class="sub">Europe &amp; MENA results, insights, fixtures and standings — refreshed every day at 03:00 local time.</p>
-  </header>
+    <div class="meta">
+      <span>12 league tables</span>
+      <span>Europe + MENA</span>
+      <span>Data: FotMob public JSON API</span>
+    </div>
+    <div class="actions">
+      <a href="summaries/football_summary_20261010.html" class="btn">
+        View 10 October 2026 →</a>
+      <a href="https://github.com/mrmakrider/football-summary-daily"
+         class="btn secondary">Source</a>
+    </div>
+  </div>
 
   <main>
     <section>
-      <h2>Latest digest</h2>
-      <p class="lead">The most recent daily summary, generated from the public FotMob JSON API. Each file is a self-contained responsive page: completed results with scorers and stats, match insights, the next 24 hours of fixtures, and league standings.</p>
-      <p><a href="summaries/football_summary_20261010.html">View 10 October 2026 →</a></p>
+      <h2><span class="dot"></span>Latest digest</h2>
+      <p class="lead">The most recent daily summary: completed results with final scores, goal scorers and assists, key stats, auto-generated match insights, the next 24 hours of fixtures and league standings snapshots. Each file is a self-contained responsive page.</p>
+      <div class="feature">
+        <div class="head">
+          <strong>83 matches reported</strong>
+          <div class="tags">
+            <span class="tag">Europe</span><span class="tag">MENA</span>
+            <span class="tag">Scorers</span><span class="tag">xG & stats</span>
+            <span class="tag">Fixtures</span>
+          </div>
+        </div>
+        <ul>
+          <li><a href="summaries/football_summary_20261010.html">Open full report for 10 October 2026</a></li>
+        </ul>
+      </div>
     </section>
 
     <section>
-      <h2>Archive</h2>
-      <p class="lead">Past digests, newest first.</p>
-      <ul>
-        <li><a href="summaries/football_summary_20261010.html">10 October 2026</a></li>
+      <h2><span class="dot" style="background:var(--accent2)"></span>Archive</h2>
+      <p class="lead">Past digests, newest first. Click to open any day's full report.</p>
+      <div class="archive">
+                <li><a href="summaries/football_summary_20261010.html">10 October 2026</a></li>
         <li><a href="summaries/football_summary_20261009.html">09 October 2026</a></li>
         <li><a href="summaries/football_summary_20261008.html">08 October 2026</a></li>
         <li><a href="summaries/football_summary_20261007.html">07 October 2026</a></li>
@@ -61,17 +136,29 @@ footer a{color:var(--accent2)}
         <li><a href="summaries/football_summary_20260927.html">27 September 2026</a></li>
         <li><a href="summaries/football_summary_20260926.html">26 September 2026</a></li>
         <li><a href="summaries/football_summary_20260925.html">25 September 2026</a></li>
-      </ul>
+      </div>
     </section>
 
     <section>
-      <h2>What it covers</h2>
-      <ul>
-        <li><strong>Europe (club):</strong> Premier League, LaLiga, Serie A, Bundesliga, Ligue 1, Champions League, Europa League, Conference League</li>
-        <li><strong>Europe (national):</strong> UEFA Nations League A/B/C/D, World Cup Qualification UEFA</li>
-        <li><strong>MENA (club):</strong> Saudi Pro League, UAE Pro League, Qatar Stars League, Egyptian Premier League, Moroccan Botola Pro, Tunisia Ligue 1</li>
-        <li><strong>MENA (national):</strong> AFCON Qualification, World Cup Qualification CAF, Asian Cup Qualification, World Cup Qualification AFC/CONCACAF, Arabian Gulf Cup</li>
-      </ul>
+      <h2><span class="dot" style="background:var(--gold)"></span>What it covers</h2>
+      <div class="regions">
+        <div class="region">
+          <h3>Europe (club)</h3>
+          <p>Premier League, LaLiga, Serie A, Bundesliga, Ligue 1, Champions League, Europa League, Conference League</p>
+        </div>
+        <div class="region">
+          <h3>Europe (national)</h3>
+          <p>UEFA Nations League A/B/C/D, World Cup Qualification UEFA</p>
+        </div>
+        <div class="region">
+          <h3>MENA (club)</h3>
+          <p>Saudi Pro League, UAE Pro League, Qatar Stars League, Egyptian Premier League, Moroccan Botola Pro, Tunisia Ligue 1</p>
+        </div>
+        <div class="region">
+          <h3>MENA (national)</h3>
+          <p>AFCON Qualification, World Cup Qualification CAF, Asian Cup Qualification, World Cup Qualification AFC/CONCACAF, Arabian Gulf Cup</p>
+        </div>
+      </div>
     </section>
   </main>
 
