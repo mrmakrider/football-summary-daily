@@ -1,0 +1,98 @@
+name: Daily Football Summary
+
+# Runs every morning at 07:00 UTC (08:00 CET, 10:00 Gulf).
+# The generator scans yesterday + today's results plus the next two days of
+# fixtures, so everything available at 07:00 UTC is captured.
+#
+# Two extra crons are a safety net, not a second edition: GitHub's scheduler
+# can drop a run under load, so the job starts again at 07:30 and 08:00 UTC.
+# If 07:00 succeeded, those retries find today's file already present and exit
+# at once (--skip-if-exists), so nothing is published twice.
+#
+# NOTE: GitHub only fires `schedule` for the DEFAULT branch. This file must
+# be on main (or whichever branch is default).
+on:
+  schedule:
+    - cron: "0 7 * * *"      # 07:00 UTC — primary run
+    - cron: "30 7 * * *"     # 07:30 UTC — retry if 07:00 failed
+    - cron: "0 8 * * *"      # 08:00 UTC — last chance
+  workflow_dispatch:
+    inputs:
+      backfill_days:
+        description: "Number of past days to backfill (0 = today only)"
+        type: string
+        default: "0"
+
+# Needed so the job can commit the finished summary back to the repository.
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: daily-football-summary
+  cancel-in-progress: false
+
+jobs:
+  summary:
+    runs-on: ubuntu-24.04 # pinned: ubuntu-latest migrates to Ubuntu 26 on 2026-10-19
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Verify the code imports
+        run: |
+          python -c "import sys; sys.path.insert(0, 'football'); import fotmob, report, generate_summary; print('ok')"
+
+      - name: Run the unit tests
+        run: python -m unittest football.tests -v
+
+      - name: Generate football summary
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ARGS="--out summaries --repo mrmakrider/football-summary-daily --branch main --push"
+          # Retry crons are no-ops when the primary run already published today.
+          if [ "${{ github.event.schedule }}" != "0 7 * * *" ]; then
+            ARGS="$ARGS --skip-if-exists"
+          fi
+          # Manual backfill (workflow_dispatch only).
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] \
+             && [ "${{ inputs.backfill_days }}" != "0" ]; then
+            ARGS="$ARGS --backfill ${{ inputs.backfill_days }}"
+          fi
+          echo "Running: python football/generate_summary.py $ARGS"
+          python football/generate_summary.py $ARGS
+
+      - name: Ask Pages to rebuild
+        run: |
+          code="$(curl -sS -o /tmp/pages.json -w '%{http_code}' \
+            -X POST \
+            -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+            -H 'Accept: application/vnd.github+json' \
+            'https://api.github.com/repos/${{ github.repository }}/pages/builds')"
+          body="$(tr -d '\n' < /tmp/pages.json)"
+          case "$code" in
+            20*) echo "::notice::Pages build requested (HTTP $code).";;
+            404) echo "::notice::Pages not enabled yet — one-time owner step: Settings → Pages → Deploy from a branch → main + /summaries → Save";;
+            403) echo "::warning::Pages rebuild not permitted (HTTP 403), ignored. Response: $body";;
+            *)   echo "::warning::Pages rebuild returned HTTP $code, ignored. Response: $body";;
+          esac
+          exit 0
+
+      - name: Upload summary as a build artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: football-summary-${{ github.run_id }}
+          path: summaries/
+          retention-days: 30
+          if-no-files-found: warn

@@ -1,8 +1,13 @@
 #!/usr/bin/env python3
-"""Daily scheduler: runs the football summary generator at 07:00 local time.
+"""Daily scheduler: runs the football summary generator at 03:00 local time.
+
+Runs at 03:00 (rather than 07:00) so the digest is ready well before the
+morning; the generator scans yesterday + today's results plus the next two
+days of fixtures, so a 03:00 run already contains everything available at
+07:00.
 
 Android has no cron daemon, so this long-running loop computes the remaining
-sleep to the next 07:00 local and fires the generator, then reschedules.
+sleep to the next 03:00 local and fires the generator, then reschedules.
 
     python3 football/scheduler.py --out DIR            # foreground loop
     python3 football/scheduler.py --out DIR --daemon   # same, logs to file
@@ -16,6 +21,7 @@ import datetime as dt
 import os
 import shutil
 import signal
+import subprocess
 import sys
 import time
 
@@ -36,7 +42,44 @@ def parse_args(argv=None):
                    help="stop after N runs (0 = forever); used by tests")
     p.add_argument("--run-now", action="store_true",
                    help="generate immediately, then continue on schedule")
+    p.add_argument("--gh-token", default=None,
+                   help="GitHub token for the daily push. Captured from "
+                        "`gh auth token` if omitted and GH_TOKEN is unset; "
+                        "exported into the generator's environment so the "
+                        "in-process run can push to GitHub Pages.")
+    p.add_argument("--backfill-days", type=int, default=14,
+                   help="how many days back the self-healing check scans for "
+                        "missed days (default 14)")
     return p.parse_args(argv)
+
+
+def _resolve_gh_token(args) -> str | None:
+    """Make a GitHub token available to the in-process generator.
+
+    The generator cannot shell out to `gh` (W^X restriction), so the token
+    must arrive via environment or a file. Preference: GH_TOKEN env var,
+    then --gh-token, then `gh auth token` captured here by the harness shell
+    tool (which *can* exec gh), written to .tmp_gh_token.
+    """
+    if os.environ.get("GH_TOKEN", "").strip():
+        return os.environ["GH_TOKEN"]
+    if args.gh_token:
+        os.environ["GH_TOKEN"] = args.gh_token
+        return args.gh_token
+    try:
+        tok = subprocess.run(["gh", "auth", "token"], capture_output=True,
+                             text=True, check=True).stdout.strip()
+    except Exception:
+        tok = ""
+    if not tok:
+        f = os.path.abspath(os.path.join(HERE, "..", ".tmp_gh_token"))
+        try:
+            tok = open(f, encoding="utf-8").read().strip()
+        except OSError:
+            tok = ""
+    if tok:
+        os.environ["GH_TOKEN"] = tok
+    return tok or None
 
 
 def run_generator(args, logfile: str | None) -> int:
@@ -54,12 +97,49 @@ def run_generator(args, logfile: str | None) -> int:
             "_football_gen", gen_path)
         mod = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(mod)
-        path = mod.run(["--out", args.out])
+        path = mod.run(["--out", args.out, "--push"])
         log(f"wrote {path}", logfile)
         return 0
     except Exception as exc:  # noqa: BLE001
         log(f"generator FAILED: {type(exc).__name__}: {exc}", logfile)
         return 1
+
+
+def backfill_missed(args, logfile: str | None, today: dt.date | None = None
+                    ) -> int:
+    """Repair days the scheduled run missed (app killed / device asleep).
+
+    The daemon only lives while the AndroidHarness app is alive, so a day can
+    be silently skipped. This scans the output directory for gaps inside the
+    backfill window and regenerates them in-process, pushing each one to
+    GitHub Pages just like the scheduled run does. Returns the number of
+    days repaired; 0 if nothing was missing.
+    """
+    import backfill as bf  # noqa: E402
+    out = os.path.abspath(args.out)
+    today = today or dt.date.today()
+    missing, _ = bf.find_gaps(out, args.backfill_days, today)
+    if not missing:
+        return 0
+    log(f"{len(missing)} missed day(s) to repair: "
+        f"{', '.join(d.isoformat() for d in missing)}", logfile)
+    repaired = 0
+    for day in missing:
+        stamp = day.strftime("%Y%m%d")
+        log(f"backfilling {stamp} ...", logfile)
+        try:
+            import importlib.util
+            spec = importlib.util.spec_from_file_location(
+                "_football_gen_bf", os.path.join(HERE, "generate_summary.py"))
+            mod = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(mod)
+            mod.run(["--date", stamp, "--out", out, "--push"])
+            repaired += 1
+        except Exception as exc:  # noqa: BLE001 - one bad day must not abort
+            log(f"backfill {stamp} FAILED: {type(exc).__name__}: {exc}",
+                logfile)
+    log(f"backfill done: {repaired}/{len(missing)} repaired", logfile)
+    return repaired
 
 
 def log(msg: str, logfile: str | None = None) -> None:
@@ -91,6 +171,11 @@ def loop(args, stop: list[bool], sleep=time.sleep, now_fn=dt.datetime.now,
             log(f"reached --max-runs={args.max_runs}, exiting", args.log)
             return runs
 
+    # Repair any days the previous run missed before waiting for the next
+    # scheduled fire. The daemon only lives while the app is alive, so a day
+    # can be skipped if the app was killed or the device slept through it.
+    backfill_missed(args, args.log)
+
     fired_date: dt.date | None = None
     while not stop[0]:
         now = now_fn()
@@ -99,6 +184,9 @@ def loop(args, stop: list[bool], sleep=time.sleep, now_fn=dt.datetime.now,
         chunk = max(1.0, min(MAX_SLEEP, wait))
         sleep(chunk)
         now = now_fn()
+        # The 15-minute wake cycle doubles as a self-healing check: if the
+        # app was restarted after a gap, the first wake repairs it.
+        backfill_missed(args, args.log, now.date())
         if now >= target and fired_date != now.date():
             fired_date = now.date()
             run_gen()
@@ -123,6 +211,10 @@ def main(argv=None) -> int:
             signal.signal(sig, handle)
         except (ValueError, OSError):
             pass
+
+    tok = _resolve_gh_token(args)
+    log(f"GitHub token {'available' if tok else 'MISSING'} for daily push",
+        args.log)
 
     log(f"scheduler armed for {args.hour:02d}:{args.minute:02d} local, "
         f"output -> {args.out}", args.log)

@@ -167,6 +167,38 @@ def _insight(m: dict) -> str:
     return ". ".join(s[0].upper() + s[1:] for s in sentences) + "."
 
 
+def _highlights_block(m: dict) -> str:
+    """YouTube match highlights + player of the match, when available.
+
+    FotMob only carries highlights for a minority of matches (roughly a
+    quarter), so this is optional and degrades to nothing when absent.
+    """
+    parts: list[str] = []
+    hl = m.get("highlights") or {}
+    if hl.get("url"):
+        thumb = hl.get("thumb") or ""
+        thumb_html = (f'<img src="{esc(thumb)}" alt="" loading="lazy" '
+                      f'onerror="this.parentElement.style.display=\'none\'">'
+                      if thumb else "")
+        parts.append(
+            f'<a class="hl" href="{esc(hl["url"])}" target="_blank" '
+            f'rel="noopener noreferrer">'
+            f'<span class="hl-tag">▶ Highlights</span>'
+            f'{thumb_html}'
+            f'<span class="hl-cap">Watch full highlights</span>'
+            f'</a>')
+    potm = m.get("potm") or {}
+    if potm.get("name"):
+        rating = (f' ({esc(potm["rating"])})' if potm.get("rating") else "")
+        team = (f' · {esc(potm["team"])}' if potm.get("team") else "")
+        parts.append(
+            f'<span class="potm">⭐ Player of the match: '
+            f'<b>{esc(potm["name"])}</b>{team}{rating}</span>')
+    if not parts:
+        return ""
+    return f'<div class="extras">{"".join(parts)}</div>'
+
+
 def _match_card(m: dict, tz: dt.tzinfo, detail: bool = True) -> str:
     goal_block = _scorer_list(m.get("goals", [])) if m.get("goals") else ""
     stats_block = _stat_rows(m.get("stats", [])) if detail else ""
@@ -206,6 +238,7 @@ def _match_card(m: dict, tz: dt.tzinfo, detail: bool = True) -> str:
       {meta_html}
       {insight}
       {goal_block}
+      {_highlights_block(m)}
       {stats_block}
     </article>"""
 
@@ -288,6 +321,20 @@ font-size:.78rem;background:#3a2410;color:#fdba74;font-weight:600;
 font-variant-numeric:tabular-nums}
 .pens b{color:#fff}
 .kickoff{margin-left:auto}
+/* Match highlights + player of the match, shown below the scoreline when
+   FotMob carries them (a minority of matches). */
+.extras{display:flex;flex-wrap:wrap;align-items:center;gap:8px;
+margin:8px 0 0;font-size:.8rem}
+.hl{display:inline-flex;align-items:center;gap:8px;background:#1c2230;
+border:1px solid var(--line);border-radius:10px;padding:4px 8px 4px 4px;
+color:var(--fg);text-decoration:none;transition:border-color .15s}
+.hl:hover{border-color:var(--accent2)}
+.hl img{width:64px;height:36px;object-fit:cover;border-radius:6px}
+.hl-cap{color:var(--muted)}
+.hl-tag{background:#7f1d1d;color:#fecaca;font-size:.62rem;font-weight:700;
+padding:1px 6px;border-radius:999px;letter-spacing:.03em}
+.potm{color:var(--accent);font-weight:600}
+.potm b{color:var(--fg)}
 /* Home / score / away share one column grid, so a long club name can never
    push the score onto its own line or duplicate it. */
 .scorebox{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;

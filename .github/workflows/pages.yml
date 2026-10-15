@@ -1,0 +1,60 @@
+name: Pages site
+
+# Publishes the football summary archive to GitHub Pages
+# (https://mrmakrider.github.io/football-summary-daily/).
+#
+# The site is served from the repository root of `main` ("Deploy from a
+# branch"). The daily workflow pushes index.html + each summary directly via
+# the contents API, so a Pages build also queues automatically on every push
+# to main. This workflow re-requests a build explicitly so a new edition is
+# live within a minute.
+#
+# NOTE: GitHub does not let a workflow's GITHUB_TOKEN *create* the Pages
+# site (the endpoint needs administration:write, which Actions tokens can
+# never hold — see actions/configure-pages#40). Until the one-time enable
+# below has been done by the repo owner, step 3 gets a 404 and simply prints
+# instructions; everything else works.
+#
+# ONE-TIME ENABLE (owner):  Settings → Pages → Source: "Deploy from a
+# branch" → main + / (root) → Save.  Or from a terminal logged in as you:
+#
+#   gh api -X POST repos/mrmakrider/football-summary-daily/pages \
+#     -f "source[branch]=main" -f "source[path]=/"
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "index.html"
+      - "summaries/**"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  pages: write
+
+concurrency:
+  group: pages-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-24.04 # pinned: ubuntu-latest migrates to Ubuntu 26 on 2026-10-19
+    timeout-minutes: 10
+
+    steps:
+      - name: Ask Pages to rebuild
+        run: |
+          code="$(curl -sS -o /tmp/pages.json -w '%{http_code}' \
+            -X POST \
+            -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+            -H 'Accept: application/vnd.github+json' \
+            'https://api.github.com/repos/${{ github.repository }}/pages/builds')"
+          body="$(tr -d '\n' < /tmp/pages.json)"
+          case "$code" in
+            20*) echo "::notice::Pages build requested (HTTP $code).";;
+            404) echo "::notice::GitHub Pages is not enabled yet, so there is nothing to rebuild. One-time owner step: https://github.com/${{ github.repository }}/settings/pages -> Deploy from a branch -> main + / (root) -> Save (or: gh api -X POST repos/${{ github.repository }}/pages -f 'source[branch]=main' -f 'source[path]=/')";;
+            403) echo "::warning::Pages rebuild not permitted (HTTP 403) — the push to main still queues a build once Pages is enabled. Response: $body";;
+            *)   echo "::warning::Pages rebuild returned HTTP $code (ignored — builds also trigger from the push itself). Response: $body";;
+          esac
+          exit 0

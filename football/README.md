@@ -1,8 +1,9 @@
 # Daily Football Summary
 
 Generates a responsive HTML digest of football results, insights, upcoming
-fixtures and league standings for **Europe** and the **MENA** region, and can
-run itself **every day at 07:00 local time**.
+fixtures and league standings for **Europe** and the **MENA** region, and runs
+itself **every day at 03:00 local time** (so the digest is ready well before
+the morning).
 
 ## What it covers
 
@@ -94,19 +95,24 @@ Options: `--out DIR`, `--days N`, `--force` (also rebuild existing days),
 Each report is named after its **reporting day**, not the wall clock, so a
 backfill for an old date can never overwrite a newer report.
 
-## The 07:00 daily schedule
+## The 03:00 daily schedule
 
 Android has **no cron daemon**, so there is no `crontab` entry to add. Instead
 `football/scheduler.py` is a long-running loop that computes the remaining
-sleep to the next 07:00 local time, runs the generator, and reschedules itself.
+sleep to the next 03:00 local time, runs the generator, and reschedules itself.
 It wakes at least every 15 minutes so a clock/date change is picked up, and it
 fires at most once per calendar day.
+
+Why 03:00 and not 07:00: the generator scans yesterday + today's results plus
+the next two days of fixtures, so everything available at 07:00 is already in
+the 03:00 report. Running early also leaves a 4-hour buffer if the fetch is
+slow or the network hiccups.
 
 Start it as a background process (it then stays alive as long as the
 AndroidHarness app is running):
 
 ```bash
-python3 football/run_daily.py --hour 7 --minute 0 --log scheduler.log
+python3 football/run_daily.py --hour 3 --minute 0 --log scheduler.log
 ```
 
 Notes and limits:
@@ -116,7 +122,7 @@ Notes and limits:
   through the dynamic linker, which a plain `subprocess()` call cannot do.
 - The schedule only fires while the app (and its background service) is alive.
   There is no OS-level wake-up on Android that a normal app can register for an
-  arbitrary 07:00 trigger; if the device or app is off at 07:00 the run happens
+  arbitrary 03:00 trigger; if the device or app is off at 03:00 the run happens
   at the next opportunity after start-up.
 - Every run appends to `football/scheduler.log`; failures are logged and the
   loop continues to the next day rather than crashing.
