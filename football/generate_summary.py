@@ -229,6 +229,23 @@ def write_index(out_dir: str, latest_stamp: str, standings: list, matches: list)
         for l, s in days
     ) or '        <li>No digests yet.</li>'
 
+    # Derive real counts from the latest summary file so the landing page stays
+    # accurate even when regenerated standalone (no matches/standings passed).
+    total_matches = len(matches)
+    total_tables = len(standings)
+    latest_path = os.path.join(out_dir, f"football_summary_{latest_stamp}.html")
+    import re
+    if os.path.exists(latest_path):
+        try:
+            latest_html = open(latest_path, encoding="utf-8").read()
+            m = re.search(r'class="count">(\d+) matches</span>', latest_html)
+            if m:
+                total_matches = int(m.group(1))
+            # One league `<h3>` per standings table.
+            total_tables = len(re.findall(r'<h3>[A-Z][^<]*</h3>', latest_html))
+        except OSError:
+            pass
+
     html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -316,7 +333,7 @@ footer a{{color:var(--accent2)}}
     <h1>⚽ Football Daily Summary</h1>
     <p class="sub">Europe &amp; MENA results, insights, fixtures and standings — refreshed every day at 03:00 local time.</p>
     <div class="meta">
-      <span>{len(standings)} league tables</span>
+      <span>{total_tables} league tables</span>
       <span>Europe + MENA</span>
       <span>Data: FotMob public JSON API</span>
     </div>
@@ -334,7 +351,7 @@ footer a{{color:var(--accent2)}}
       <p class="lead">The most recent daily summary: completed results with final scores, goal scorers and assists, key stats, auto-generated match insights, the next 24 hours of fixtures and league standings snapshots. Each file is a self-contained responsive page.</p>
       <div class="feature">
         <div class="head">
-          <strong>{len(matches)} matches reported</strong>
+          <strong>{total_matches} matches reported</strong>
           <div class="tags">
             <span class="tag">Europe</span><span class="tag">MENA</span>
             <span class="tag">Scorers</span><span class="tag">xG & stats</span>
