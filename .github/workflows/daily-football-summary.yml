@@ -1,21 +1,21 @@
 name: Daily Football Summary
 
-# Runs every morning at 07:00 UTC (08:00 CET, 10:00 Gulf).
+# Runs every morning at 03:00 UTC (04:00 CET, 06:00 Gulf).
 # The generator scans yesterday + today's results plus the next two days of
-# fixtures, so everything available at 07:00 UTC is captured.
+# fixtures, so everything available at 03:00 UTC is captured.
 #
 # Two extra crons are a safety net, not a second edition: GitHub's scheduler
-# can drop a run under load, so the job starts again at 07:30 and 08:00 UTC.
-# If 07:00 succeeded, those retries find today's file already present and exit
+# can drop a run under load, so the job starts again at 03:30 and 04:00 UTC.
+# If 03:00 succeeded, those retries find today's file already present and exit
 # at once (--skip-if-exists), so nothing is published twice.
 #
 # NOTE: GitHub only fires `schedule` for the DEFAULT branch. This file must
 # be on main (or whichever branch is default).
 on:
   schedule:
-    - cron: "0 7 * * *"      # 07:00 UTC — primary run
-    - cron: "30 7 * * *"     # 07:30 UTC — retry if 07:00 failed
-    - cron: "0 8 * * *"      # 08:00 UTC — last chance
+    - cron: "0 3 * * *"      # 03:00 UTC — primary run
+    - cron: "30 3 * * *"     # 03:30 UTC — retry if 03:00 failed
+    - cron: "0 4 * * *"      # 04:00 UTC — last chance
   workflow_dispatch:
     inputs:
       backfill_days:
