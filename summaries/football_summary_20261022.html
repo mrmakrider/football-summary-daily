@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Football Daily Summary &ndash; 22 October 2026</title>
+<style>
+:root{--bg:#0e1117;--card:#161b25;--card2:#1c2230;--fg:#e8ecf3;--muted:#93a1b5;
+--accent:#4ade80;--accent2:#60a5fa;--line:#242c3a;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+line-height:1.5;}
+.wrap{max-width:1080px;margin:0 auto;padding:16px}
+header.page{background:linear-gradient(135deg,#16233c,#0e1117);padding:28px 16px;
+border-bottom:1px solid var(--line)}
+header.page .wrap{padding-bottom:4px}
+h1{margin:0 0 6px;font-size:1.6rem;letter-spacing:-.02em}
+.sub{color:var(--muted);margin:0;font-size:.95rem}
+h2{font-size:1.2rem;margin:28px 0 12px;padding-bottom:6px;
+border-bottom:1px solid var(--line)}
+h2 .count{color:var(--muted);font-size:.85rem;font-weight:400;margin-left:8px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+padding:14px}
+.card-head{display:flex;align-items:center;gap:8px;margin-bottom:10px;
+font-size:.75rem;color:var(--muted);flex-wrap:wrap}
+.league{color:var(--accent2);font-weight:600;text-transform:uppercase;
+letter-spacing:.04em}
+.badge{padding:1px 7px;border-radius:999px;font-size:.68rem;font-weight:700;
+background:#2a3346;color:#cbd5e1}
+.badge.ft{background:#14532d;color:#86efac}
+.badge.live{background:#7f1d1d;color:#fecaca}
+.badge.pen,.badge.aet{background:#4a2a0b;color:#fdba74}
+.pens{display:inline-block;margin:0 0 6px;padding:2px 9px;border-radius:8px;
+font-size:.78rem;background:#3a2410;color:#fdba74;font-weight:600;
+font-variant-numeric:tabular-nums}
+.pens b{color:#fff}
+.kickoff{margin-left:auto}
+/* Match highlights + player of the match, shown below the scoreline when
+   FotMob carries them (a minority of matches). */
+.extras{display:flex;flex-wrap:wrap;align-items:center;gap:8px;
+margin:8px 0 0;font-size:.8rem}
+.hl{display:inline-flex;align-items:center;gap:8px;background:#1c2230;
+border:1px solid var(--line);border-radius:10px;padding:4px 8px 4px 4px;
+color:var(--fg);text-decoration:none;transition:border-color .15s}
+.hl:hover{border-color:var(--accent2)}
+.hl img{width:64px;height:36px;object-fit:cover;border-radius:6px}
+.hl-cap{color:var(--muted)}
+.hl-tag{background:#7f1d1d;color:#fecaca;font-size:.62rem;font-weight:700;
+padding:1px 6px;border-radius:999px;letter-spacing:.03em}
+.potm{color:var(--accent);font-weight:600}
+.potm b{color:var(--fg)}
+/* Home / score / away share one column grid, so a long club name can never
+   push the score onto its own line or duplicate it. */
+.scorebox{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+gap:2px 10px;margin:0 0 2px}
+.scorebox .tname{font-weight:600;min-width:0;overflow-wrap:break-word}
+/* The away name is the second <span class="tname">, i.e. the 3rd grid child. */
+.scorebox .tname:nth-child(3){text-align:right}
+@media (max-width:400px){
+ .scorebox{grid-template-columns:1fr;gap:2px;text-align:center}
+ .scorebox .tname:nth-child(3){text-align:center}
+ .scorebox .sc{justify-self:center}
+}
+.scorebox .sc{font-variant-numeric:tabular-nums;font-weight:700;
+background:var(--card2);padding:2px 10px;border-radius:6px;min-width:62px;
+text-align:center}
+.scorebox.pending .sc{color:var(--muted);font-weight:400}
+.badge.tally{background:#1e3a5f;color:#93c5fd;padding:0 5px;font-size:.7rem;
+margin-left:2px}
+.meta{color:var(--muted);font-size:.78rem;margin:8px 0 0}
+.insight{margin:8px 0 0;font-size:.85rem;color:#cbd5e1;border-left:3px solid var(--accent);
+padding-left:8px}
+.scorers{list-style:none;margin:10px 0 0;padding:0;font-size:.85rem}
+.scorer{display:flex;gap:8px;padding:2px 0}
+.min{color:var(--muted);min-width:34px;text-align:right;
+font-variant-numeric:tabular-nums}
+.assist{color:var(--muted);font-size:.95em}
+.statgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:4px 12px;
+margin-top:10px;font-size:.8rem}
+.stat{display:flex;align-items:center;gap:6px}
+.stat .sv{min-width:26px;text-align:right;font-variant-numeric:tabular-nums;
+color:#cbd5e1}
+.stat .st{flex:1;text-align:center;color:var(--muted);font-size:.72rem}
+table.tbl,table.fx{width:100%;border-collapse:collapse;font-size:.83rem}
+table.tbl th{color:var(--muted);font-weight:600;font-size:.72rem;text-align:right;
+padding:4px 6px;border-bottom:1px solid var(--line);white-space:nowrap}
+table.tbl th:nth-child(2),table.tbl td.tm{text-align:left}
+table.tbl td{padding:4px 6px;text-align:right;border-bottom:1px solid #1e2534;
+font-variant-numeric:tabular-nums;white-space:nowrap}
+table.tbl td.pos{width:26px;min-width:26px}
+table.tbl td.tm{min-width:130px;white-space:normal}
+table.tbl td.pts{font-weight:700;color:var(--accent)}
+table.tbl tr:nth-child(even){background:#131824}
+.dot{display:inline-block;width:7px;height:7px;border-radius:2px;
+margin-left:4px;vertical-align:middle}
+.standings{background:var(--card);border:1px solid var(--line);border-radius:12px;
+padding:12px;overflow-x:auto}
+.standings h3{margin:0 0 8px;font-size:.95rem}
+.standings-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+gap:12px}
+table.fx td{padding:6px 8px;border-bottom:1px solid #1e2534}
+tr.fxgroup td{color:var(--accent2);font-size:.75rem;font-weight:600;
+text-transform:uppercase;letter-spacing:.04em;padding-top:12px}
+.fx-time{color:var(--muted);font-size:.78rem;white-space:nowrap;width:90px}
+.fx-teams{font-weight:600}
+.legend{margin:8px 0 0;font-size:.7rem;color:var(--muted);
+display:flex;flex-wrap:wrap;gap:4px 10px}
+.chip{display:inline-flex;align-items:center;gap:4px}
+.muted{color:var(--muted)}
+.small{font-size:.8rem}
+.empty{background:var(--card);border:1px dashed var(--line);border-radius:12px;
+padding:18px;color:var(--muted)}
+footer.page{margin-top:36px;padding:16px;border-top:1px solid var(--line);
+color:var(--muted);font-size:.78rem}
+a{color:var(--accent2)}
+@media (max-width:640px){
+ header.page h1{font-size:1.3rem}
+ .cards{grid-template-columns:1fr}
+ .wrap{padding:12px}
+ .statgrid{grid-template-columns:1fr}
+ .standings{padding:10px}
+ table.tbl{font-size:.76rem}
+ table.tbl td,table.tbl th{padding:4px 3px}
+ table.tbl td.tm{min-width:96px}
+ .fx-teams{font-size:.9rem}
+}
+</style>
+</head><body>
+<header class="page"><div class="wrap">
+<h1>&#9917; Football Daily Summary</h1>
+<p class="sub">Thursday 22 October 2026 &middot; generated 08:29 UTC &middot;
+13 completed, 0 live, 24 upcoming
+&middot; Europe + MENA</p>
+</div></header>
+<div class="wrap"><h2>Results &middot; Europe<span class="count">10 matches</span></h2><div class="cards">
+    <article class="card">
+      <header class="card-head">
+        <span class="league">LaLiga</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Wed 21 Oct · 18:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Levante</span><span class="sc">3 &ndash; 1</span><span class="tname">Athletic Club</span></span>
+      
+      <p class="meta">Estadio Ciudad de Valencia · Att. 18779</p>
+      <p class="insight">Levante beat Athletic Club by two goals. Shot count 12-21 favoured Athletic Club.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">20&#x27;</span><span class="pname">Roger Brugué <span class="badge tally" title="multiple goals">2&times;</span> <span class="assist">(ast. Dani Requena)</span></span></li><li class="scorer"><span class="min">22&#x27;</span><span class="pname">Roger Brugué <span class="badge tally" title="multiple goals">2&times;</span></span></li><li class="scorer"><span class="min">67&#x27;</span><span class="pname">Alex Berenguer</span></li><li class="scorer"><span class="min">90+8&#x27;</span><span class="pname">Etta Eyong</span></li></ul>
+      <div class="extras"><span class="potm">⭐ Player of the match: <b>Roger Brugué</b> · Levante (8.8)</span></div>
+      <div class="statgrid"><div class="stat"><span class="sv">38</span><span class="st">Ball possession</span><span class="sv">62</span></div><div class="stat"><span class="sv">1.97</span><span class="st">Expected goals (xG)</span><span class="sv">1.90</span></div><div class="stat"><span class="sv">12</span><span class="st">Total shots</span><span class="sv">21</span></div><div class="stat"><span class="sv">7</span><span class="st">Shots on target</span><span class="sv">4</span></div><div class="stat"><span class="sv">30</span><span class="st">Touches in opposition box</span><span class="sv">29</span></div><div class="stat"><span class="sv">3</span><span class="st">Big chances</span><span class="sv">1</span></div><div class="stat"><span class="sv">1</span><span class="st">Big chances missed</span><span class="sv">0</span></div><div class="stat"><span class="sv">254 (77%)</span><span class="st">Accurate passes</span><span class="sv">458 (85%)</span></div><div class="stat"><span class="sv">3</span><span class="st">Yellow cards</span><span class="sv">1</span></div><div class="stat"><span class="sv">3</span><span class="st">Corners</span><span class="sv">9</span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">Champions League</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Wed 21 Oct · 16:45</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Como</span><span class="sc">4 &ndash; 1</span><span class="tname">Manchester United</span></span>
+      
+      <p class="meta">Stadio Giuseppe Sinigaglia · Att. 10875</p>
+      <p class="insight">Como produced a comprehensive 3-goal victory over Manchester United. Shot count 11-13 favoured Manchester United.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">2&#x27;</span><span class="pname">Nico Paz <span class="badge tally" title="multiple goals">2&times;</span> <span class="assist">(ast. Lucas Da Cunha)</span></span></li><li class="scorer"><span class="min">49&#x27;</span><span class="pname">Anastasios Douvikas <span class="assist">(ast. Nico Paz)</span></span></li><li class="scorer"><span class="min">57&#x27;</span><span class="pname">Nico Paz <span class="badge tally" title="multiple goals">2&times;</span></span></li><li class="scorer"><span class="min">76&#x27;</span><span class="pname">Jacobo Ramón <span class="assist">(ast. Kaiki)</span></span></li><li class="scorer"><span class="min">90+1&#x27;</span><span class="pname">Joshua Zirkzee <span class="assist">(ast. Amad Diallo)</span></span></li></ul>
+      <div class="extras"><span class="potm">⭐ Player of the match: <b>Nico Paz</b> · Como (9.4)</span></div>
+      <div class="statgrid"><div class="stat"><span class="sv">55</span><span class="st">Ball possession</span><span class="sv">45</span></div><div class="stat"><span class="sv">2.11</span><span class="st">Expected goals (xG)</span><span class="sv">0.99</span></div><div class="stat"><span class="sv">11</span><span class="st">Total shots</span><span class="sv">13</span></div><div class="stat"><span class="sv">8</span><span class="st">Shots on target</span><span class="sv">4</span></div><div class="stat"><span class="sv">20</span><span class="st">Touches in opposition box</span><span class="sv">18</span></div><div class="stat"><span class="sv">4</span><span class="st">Big chances</span><span class="sv">1</span></div><div class="stat"><span class="sv">1</span><span class="st">Big chances missed</span><span class="sv">0</span></div><div class="stat"><span class="sv">600 (89%)</span><span class="st">Accurate passes</span><span class="sv">473 (87%)</span></div><div class="stat"><span class="sv">1</span><span class="st">Yellow cards</span><span class="sv">3</span></div><div class="stat"><span class="sv">1</span><span class="st">Corners</span><span class="sv">4</span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">Champions League</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Wed 21 Oct · 16:45</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Lille</span><span class="sc">2 &ndash; 4</span><span class="tname">Galatasaray</span></span>
+      
+      <p class="meta">Decathlon Arena - Stade Pierre-Mauroy · Att. 44142</p>
+      <p class="insight">Galatasaray beat Lille by two goals. It was a high-scoring thriller. Shot count 15-10 favoured Lille.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">2&#x27;</span><span class="pname">Yunus Akgün</span></li><li class="scorer"><span class="min">7&#x27;</span><span class="pname">Soriba Diaoune <span class="badge tally" title="multiple goals">2&times;</span> <span class="assist">(ast. Alexsandro Ribeiro)</span></span></li><li class="scorer"><span class="min">39&#x27;</span><span class="pname">Soriba Diaoune <span class="badge tally" title="multiple goals">2&times;</span> <span class="assist">(ast. Hákon Arnar Haraldsson)</span></span></li><li class="scorer"><span class="min">44&#x27;</span><span class="pname">Aleksey Batrakov <span class="assist">(ast. Roland Sallai)</span></span></li><li class="scorer"><span class="min">52&#x27;</span><span class="pname">Nabil Bentaleb (OG)</span></li><li class="scorer"><span class="min">61&#x27;</span><span class="pname">Victor Osimhen <span class="assist">(ast. Barış Alper Yılmaz)</span></span></li></ul>
+      <div class="extras"><span class="potm">⭐ Player of the match: <b>Soriba Diaoune</b> · Lille (8.8)</span></div>
+      <div class="statgrid"><div class="stat"><span class="sv">56</span><span class="st">Ball possession</span><span class="sv">44</span></div><div class="stat"><span class="sv">2.07</span><span class="st">Expected goals (xG)</span><span class="sv">1.39</span></div><div class="stat"><span class="sv">15</span><span class="st">Total shots</span><span class="sv">10</span></div><div class="stat"><span class="sv">5</span><span class="st">Shots on target</span><span class="sv">4</span></div><div class="stat"><span class="sv">22</span><span class="st">Touches in opposition box</span><span class="sv">26</span></div><div class="stat"><span class="sv">4</span><span class="st">Big chances</span><span class="sv">5</span></div><div class="stat"><span class="sv">2</span><span class="st">Big chances missed</span><span class="sv">2</span></div><div class="stat"><span class="sv">450 (86%)</span><span class="st">Accurate passes</span><span class="sv">331 (80%)</span></div><div class="stat"><span class="sv">3</span><span class="st">Yellow cards</span><span class="sv">1</span></div><div class="stat"><span class="sv">3</span><span class="st">Corners</span><span class="sv">3</span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">Champions League</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Wed 21 Oct · 19:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Aston Villa</span><span class="sc">3 &ndash; 1</span><span class="tname">Viking</span></span>
+      
+      <p class="meta">Villa Park · Att. 33410</p>
+      <p class="insight">Aston Villa beat Viking by two goals. Shot count 21-10 favoured Aston Villa.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">23&#x27;</span><span class="pname">Ross Barkley <span class="assist">(ast. Ibrahim Mbaye)</span></span></li><li class="scorer"><span class="min">37&#x27;</span><span class="pname">Emiliano Buendía</span></li><li class="scorer"><span class="min">62&#x27;</span><span class="pname">Henrik Heggheim (OG)</span></li><li class="scorer"><span class="min">84&#x27;</span><span class="pname">Peter Christiansen <span class="assist">(ast. Kristoffer Askildsen)</span></span></li></ul>
+      <div class="extras"><span class="potm">⭐ Player of the match: <b>Emiliano Buendía</b> · Aston Villa (8.2)</span></div>
+      <div class="statgrid"><div class="stat"><span class="sv">54</span><span class="st">Ball possession</span><span class="sv">46</span></div><div class="stat"><span class="sv">2.70</span><span class="st">Expected goals (xG)</span><span class="sv">0.74</span></div><div class="stat"><span class="sv">21</span><span class="st">Total shots</span><span class="sv">10</span></div><div class="stat"><span class="sv">10</span><span class="st">Shots on target</span><span class="sv">3</span></div><div class="stat"><span class="sv">40</span><span class="st">Touches in opposition box</span><span class="sv">12</span></div><div class="stat"><span class="sv">8</span><span class="st">Big chances</span><span class="sv">1</span></div><div class="stat"><span class="sv">6</span><span class="st">Big chances missed</span><span class="sv">0</span></div><div class="stat"><span class="sv">471 (89%)</span><span class="st">Accurate passes</span><span class="sv">377 (87%)</span></div><div class="stat"><span class="sv">0</span><span class="st">Yellow cards</span><span class="sv">0</span></div><div class="stat"><span class="sv">8</span><span class="st">Corners</span><span class="sv">6</span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">Champions League</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Wed 21 Oct · 19:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Bayern München</span><span class="sc">2 &ndash; 2</span><span class="tname">Arsenal</span></span>
+      
+      <p class="meta">Allianz Arena · Att. 75000</p>
+      <p class="insight">Honours were even in a draw. Shot count 13-14 favoured Arsenal.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">25&#x27;</span><span class="pname">Eberechi Eze <span class="assist">(ast. Martin Ødegaard)</span></span></li><li class="scorer"><span class="min">35&#x27;</span><span class="pname">Alphonso Davies <span class="assist">(ast. Harry Kane)</span></span></li><li class="scorer"><span class="min">61&#x27;</span><span class="pname">Harry Kane</span></li><li class="scorer"><span class="min">82&#x27;</span><span class="pname">Declan Rice <span class="assist">(ast. Viktor Gyökeres)</span></span></li></ul>
+      <div class="extras"><span class="potm">⭐ Player of the match: <b>Declan Rice</b> · Arsenal (8.5)</span></div>
+      <div class="statgrid"><div class="stat"><span class="sv">46</span><span class="st">Ball possession</span><span class="sv">54</span></div><div class="stat"><span class="sv">2.46</span><span class="st">Expected goals (xG)</span><span class="sv">1.69</span></div><div class="stat"><span class="sv">13</span><span class="st">Total shots</span><span class="sv">14</span></div><div class="stat"><span class="sv">5</span><span class="st">Shots on target</span><span class="sv">5</span></div><div class="stat"><span class="sv">29</span><span class="st">Touches in opposition box</span><span class="sv">22</span></div><div class="stat"><span class="sv">4</span><span class="st">Big chances</span><span class="sv">3</span></div><div class="stat"><span class="sv">2</span><span class="st">Big chances missed</span><span class="sv">2</span></div><div class="stat"><span class="sv">372 (86%)</span><span class="st">Accurate passes</span><span class="sv">440 (87%)</span></div><div class="stat"><span class="sv">0</span><span class="st">Yellow cards</span><span class="sv">2</span></div><div class="stat"><span class="sv">3</span><span class="st">Corners</span><span class="sv">5</span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">Champions League</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Wed 21 Oct · 19:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Club Brugge</span><span class="sc">3 &ndash; 0</span><span class="tname">Lens</span></span>
+      
+      <p class="meta">Jan Breydelstadion · Att. 26023</p>
+      <p class="insight">Club Brugge produced a comprehensive 3-goal victory over Lens. Shot count 11-19 favoured Lens.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">45+3&#x27;</span><span class="pname">Hans Vanaken <span class="assist">(ast. Nicolò Tresoldi)</span></span></li><li class="scorer"><span class="min">50&#x27;</span><span class="pname">Joaquin Seys</span></li><li class="scorer"><span class="min">72&#x27;</span><span class="pname">Carlos Forbs <span class="assist">(ast. Hugo Vetlesen)</span></span></li></ul>
+      <div class="extras"><span class="potm">⭐ Player of the match: <b>Hans Vanaken</b> · Club Brugge (8.7)</span></div>
+      <div class="statgrid"><div class="stat"><span class="sv">57</span><span class="st">Ball possession</span><span class="sv">43</span></div><div class="stat"><span class="sv">2.60</span><span class="st">Expected goals (xG)</span><span class="sv">2.03</span></div><div class="stat"><span class="sv">11</span><span class="st">Total shots</span><span class="sv">19</span></div><div class="stat"><span class="sv">5</span><span class="st">Shots on target</span><span class="sv">7</span></div><div class="stat"><span class="sv">20</span><span class="st">Touches in opposition box</span><span class="sv">32</span></div><div class="stat"><span class="sv">4</span><span class="st">Big chances</span><span class="sv">6</span></div><div class="stat"><span class="sv">1</span><span class="st">Big chances missed</span><span class="sv">6</span></div><div class="stat"><span class="sv">603 (88%)</span><span class="st">Accurate passes</span><span class="sv">427 (84%)</span></div><div class="stat"><span class="sv">2</span><span class="st">Yellow cards</span><span class="sv">2</span></div><div class="stat"><span class="sv">1</span><span class="st">Corners</span><span class="sv">5</span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">Champions League</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Wed 21 Oct · 19:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Inter</span><span class="sc">1 &ndash; 0</span><span class="tname">Shakhtar Donetsk</span></span>
+      
+      <p class="meta">Stadio Giuseppe Meazza · Att. 73352</p>
+      <p class="insight">Inter edged it by a single goal against Shakhtar Donetsk. In a low-scoring affair. Shot count 13-12 favoured Inter.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">77&#x27;</span><span class="pname">Carlos Augusto <span class="assist">(ast. Henrikh Mkhitaryan)</span></span></li></ul>
+      <div class="extras"><span class="potm">⭐ Player of the match: <b>Josep Martínez</b> · Inter (8.3)</span></div>
+      <div class="statgrid"><div class="stat"><span class="sv">45</span><span class="st">Ball possession</span><span class="sv">55</span></div><div class="stat"><span class="sv">1.05</span><span class="st">Expected goals (xG)</span><span class="sv">0.60</span></div><div class="stat"><span class="sv">13</span><span class="st">Total shots</span><span class="sv">12</span></div><div class="stat"><span class="sv">5</span><span class="st">Shots on target</span><span class="sv">4</span></div><div class="stat"><span class="sv">28</span><span class="st">Touches in opposition box</span><span class="sv">15</span></div><div class="stat"><span class="sv">1</span><span class="st">Big chances</span><span class="sv">0</span></div><div class="stat"><span class="sv">0</span><span class="st">Big chances missed</span><span class="sv">0</span></div><div class="stat"><span class="sv">371 (87%)</span><span class="st">Accurate passes</span><span class="sv">484 (91%)</span></div><div class="stat"><span class="sv">2</span><span class="st">Yellow cards</span><span class="sv">2</span></div><div class="stat"><span class="sv">5</span><span class="st">Corners</span><span class="sv">4</span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">Champions League</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Wed 21 Oct · 19:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Real Betis</span><span class="sc">1 &ndash; 0</span><span class="tname">Feyenoord</span></span>
+      
+      <p class="meta">Estadio La Cartuja de Sevilla · Att. 67524</p>
+      <p class="insight">Real Betis edged it by a single goal against Feyenoord. In a low-scoring affair. Shot count 23-12 favoured Real Betis.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">59&#x27;</span><span class="pname">Isco</span></li></ul>
+      <div class="extras"><span class="potm">⭐ Player of the match: <b>Isco</b> · Real Betis (8.4)</span></div>
+      <div class="statgrid"><div class="stat"><span class="sv">47</span><span class="st">Ball possession</span><span class="sv">53</span></div><div class="stat"><span class="sv">2.14</span><span class="st">Expected goals (xG)</span><span class="sv">0.78</span></div><div class="stat"><span class="sv">23</span><span class="st">Total shots</span><span class="sv">12</span></div><div class="stat"><span class="sv">10</span><span class="st">Shots on target</span><span class="sv">2</span></div><div class="stat"><span class="sv">37</span><span class="st">Touches in opposition box</span><span class="sv">26</span></div><div class="stat"><span class="sv">2</span><span class="st">Big chances</span><span class="sv">1</span></div><div class="stat"><span class="sv">1</span><span class="st">Big chances missed</span><span class="sv">1</span></div><div class="stat"><span class="sv">448 (89%)</span><span class="st">Accurate passes</span><span class="sv">496 (87%)</span></div><div class="stat"><span class="sv">1</span><span class="st">Yellow cards</span><span class="sv">2</span></div><div class="stat"><span class="sv">4</span><span class="st">Corners</span><span class="sv">4</span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">Champions League</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Wed 21 Oct · 19:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Real Madrid</span><span class="sc">4 &ndash; 1</span><span class="tname">RB Leipzig</span></span>
+      
+      <p class="meta">Estadio Bernabéu · Att. 73016</p>
+      <p class="insight">Real Madrid produced a comprehensive 3-goal victory over RB Leipzig. Shot count 18-11 favoured Real Madrid.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">44&#x27;</span><span class="pname">Bernardo Silva <span class="assist">(ast. Arda Güler)</span></span></li><li class="scorer"><span class="min">52&#x27;</span><span class="pname">Arda Güler <span class="assist">(ast. Kylian Mbappé)</span></span></li><li class="scorer"><span class="min">83&#x27;</span><span class="pname">Kylian Mbappé <span class="assist">(ast. Yan Diomande)</span></span></li><li class="scorer"><span class="min">85&#x27;</span><span class="pname">Tidiam Gomis <span class="assist">(ast. Christoph Baumgartner)</span></span></li><li class="scorer"><span class="min">87&#x27;</span><span class="pname">Yan Diomande <span class="assist">(ast. Brahim Díaz)</span></span></li></ul>
+      <div class="extras"><span class="potm">⭐ Player of the match: <b>Arda Güler</b> · Real Madrid (8.7)</span></div>
+      <div class="statgrid"><div class="stat"><span class="sv">64</span><span class="st">Ball possession</span><span class="sv">36</span></div><div class="stat"><span class="sv">3.09</span><span class="st">Expected goals (xG)</span><span class="sv">1.49</span></div><div class="stat"><span class="sv">18</span><span class="st">Total shots</span><span class="sv">11</span></div><div class="stat"><span class="sv">11</span><span class="st">Shots on target</span><span class="sv">6</span></div><div class="stat"><span class="sv">37</span><span class="st">Touches in opposition box</span><span class="sv">28</span></div><div class="stat"><span class="sv">4</span><span class="st">Big chances</span><span class="sv">3</span></div><div class="stat"><span class="sv">2</span><span class="st">Big chances missed</span><span class="sv">2</span></div><div class="stat"><span class="sv">679 (91%)</span><span class="st">Accurate passes</span><span class="sv">355 (88%)</span></div><div class="stat"><span class="sv">1</span><span class="st">Yellow cards</span><span class="sv">1</span></div><div class="stat"><span class="sv">7</span><span class="st">Corners</span><span class="sv">1</span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">Champions League</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Wed 21 Oct · 19:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Sporting CP</span><span class="sc">2 &ndash; 3</span><span class="tname">LASK</span></span>
+      
+      <p class="meta">Estádio José Alvalade · Att. 48985</p>
+      <p class="insight">LASK edged it by a single goal against Sporting CP. Shot count 16-11 favoured Sporting CP.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">5&#x27;</span><span class="pname">Luis Suárez <span class="badge tally" title="multiple goals">2&times;</span></span></li><li class="scorer"><span class="min">15&#x27;</span><span class="pname">Christoph Lang <span class="assist">(ast. Kasper Jørgensen)</span></span></li><li class="scorer"><span class="min">63&#x27;</span><span class="pname">Saša Kalajdžić <span class="assist">(ast. Robert Ljubičić)</span></span></li><li class="scorer"><span class="min">68&#x27;</span><span class="pname">Kryštof Daněk <span class="assist">(ast. Samuel Adeniran)</span></span></li><li class="scorer"><span class="min">89&#x27;</span><span class="pname">Luis Suárez <span class="badge tally" title="multiple goals">2&times;</span> <span class="assist">(ast. Jesse Derry)</span></span></li></ul>
+      <div class="extras"><span class="potm">⭐ Player of the match: <b>Luis Suárez</b> · Sporting CP (8.9)</span></div>
+      <div class="statgrid"><div class="stat"><span class="sv">62</span><span class="st">Ball possession</span><span class="sv">38</span></div><div class="stat"><span class="sv">3.24</span><span class="st">Expected goals (xG)</span><span class="sv">1.12</span></div><div class="stat"><span class="sv">16</span><span class="st">Total shots</span><span class="sv">11</span></div><div class="stat"><span class="sv">4</span><span class="st">Shots on target</span><span class="sv">7</span></div><div class="stat"><span class="sv">32</span><span class="st">Touches in opposition box</span><span class="sv">20</span></div><div class="stat"><span class="sv">5</span><span class="st">Big chances</span><span class="sv">1</span></div><div class="stat"><span class="sv">3</span><span class="st">Big chances missed</span><span class="sv">0</span></div><div class="stat"><span class="sv">507 (89%)</span><span class="st">Accurate passes</span><span class="sv">292 (82%)</span></div><div class="stat"><span class="sv">2</span><span class="st">Yellow cards</span><span class="sv">5</span></div><div class="stat"><span class="sv">7</span><span class="st">Corners</span><span class="sv">4</span></div></div>
+    </article></div><h2>Results &middot; MENA<span class="count">3 matches</span></h2><div class="cards">
+    <article class="card">
+      <header class="card-head">
+        <span class="league">Egyptian Premier League</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Wed 21 Oct · 14:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Ghazl Al Mahalla</span><span class="sc">2 &ndash; 1</span><span class="tname">Al Ittihad Alexandria</span></span>
+      
+      <p class="meta">El Mahalla Stadium</p>
+      <p class="insight">Ghazl Al Mahalla edged it by a single goal against Al Ittihad Alexandria. Shot count 16-9 favoured Ghazl Al Mahalla.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">31&#x27;</span><span class="pname">Abdel Fattah Sheta <span class="assist">(ast. Abdelrahman Shika)</span></span></li><li class="scorer"><span class="min">45+2&#x27;</span><span class="pname">Amr Gomaa <span class="assist">(ast. Mohamed Ekbad)</span></span></li><li class="scorer"><span class="min">47&#x27;</span><span class="pname">Hossam Hassan</span></li></ul>
+      <div class="extras"><a class="hl" href="https://www.youtube.com/watch?v=icWxOCWbTz0" target="_blank" rel="noopener noreferrer"><span class="hl-tag">▶ Highlights</span><img src="https://i.ytimg.com/vi/icWxOCWbTz0/maxresdefault.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"><span class="hl-cap">Watch full highlights</span></a><span class="potm">⭐ Player of the match: <b>Abdelrahman Shika</b> · Ghazl Al Mahalla (8.7)</span></div>
+      <div class="statgrid"><div class="stat"><span class="sv">46</span><span class="st">Ball possession</span><span class="sv">54</span></div><div class="stat"><span class="sv">1.22</span><span class="st">Expected goals (xG)</span><span class="sv">0.93</span></div><div class="stat"><span class="sv">16</span><span class="st">Total shots</span><span class="sv">9</span></div><div class="stat"><span class="sv">3</span><span class="st">Shots on target</span><span class="sv">3</span></div><div class="stat"><span class="sv">24</span><span class="st">Touches in opposition box</span><span class="sv">16</span></div><div class="stat"><span class="sv">2</span><span class="st">Big chances</span><span class="sv">1</span></div><div class="stat"><span class="sv">1</span><span class="st">Big chances missed</span><span class="sv">0</span></div><div class="stat"><span class="sv">277 (77%)</span><span class="st">Accurate passes</span><span class="sv">335 (77%)</span></div><div class="stat"><span class="sv">2</span><span class="st">Yellow cards</span><span class="sv">1</span></div><div class="stat"><span class="sv">4</span><span class="st">Corners</span><span class="sv">3</span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">Egyptian Premier League</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Wed 21 Oct · 17:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Al Ahly SC</span><span class="sc">3 &ndash; 3</span><span class="tname">Olympic El Qanah FC</span></span>
+      
+      <p class="meta">Cairo International Stadium</p>
+      <p class="insight">Honours were even in a draw. It was a high-scoring thriller. Shot count 12-8 favoured Al Ahly SC.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">18&#x27;</span><span class="pname">Omar El Saaiy <span class="assist">(ast. Mohamed Hany)</span></span></li><li class="scorer"><span class="min">32&#x27;</span><span class="pname">Mody Shalata <span class="assist">(ast. Mohamed Sadek)</span></span></li><li class="scorer"><span class="min">43&#x27;</span><span class="pname">Ibrahim Samy (OG)</span></li><li class="scorer"><span class="min">54&#x27;</span><span class="pname">Hazem Abosena</span></li><li class="scorer"><span class="min">80&#x27;</span><span class="pname">Yassin Marei (OG)</span></li><li class="scorer"><span class="min">90+3&#x27;</span><span class="pname">Achraf Dari</span></li></ul>
+      <div class="extras"><a class="hl" href="https://www.youtube.com/watch?v=qu6FR53VfYo" target="_blank" rel="noopener noreferrer"><span class="hl-tag">▶ Highlights</span><img src="https://i.ytimg.com/vi/qu6FR53VfYo/hqdefault.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"><span class="hl-cap">Watch full highlights</span></a><span class="potm">⭐ Player of the match: <b>Mody Shalata</b> · Olympic El Qanah FC (8.4)</span></div>
+      <div class="statgrid"><div class="stat"><span class="sv">57</span><span class="st">Ball possession</span><span class="sv">43</span></div><div class="stat"><span class="sv">0.96</span><span class="st">Expected goals (xG)</span><span class="sv">0.42</span></div><div class="stat"><span class="sv">12</span><span class="st">Total shots</span><span class="sv">8</span></div><div class="stat"><span class="sv">5</span><span class="st">Shots on target</span><span class="sv">4</span></div><div class="stat"><span class="sv">21</span><span class="st">Touches in opposition box</span><span class="sv">10</span></div><div class="stat"><span class="sv">2</span><span class="st">Big chances</span><span class="sv">0</span></div><div class="stat"><span class="sv">0</span><span class="st">Big chances missed</span><span class="sv">0</span></div><div class="stat"><span class="sv">369 (85%)</span><span class="st">Accurate passes</span><span class="sv">258 (78%)</span></div><div class="stat"><span class="sv">1</span><span class="st">Yellow cards</span><span class="sv">1</span></div><div class="stat"><span class="sv">7</span><span class="st">Corners</span><span class="sv">2</span></div></div>
+    </article>
+    <article class="card">
+      <header class="card-head">
+        <span class="league">Egyptian Premier League</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Wed 21 Oct · 17:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Ceramica Cleopatra</span><span class="sc">2 &ndash; 0</span><span class="tname">Petrojet-Suez</span></span>
+      
+      <p class="meta">Suez Canal Stadium</p>
+      <p class="insight">Ceramica Cleopatra beat Petrojet-Suez by two goals. Shot count 14-9 favoured Ceramica Cleopatra.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">30&#x27;</span><span class="pname">Peter Gwargis <span class="assist">(ast. Nejc Gradišar)</span></span></li><li class="scorer"><span class="min">90+5&#x27;</span><span class="pname">Amr Al Solia</span></li></ul>
+      <div class="extras"><a class="hl" href="https://www.youtube.com/watch?v=0O426hivH6M" target="_blank" rel="noopener noreferrer"><span class="hl-tag">▶ Highlights</span><img src="https://i.ytimg.com/vi/0O426hivH6M/maxresdefault.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"><span class="hl-cap">Watch full highlights</span></a><span class="potm">⭐ Player of the match: <b>Amr Al Solia</b> · Ceramica Cleopatra (8.5)</span></div>
+      <div class="statgrid"><div class="stat"><span class="sv">63</span><span class="st">Ball possession</span><span class="sv">37</span></div><div class="stat"><span class="sv">2.02</span><span class="st">Expected goals (xG)</span><span class="sv">0.64</span></div><div class="stat"><span class="sv">14</span><span class="st">Total shots</span><span class="sv">9</span></div><div class="stat"><span class="sv">4</span><span class="st">Shots on target</span><span class="sv">1</span></div><div class="stat"><span class="sv">34</span><span class="st">Touches in opposition box</span><span class="sv">11</span></div><div class="stat"><span class="sv">3</span><span class="st">Big chances</span><span class="sv">0</span></div><div class="stat"><span class="sv">1</span><span class="st">Big chances missed</span><span class="sv">0</span></div><div class="stat"><span class="sv">428 (81%)</span><span class="st">Accurate passes</span><span class="sv">187 (65%)</span></div><div class="stat"><span class="sv">2</span><span class="st">Yellow cards</span><span class="sv">3</span></div><div class="stat"><span class="sv">2</span><span class="st">Corners</span><span class="sv">4</span></div></div>
+    </article></div><h2>Results &middot; International<span class="count">0 matches</span></h2><div class="empty">No completed matches in the International competitions for this reporting window.</div><h2>Match Reports &amp; Insights</h2><div class="standings"><ul class="insight-list"><li><strong>Como 4&ndash;1 Manchester United</strong> (Champions League): Como produced a comprehensive 3-goal victory over Manchester United. Shot count 11-13 favoured Manchester United. Scorers: Nico Paz 2, 57; Anastasios Douvikas 49; Jacobo Ramón 76; Joshua Zirkzee 90+1.</li><li><strong>Lille 2&ndash;4 Galatasaray</strong> (Champions League): Galatasaray beat Lille by two goals. It was a high-scoring thriller. Shot count 15-10 favoured Lille. Scorers: Yunus Akgün 2; Soriba Diaoune 7, 39; Aleksey Batrakov 44; Nabil Bentaleb (OG) 52; Victor Osimhen 61.</li><li><strong>Real Madrid 4&ndash;1 RB Leipzig</strong> (Champions League): Real Madrid produced a comprehensive 3-goal victory over RB Leipzig. Shot count 18-11 favoured Real Madrid. Scorers: Bernardo Silva 44; Arda Güler 52; Kylian Mbappé 83; Tidiam Gomis 85; Yan Diomande 87.</li><li><strong>Al Ahly SC 3&ndash;3 Olympic El Qanah FC</strong> (Egyptian Premier League): Honours were even in a draw. It was a high-scoring thriller. Shot count 12-8 favoured Al Ahly SC. Scorers: Omar El Saaiy 18; Mody Shalata 32; Ibrahim Samy (OG) 43; Hazem Abosena 54; Yassin Marei (OG) 80; Achraf Dari 90+3.</li><li><strong>Levante 3&ndash;1 Athletic Club</strong> (LaLiga): Levante beat Athletic Club by two goals. Shot count 12-21 favoured Athletic Club. Scorers: Roger Brugué 20, 22; Alex Berenguer 67; Etta Eyong 90+8.</li><li><strong>Aston Villa 3&ndash;1 Viking</strong> (Champions League): Aston Villa beat Viking by two goals. Shot count 21-10 favoured Aston Villa. Scorers: Ross Barkley 23; Emiliano Buendía 37; Henrik Heggheim (OG) 62; Peter Christiansen 84.</li></ul></div><h2>Upcoming Fixtures &middot; next 24 hours</h2><p class="muted small window-note">Thu 22 Oct 08:29 &rarr; Fri 23 Oct 08:29 (UTC)</p><div class="standings"><table class="fx"><tr class="fxgroup"><td colspan="2">Europa League</td></tr>
+      <tr>
+        <td class="fx-time">16:45</td>
+        <td class="fx-teams">Ararat Armenia <span class="muted">vs</span> AZ Alkmaar</td>
+      </tr>
+      <tr>
+        <td class="fx-time">16:45</td>
+        <td class="fx-teams">Dinamo Zagreb <span class="muted">vs</span> NEC Nijmegen</td>
+      </tr>
+      <tr>
+        <td class="fx-time">16:45</td>
+        <td class="fx-teams">Ferencváros <span class="muted">vs</span> Torreense</td>
+      </tr>
+      <tr>
+        <td class="fx-time">16:45</td>
+        <td class="fx-teams">Juventus <span class="muted">vs</span> Rennes</td>
+      </tr>
+      <tr>
+        <td class="fx-time">16:45</td>
+        <td class="fx-teams">Lech Poznań <span class="muted">vs</span> Sunderland</td>
+      </tr>
+      <tr>
+        <td class="fx-time">16:45</td>
+        <td class="fx-teams">OFI Crete <span class="muted">vs</span> Bayer Leverkusen</td>
+      </tr>
+      <tr>
+        <td class="fx-time">16:45</td>
+        <td class="fx-teams">Sturm Graz <span class="muted">vs</span> Marseille</td>
+      </tr>
+      <tr>
+        <td class="fx-time">16:45</td>
+        <td class="fx-teams">Union St.Gilloise <span class="muted">vs</span> Hapoel Beer Sheva</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:00</td>
+        <td class="fx-teams">AFC Bournemouth <span class="muted">vs</span> Milan</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:00</td>
+        <td class="fx-teams">Beşiktaş <span class="muted">vs</span> Crystal Palace</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:00</td>
+        <td class="fx-teams">Celtic <span class="muted">vs</span> Celta Vigo</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:00</td>
+        <td class="fx-teams">Hoffenheim <span class="muted">vs</span> Lyon</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:00</td>
+        <td class="fx-teams">Jagiellonia Białystok <span class="muted">vs</span> Anderlecht</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:00</td>
+        <td class="fx-teams">Lillestrøm <span class="muted">vs</span> Real Sociedad</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:00</td>
+        <td class="fx-teams">NK Celje <span class="muted">vs</span> Salzburg</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:00</td>
+        <td class="fx-teams">Olympiacos <span class="muted">vs</span> Sparta Prague</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:00</td>
+        <td class="fx-teams">Omonia Nicosia <span class="muted">vs</span> Benfica</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:00</td>
+        <td class="fx-teams">Viktoria Plzeň <span class="muted">vs</span> Levski Sofia</td>
+      </tr><tr class="fxgroup"><td colspan="2">Saudi Pro League</td></tr>
+      <tr>
+        <td class="fx-time">13:40</td>
+        <td class="fx-teams">Al Hazem <span class="muted">vs</span> Al-Fayha</td>
+      </tr>
+      <tr>
+        <td class="fx-time">14:45</td>
+        <td class="fx-teams">Al Fateh FC <span class="muted">vs</span> Al Shabab</td>
+      </tr>
+      <tr>
+        <td class="fx-time">18:00</td>
+        <td class="fx-teams">Al Ahli <span class="muted">vs</span> Al Khaleej</td>
+      </tr><tr class="fxgroup"><td colspan="2">Qatar Stars League</td></tr>
+      <tr>
+        <td class="fx-time">14:30</td>
+        <td class="fx-teams">Al-Shahaniya <span class="muted">vs</span> Al-Sadd</td>
+      </tr>
+      <tr>
+        <td class="fx-time">16:45</td>
+        <td class="fx-teams">Al-Gharafa <span class="muted">vs</span> Al-Ahli</td>
+      </tr><tr class="fxgroup"><td colspan="2">Persian Gulf Pro League</td></tr>
+      <tr>
+        <td class="fx-time">13:30</td>
+        <td class="fx-teams">Tractor <span class="muted">vs</span> Sanat Naft Abadan</td>
+      </tr></table></div><h2>League Standings</h2><div class="standings-grid">
+    <div class="standings">
+      <h3>Premier League</h3>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
+        <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
+        <tbody><tr><td class="pos">1<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Manchester City</td><td>7</td><td>7</td><td>0</td><td>0</td><td>19-7</td><td>12</td><td class="pts">21</td></tr><tr><td class="pos">2<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Arsenal</td><td>7</td><td>6</td><td>0</td><td>1</td><td>11-5</td><td>6</td><td class="pts">18</td></tr><tr><td class="pos">3<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Brighton &amp; Hove Albion</td><td>7</td><td>5</td><td>1</td><td>1</td><td>23-5</td><td>18</td><td class="pts">16</td></tr><tr><td class="pos">4<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Chelsea</td><td>7</td><td>4</td><td>1</td><td>2</td><td>17-13</td><td>4</td><td class="pts">13</td></tr><tr><td class="pos">5<span class="dot" style="background:#0046A7" title="European competition place"></span></td><td class="tm">Liverpool</td><td>7</td><td>3</td><td>3</td><td>1</td><td>9-8</td><td>1</td><td class="pts">12</td></tr><tr><td class="pos">6</td><td class="tm">Brentford</td><td>7</td><td>2</td><td>4</td><td>1</td><td>13-8</td><td>5</td><td class="pts">10</td></tr><tr><td class="pos">7</td><td class="tm">Leeds United</td><td>7</td><td>2</td><td>4</td><td>1</td><td>9-6</td><td>3</td><td class="pts">10</td></tr><tr><td class="pos">8</td><td class="tm">Everton</td><td>7</td><td>2</td><td>4</td><td>1</td><td>8-7</td><td>1</td><td class="pts">10</td></tr></tbody>
+      </table>
+      <p class="legend"><span class="chip"><span class="dot" style="background:#2AD572"></span>Champions League</span><span class="chip"><span class="dot" style="background:#0046A7"></span>Europa League</span><span class="chip"><span class="dot" style="background:#FF4646"></span>Relegation</span></p>
+    </div>
+    <div class="standings">
+      <h3>LaLiga</h3>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
+        <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
+        <tbody><tr><td class="pos">1<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Barcelona</td><td>9</td><td>9</td><td>0</td><td>0</td><td>39-9</td><td>30</td><td class="pts">27</td></tr><tr><td class="pos">2<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Atlético Madrid</td><td>9</td><td>7</td><td>1</td><td>1</td><td>19-8</td><td>11</td><td class="pts">22</td></tr><tr><td class="pos">3<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Real Madrid</td><td>9</td><td>7</td><td>0</td><td>2</td><td>23-9</td><td>14</td><td class="pts">21</td></tr><tr><td class="pos">4<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Real Betis</td><td>9</td><td>6</td><td>1</td><td>2</td><td>16-14</td><td>2</td><td class="pts">19</td></tr><tr><td class="pos">5<span class="dot" style="background:#0046A7" title="European competition place"></span></td><td class="tm">Real Sociedad</td><td>9</td><td>5</td><td>1</td><td>3</td><td>17-17</td><td>0</td><td class="pts">16</td></tr><tr><td class="pos">6<span class="dot" style="background:#02CCF0" title="European competition place"></span></td><td class="tm">Sevilla</td><td>9</td><td>4</td><td>2</td><td>3</td><td>14-16</td><td>-2</td><td class="pts">14</td></tr><tr><td class="pos">7</td><td class="tm">Deportivo Alavés</td><td>9</td><td>3</td><td>2</td><td>4</td><td>13-10</td><td>3</td><td class="pts">11</td></tr><tr><td class="pos">8</td><td class="tm">Celta Vigo</td><td>9</td><td>2</td><td>5</td><td>2</td><td>10-7</td><td>3</td><td class="pts">11</td></tr></tbody>
+      </table>
+      <p class="legend"><span class="chip"><span class="dot" style="background:#2AD572"></span>Champions League</span><span class="chip"><span class="dot" style="background:#0046A7"></span>Europa League</span><span class="chip"><span class="dot" style="background:#02CCF0"></span>Conference League qualification</span><span class="chip"><span class="dot" style="background:#FF4646"></span>Relegation</span></p>
+    </div>
+    <div class="standings">
+      <h3>Serie A</h3>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
+        <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
+        <tbody><tr><td class="pos">1<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Inter</td><td>7</td><td>6</td><td>1</td><td>0</td><td>21-9</td><td>12</td><td class="pts">19</td></tr><tr><td class="pos">2<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Lazio</td><td>7</td><td>6</td><td>1</td><td>0</td><td>14-4</td><td>10</td><td class="pts">19</td></tr><tr><td class="pos">3<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Roma</td><td>7</td><td>5</td><td>2</td><td>0</td><td>16-3</td><td>13</td><td class="pts">17</td></tr><tr><td class="pos">4<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Milan</td><td>7</td><td>4</td><td>3</td><td>0</td><td>14-7</td><td>7</td><td class="pts">15</td></tr><tr><td class="pos">5<span class="dot" style="background:#0046A7" title="European competition place"></span></td><td class="tm">Como</td><td>7</td><td>4</td><td>2</td><td>1</td><td>12-7</td><td>5</td><td class="pts">14</td></tr><tr><td class="pos">6<span class="dot" style="background:#02CCF0" title="European competition place"></span></td><td class="tm">Frosinone</td><td>7</td><td>4</td><td>1</td><td>2</td><td>13-9</td><td>4</td><td class="pts">13</td></tr><tr><td class="pos">7</td><td class="tm">Cagliari</td><td>7</td><td>4</td><td>1</td><td>2</td><td>6-7</td><td>-1</td><td class="pts">13</td></tr><tr><td class="pos">8</td><td class="tm">Juventus</td><td>7</td><td>3</td><td>2</td><td>2</td><td>9-8</td><td>1</td><td class="pts">11</td></tr></tbody>
+      </table>
+      <p class="legend"><span class="chip"><span class="dot" style="background:#2AD572"></span>Champions League</span><span class="chip"><span class="dot" style="background:#0046A7"></span>Europa League</span><span class="chip"><span class="dot" style="background:#02CCF0"></span>Conference League qualification</span><span class="chip"><span class="dot" style="background:#FF4646"></span>Relegation</span></p>
+    </div>
+    <div class="standings">
+      <h3>Bundesliga</h3>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
+        <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
+        <tbody><tr><td class="pos">1<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Bayern München</td><td>6</td><td>4</td><td>2</td><td>0</td><td>22-5</td><td>17</td><td class="pts">14</td></tr><tr><td class="pos">2<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Borussia Dortmund</td><td>6</td><td>4</td><td>2</td><td>0</td><td>11-4</td><td>7</td><td class="pts">14</td></tr><tr><td class="pos">3<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Freiburg</td><td>6</td><td>4</td><td>1</td><td>1</td><td>15-6</td><td>9</td><td class="pts">13</td></tr><tr><td class="pos">4<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Bayer Leverkusen</td><td>6</td><td>4</td><td>1</td><td>1</td><td>16-9</td><td>7</td><td class="pts">13</td></tr><tr><td class="pos">5<span class="dot" style="background:#0046A7" title="European competition place"></span></td><td class="tm">Mainz 05</td><td>6</td><td>3</td><td>1</td><td>2</td><td>14-10</td><td>4</td><td class="pts">10</td></tr><tr><td class="pos">6<span class="dot" style="background:#02CCF0" title="European competition place"></span></td><td class="tm">Elversberg</td><td>6</td><td>3</td><td>1</td><td>2</td><td>12-11</td><td>1</td><td class="pts">10</td></tr><tr><td class="pos">7</td><td class="tm">RB Leipzig</td><td>6</td><td>3</td><td>0</td><td>3</td><td>16-11</td><td>5</td><td class="pts">9</td></tr><tr><td class="pos">8</td><td class="tm">Werder Bremen</td><td>6</td><td>2</td><td>3</td><td>1</td><td>12-12</td><td>0</td><td class="pts">9</td></tr></tbody>
+      </table>
+      <p class="legend"><span class="chip"><span class="dot" style="background:#2AD572"></span>Champions League</span><span class="chip"><span class="dot" style="background:#0046A7"></span>Europa League</span><span class="chip"><span class="dot" style="background:#02CCF0"></span>Conference League qualification</span><span class="chip"><span class="dot" style="background:#FFA72F"></span>Relegation qualification</span><span class="chip"><span class="dot" style="background:#FF4646"></span>Relegation</span></p>
+    </div>
+    <div class="standings">
+      <h3>Ligue 1</h3>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
+        <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
+        <tbody><tr><td class="pos">1<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Lyon</td><td>7</td><td>4</td><td>2</td><td>1</td><td>13-5</td><td>8</td><td class="pts">14</td></tr><tr><td class="pos">2<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Paris Saint-Germain</td><td>7</td><td>4</td><td>2</td><td>1</td><td>14-9</td><td>5</td><td class="pts">14</td></tr><tr><td class="pos">3<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Paris FC</td><td>7</td><td>4</td><td>2</td><td>1</td><td>12-7</td><td>5</td><td class="pts">14</td></tr><tr><td class="pos">4<span class="dot" style="background:#FFD908" title="European competition place"></span></td><td class="tm">Lille</td><td>7</td><td>4</td><td>2</td><td>1</td><td>10-5</td><td>5</td><td class="pts">14</td></tr><tr><td class="pos">5<span class="dot" style="background:#0046A7" title="European competition place"></span></td><td class="tm">Monaco</td><td>7</td><td>4</td><td>2</td><td>1</td><td>10-6</td><td>4</td><td class="pts">14</td></tr><tr><td class="pos">6<span class="dot" style="background:#02CCF0" title="European competition place"></span></td><td class="tm">Rennes</td><td>7</td><td>4</td><td>1</td><td>2</td><td>15-14</td><td>1</td><td class="pts">13</td></tr><tr><td class="pos">7</td><td class="tm">Lorient</td><td>7</td><td>3</td><td>2</td><td>2</td><td>7-6</td><td>1</td><td class="pts">11</td></tr><tr><td class="pos">8</td><td class="tm">Lens</td><td>7</td><td>3</td><td>1</td><td>3</td><td>14-11</td><td>3</td><td class="pts">10</td></tr></tbody>
+      </table>
+      <p class="legend"><span class="chip"><span class="dot" style="background:#2AD572"></span>Champions League</span><span class="chip"><span class="dot" style="background:#FFD908"></span>Champions League qualification</span><span class="chip"><span class="dot" style="background:#0046A7"></span>Europa League</span><span class="chip"><span class="dot" style="background:#02CCF0"></span>Conference League qualification</span><span class="chip"><span class="dot" style="background:#FFA72F"></span>Relegation qualification</span><span class="chip"><span class="dot" style="background:#FF4646"></span>Relegation</span></p>
+    </div>
+    <div class="standings">
+      <h3>Champions League</h3>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
+        <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
+        <tbody><tr><td class="pos">1<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Paris Saint-Germain</td><td>3</td><td>3</td><td>0</td><td>0</td><td>14-5</td><td>9</td><td class="pts">9</td></tr><tr><td class="pos">2<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Aston Villa</td><td>3</td><td>3</td><td>0</td><td>0</td><td>12-3</td><td>9</td><td class="pts">9</td></tr><tr><td class="pos">3<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Liverpool</td><td>3</td><td>3</td><td>0</td><td>0</td><td>12-7</td><td>5</td><td class="pts">9</td></tr><tr><td class="pos">4<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Real Madrid</td><td>3</td><td>3</td><td>0</td><td>0</td><td>10-5</td><td>5</td><td class="pts">9</td></tr><tr><td class="pos">5<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Real Betis</td><td>3</td><td>3</td><td>0</td><td>0</td><td>7-4</td><td>3</td><td class="pts">9</td></tr><tr><td class="pos">6<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">VfB Stuttgart</td><td>3</td><td>2</td><td>1</td><td>0</td><td>7-2</td><td>5</td><td class="pts">7</td></tr><tr><td class="pos">7<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Arsenal</td><td>3</td><td>2</td><td>1</td><td>0</td><td>6-2</td><td>4</td><td class="pts">7</td></tr><tr><td class="pos">8<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Barcelona</td><td>3</td><td>2</td><td>0</td><td>1</td><td>11-6</td><td>5</td><td class="pts">6</td></tr></tbody>
+      </table>
+      <p class="legend"><span class="chip"><span class="dot" style="background:#2AD572"></span>Qualification to 1/8 finals</span><span class="chip"><span class="dot" style="background:#0294F0"></span>Qualification to 1/16 finals</span></p>
+    </div>
+    <div class="standings">
+      <h3>Saudi Pro League</h3>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
+        <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
+        <tbody><tr><td class="pos">1<span class="dot" style="background:#c9dd03" title="European competition place"></span></td><td class="tm">Al Qadsiah</td><td>10</td><td>8</td><td>1</td><td>1</td><td>24-9</td><td>15</td><td class="pts">25</td></tr><tr><td class="pos">2<span class="dot" style="background:#c9dd03" title="European competition place"></span></td><td class="tm">Al Hilal</td><td>9</td><td>8</td><td>0</td><td>1</td><td>27-7</td><td>20</td><td class="pts">24</td></tr><tr><td class="pos">3<span class="dot" style="background:#c9dd03" title="European competition place"></span></td><td class="tm">Al Nassr FC</td><td>9</td><td>7</td><td>1</td><td>1</td><td>20-7</td><td>13</td><td class="pts">22</td></tr><tr><td class="pos">4<span class="dot" style="background:#FFD908" title="European competition place"></span></td><td class="tm">Al Ittihad</td><td>9</td><td>6</td><td>2</td><td>1</td><td>18-10</td><td>8</td><td class="pts">20</td></tr><tr><td class="pos">5<span class="dot" style="background:#FFD908" title="European competition place"></span></td><td class="tm">Al Ahli</td><td>9</td><td>6</td><td>0</td><td>3</td><td>23-12</td><td>11</td><td class="pts">18</td></tr><tr><td class="pos">6<span class="dot" style="background:#0046A7" title="European competition place"></span></td><td class="tm">Neom SC</td><td>10</td><td>5</td><td>1</td><td>4</td><td>14-9</td><td>5</td><td class="pts">16</td></tr><tr><td class="pos">7</td><td class="tm">Al Diriyah</td><td>10</td><td>4</td><td>3</td><td>3</td><td>9-9</td><td>0</td><td class="pts">15</td></tr><tr><td class="pos">8</td><td class="tm">Al-Ettifaq</td><td>10</td><td>4</td><td>3</td><td>3</td><td>14-16</td><td>-2</td><td class="pts">15</td></tr></tbody>
+      </table>
+      <p class="legend"><span class="chip"><span class="dot" style="background:#c9dd03"></span>AFC Champions League</span><span class="chip"><span class="dot" style="background:#FFD908"></span>AFC Champions League Qualification</span><span class="chip"><span class="dot" style="background:#0046A7"></span>AFC Cup</span><span class="chip"><span class="dot" style="background:#FF4646"></span>Relegation</span></p>
+    </div>
+    <div class="standings">
+      <h3>UAE Pro League</h3>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
+        <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
+        <tbody><tr><td class="pos">1<span class="dot" style="background:#c9dd03" title="European competition place"></span></td><td class="tm">Al-Jazira</td><td>6</td><td>4</td><td>2</td><td>0</td><td>13-4</td><td>9</td><td class="pts">14</td></tr><tr><td class="pos">2<span class="dot" style="background:#c9dd03" title="European competition place"></span></td><td class="tm">Shabab Al-Ahli Dubai FC</td><td>6</td><td>4</td><td>1</td><td>1</td><td>12-5</td><td>7</td><td class="pts">13</td></tr><tr><td class="pos">3<span class="dot" style="background:#FFD908" title="European competition place"></span></td><td class="tm">Al-Wasl</td><td>6</td><td>4</td><td>1</td><td>1</td><td>17-6</td><td>11</td><td class="pts">13</td></tr><tr><td class="pos">4<span class="dot" style="background:#0046A7" title="European competition place"></span></td><td class="tm">Al-Ain</td><td>6</td><td>4</td><td>1</td><td>1</td><td>12-7</td><td>5</td><td class="pts">13</td></tr><tr><td class="pos">5</td><td class="tm">Al-Wahda</td><td>6</td><td>4</td><td>0</td><td>2</td><td>9-7</td><td>2</td><td class="pts">12</td></tr><tr><td class="pos">6</td><td class="tm">Sharjah Cultural Club</td><td>6</td><td>4</td><td>0</td><td>2</td><td>13-8</td><td>5</td><td class="pts">12</td></tr><tr><td class="pos">7</td><td class="tm">Ajman</td><td>6</td><td>3</td><td>0</td><td>3</td><td>12-15</td><td>-3</td><td class="pts">9</td></tr><tr><td class="pos">8</td><td class="tm">Al-Nasr SC</td><td>6</td><td>2</td><td>2</td><td>2</td><td>8-7</td><td>1</td><td class="pts">8</td></tr></tbody>
+      </table>
+      <p class="legend"><span class="chip"><span class="dot" style="background:#c9dd03"></span>AFC Champions League</span><span class="chip"><span class="dot" style="background:#FFD908"></span>AFC Champions League Qualification</span><span class="chip"><span class="dot" style="background:#0046A7"></span>AFC Cup</span><span class="chip"><span class="dot" style="background:#FF4646"></span>Relegation</span></p>
+    </div>
+    <div class="standings">
+      <h3>Qatar Stars League</h3>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
+        <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
+        <tbody><tr><td class="pos">1<span class="dot" style="background:#c9dd03" title="European competition place"></span></td><td class="tm">Al-Rayyan</td><td>6</td><td>4</td><td>2</td><td>0</td><td>10-2</td><td>8</td><td class="pts">14</td></tr><tr><td class="pos">2<span class="dot" style="background:#FFD908" title="European competition place"></span></td><td class="tm">Al-Sadd</td><td>6</td><td>4</td><td>0</td><td>2</td><td>23-13</td><td>10</td><td class="pts">12</td></tr><tr><td class="pos">3<span class="dot" style="background:#0046A7" title="European competition place"></span></td><td class="tm">Al-Arabi</td><td>6</td><td>3</td><td>3</td><td>0</td><td>14-5</td><td>9</td><td class="pts">12</td></tr><tr><td class="pos">4</td><td class="tm">Al-Duhail SC</td><td>6</td><td>3</td><td>3</td><td>0</td><td>12-5</td><td>7</td><td class="pts">12</td></tr><tr><td class="pos">5</td><td class="tm">Al-Shamal</td><td>6</td><td>2</td><td>3</td><td>1</td><td>10-10</td><td>0</td><td class="pts">9</td></tr><tr><td class="pos">6</td><td class="tm">Al-Wakrah</td><td>6</td><td>2</td><td>2</td><td>2</td><td>10-11</td><td>-1</td><td class="pts">8</td></tr><tr><td class="pos">7</td><td class="tm">Al-Ahli</td><td>6</td><td>2</td><td>1</td><td>3</td><td>10-12</td><td>-2</td><td class="pts">7</td></tr><tr><td class="pos">8</td><td class="tm">Al-Shahaniya</td><td>6</td><td>2</td><td>1</td><td>3</td><td>8-15</td><td>-7</td><td class="pts">7</td></tr></tbody>
+      </table>
+      <p class="legend"><span class="chip"><span class="dot" style="background:#c9dd03"></span>AFC Champions League</span><span class="chip"><span class="dot" style="background:#FFD908"></span>AFC Champions League Qualification</span><span class="chip"><span class="dot" style="background:#0046A7"></span>AFC Cup</span><span class="chip"><span class="dot" style="background:#FFA72F"></span>Relegation qualification</span><span class="chip"><span class="dot" style="background:#FF4646"></span>Relegation</span></p>
+    </div>
+    <div class="standings">
+      <h3>Egyptian Premier League</h3>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
+        <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
+        <tbody><tr><td class="pos">1<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Pyramids FC</td><td>7</td><td>7</td><td>0</td><td>0</td><td>17-3</td><td>14</td><td class="pts">21</td></tr><tr><td class="pos">2<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Al Ahly SC</td><td>7</td><td>5</td><td>2</td><td>0</td><td>14-6</td><td>8</td><td class="pts">17</td></tr><tr><td class="pos">3<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Zamalek SC</td><td>7</td><td>5</td><td>1</td><td>1</td><td>9-3</td><td>6</td><td class="pts">16</td></tr><tr><td class="pos">4<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Ceramica Cleopatra</td><td>7</td><td>5</td><td>0</td><td>2</td><td>13-7</td><td>6</td><td class="pts">15</td></tr><tr><td class="pos">5<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Modern Sport FC</td><td>7</td><td>4</td><td>1</td><td>2</td><td>12-9</td><td>3</td><td class="pts">13</td></tr><tr><td class="pos">6<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Al Ittihad Alexandria</td><td>7</td><td>4</td><td>1</td><td>2</td><td>9-6</td><td>3</td><td class="pts">13</td></tr><tr><td class="pos">7<span class="dot" style="background:#FFA72F" title="European competition place"></span></td><td class="tm">Al Mokawloon Al Arab</td><td>7</td><td>3</td><td>2</td><td>2</td><td>10-6</td><td>4</td><td class="pts">11</td></tr><tr><td class="pos">8<span class="dot" style="background:#FFA72F" title="European competition place"></span></td><td class="tm">ZED FC</td><td>7</td><td>3</td><td>2</td><td>2</td><td>8-8</td><td>0</td><td class="pts">11</td></tr></tbody>
+      </table>
+      <p class="legend"><span class="chip"><span class="dot" style="background:#2AD572"></span>Championship playoff</span><span class="chip"><span class="dot" style="background:#FFA72F"></span>Relegation qualification</span></p>
+    </div>
+    <div class="standings">
+      <h3>Moroccan Botola Pro</h3>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
+        <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
+        <tbody><tr><td class="pos">1<span class="dot" style="background:#FFD908" title="European competition place"></span></td><td class="tm">KACM</td><td>4</td><td>3</td><td>0</td><td>1</td><td>6-4</td><td>2</td><td class="pts">9</td></tr><tr><td class="pos">2<span class="dot" style="background:#FFD908" title="European competition place"></span></td><td class="tm">CODM Meknès</td><td>4</td><td>2</td><td>1</td><td>1</td><td>7-3</td><td>4</td><td class="pts">7</td></tr><tr><td class="pos">3<span class="dot" style="background:#0294F0" title="European competition place"></span></td><td class="tm">Hassania Agadir</td><td>4</td><td>2</td><td>1</td><td>1</td><td>11-8</td><td>3</td><td class="pts">7</td></tr><tr><td class="pos">4</td><td class="tm">Ittihad Tanger</td><td>4</td><td>2</td><td>1</td><td>1</td><td>7-5</td><td>2</td><td class="pts">7</td></tr><tr><td class="pos">5</td><td class="tm">MAS Fès</td><td>4</td><td>2</td><td>1</td><td>1</td><td>5-4</td><td>1</td><td class="pts">7</td></tr><tr><td class="pos">6</td><td class="tm">Union Touarga Sport</td><td>4</td><td>2</td><td>1</td><td>1</td><td>3-2</td><td>1</td><td class="pts">7</td></tr><tr><td class="pos">7</td><td class="tm">Difaâ El Jadida</td><td>4</td><td>2</td><td>0</td><td>2</td><td>11-11</td><td>0</td><td class="pts">6</td></tr><tr><td class="pos">8</td><td class="tm">Raja Casablanca</td><td>3</td><td>1</td><td>2</td><td>0</td><td>2-1</td><td>1</td><td class="pts">5</td></tr></tbody>
+      </table>
+      <p class="legend"><span class="chip"><span class="dot" style="background:#FFD908"></span>CAF Champions League qualification</span><span class="chip"><span class="dot" style="background:#0294F0"></span>CAF Confederation Cup qualification</span><span class="chip"><span class="dot" style="background:#FFA72F"></span>Relegation qualification</span><span class="chip"><span class="dot" style="background:#FF4646"></span>Relegation</span></p>
+    </div>
+    <div class="standings">
+      <h3>Tunisia Ligue Professionnelle 1</h3>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
+        <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
+        <tbody><tr><td class="pos">1<span class="dot" style="background:#FFD908" title="European competition place"></span></td><td class="tm">Ben Guerdane</td><td>6</td><td>4</td><td>2</td><td>0</td><td>11-6</td><td>5</td><td class="pts">14</td></tr><tr><td class="pos">2<span class="dot" style="background:#FFD908" title="European competition place"></span></td><td class="tm">Espérance</td><td>5</td><td>4</td><td>0</td><td>1</td><td>10-7</td><td>3</td><td class="pts">12</td></tr><tr><td class="pos">3<span class="dot" style="background:#0294F0" title="European competition place"></span></td><td class="tm">US Monastir</td><td>6</td><td>3</td><td>3</td><td>0</td><td>8-5</td><td>3</td><td class="pts">12</td></tr><tr><td class="pos">4</td><td class="tm">PS Sakiet Eddaïer</td><td>6</td><td>3</td><td>2</td><td>1</td><td>5-2</td><td>3</td><td class="pts">11</td></tr><tr><td class="pos">5</td><td class="tm">Club Africain</td><td>4</td><td>3</td><td>0</td><td>1</td><td>4-2</td><td>2</td><td class="pts">9</td></tr><tr><td class="pos">6</td><td class="tm">JS Omrane</td><td>6</td><td>2</td><td>3</td><td>1</td><td>6-5</td><td>1</td><td class="pts">9</td></tr><tr><td class="pos">7</td><td class="tm">CS Sfaxien</td><td>5</td><td>2</td><td>2</td><td>1</td><td>6-4</td><td>2</td><td class="pts">8</td></tr><tr><td class="pos">8</td><td class="tm">CA Bizertin</td><td>5</td><td>2</td><td>2</td><td>1</td><td>3-3</td><td>0</td><td class="pts">8</td></tr></tbody>
+      </table>
+      <p class="legend"><span class="chip"><span class="dot" style="background:#FFD908"></span>CAF Champions League qualification</span><span class="chip"><span class="dot" style="background:#0294F0"></span>CAF Confederation Cup qualification</span><span class="chip"><span class="dot" style="background:#FF4646"></span>Relegation</span></p>
+    </div></div>
+<footer class="page">
+<p><strong>Data sources:</strong> FotMob public JSON API (matches, matchDetails, league tables)</p>
+<p>Reporting window scanned: results (2 days), fixtures (2 days). Kick-off times shown in
+UTC. Standings are the latest published
+tables from the data provider.</p>
+<p>Match insight lines are auto-generated from scoreline, goal and stat data.
+Generated automatically &middot; this page is informational only.</p>
+</footer>
+</div></body></html>
