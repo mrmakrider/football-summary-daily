@@ -462,7 +462,7 @@ def render_html(day_matches: list[dict], standings: list[tuple[dict, list]],
 <h1>&#9917; Football Daily Summary</h1>
 <p class="sub">{day:%A %d %B %Y} &middot; generated {now:%H:%M %Z} &middot;
 {len(finished)} completed, {len(live)} live, {len(upcoming)} upcoming
-&middot; Europe + MENA</p>
+&middot; Europe · MENA · International</p>
 </div></header>
 <div class="wrap">""")
 

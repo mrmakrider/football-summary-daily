@@ -169,13 +169,18 @@ def make_client(fail_times=0):
 # --------------------------------------------------------------------------
 class TestFetching(unittest.TestCase):
 
-    def test_collect_day_filters_to_target_leagues(self):
+    def test_collect_day_includes_all_competitions(self):
         c, _ = make_client()
         ms = fotmob.collect_day(c, "20260920")
         ids = {m["id"] for m in ms}
         self.assertIn(1, ids, "Premier League match missing")
         self.assertIn(2, ids, "Saudi match missing")
-        self.assertNotIn(3, ids, "untracked league must be filtered out")
+        self.assertIn(3, ids, "untracked league must now be included")
+        # Regions are inferred for unknown leagues
+        regions = {m["id"]: m["region"] for m in ms}
+        self.assertEqual(regions[1], "Europe")
+        self.assertEqual(regions[2], "MENA")
+        self.assertEqual(regions[3], "Europe")
 
     def test_normalise_status_and_region(self):
         c, _ = make_client()
@@ -335,10 +340,12 @@ class TestRendering(unittest.TestCase):
 
     def test_score_rendered_exactly_once_per_card(self):
         # Regression: the score cell used to be emitted for the home row AND
-        # the away row, so every result card showed "2 - 2" twice.
+        # the away row, so every result card showed the score twice.
         h = self.render()
-        self.assertEqual(h.count('<span class="scorebox final">'), 1)
+        # Two completed matches (IDs 1 and 3) => two scoreboxes, one per card.
+        self.assertEqual(h.count('<span class="scorebox final">'), 2)
         self.assertEqual(h.count("3 &ndash; 1"), 1)
+        self.assertEqual(h.count("1 &ndash; 0"), 1)
         self.assertNotIn('<div class="teams">', h)
 
     def test_long_team_names_keep_score_on_one_line(self):

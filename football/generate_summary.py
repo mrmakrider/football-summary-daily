@@ -187,9 +187,14 @@ def collect_all(client: Client, anchor: dt.date, enrich: bool = True,
 
 
 def load_standings(client: Client, per_region: int) -> list[tuple[dict, list]]:
-    """Fetch standings for up to `per_region` competitions in each region."""
+    """Fetch standings for tracked competitions in each region.
+
+    ``per_region`` is kept as a soft cap for display brevity: the first
+    ``per_region`` leagues per region get full tables; the rest are still
+    included in results/fixtures but without a standings block.
+    """
     out = []
-    counts: dict[str, int] = {"Europe": 0, "MENA": 0}
+    counts: dict[str, int] = {"Europe": 0, "MENA": 0, "International": 0}
     for lg in LEAGUES:
         region = lg["region"]
         if counts.get(region, 0) >= per_region:
@@ -331,10 +336,10 @@ footer a{{color:var(--accent2)}}
 <div class="wrap">
   <div class="hero">
     <h1>⚽ Football Daily Summary</h1>
-    <p class="sub">Europe &amp; MENA results, insights, fixtures and standings — refreshed every day at 03:00 local time.</p>
+    <p class="sub">All European &amp; MENA club and national-team competitions — Premier League through lower divisions, Champions League, Europa League, Saudi Pro League, Egyptian Premier League and dozens more — refreshed every day at 03:00 local time.</p>
     <div class="meta">
       <span>{total_tables} league tables</span>
-      <span>Europe + MENA</span>
+      <span>Europe · MENA · International</span>
       <span>Data: FotMob public JSON API</span>
     </div>
     <div class="actions">
@@ -353,7 +358,7 @@ footer a{{color:var(--accent2)}}
         <div class="head">
           <strong>{total_matches} matches reported</strong>
           <div class="tags">
-            <span class="tag">Europe</span><span class="tag">MENA</span>
+            <span class="tag">Europe</span><span class="tag">MENA</span><span class="tag">International</span>
             <span class="tag">Scorers</span><span class="tag">xG & stats</span>
             <span class="tag">Fixtures</span>
           </div>
@@ -377,19 +382,19 @@ footer a{{color:var(--accent2)}}
       <div class="regions">
         <div class="region">
           <h3>Europe (club)</h3>
-          <p>Premier League, LaLiga, Serie A, Bundesliga, Ligue 1, Champions League, Europa League, Conference League</p>
+          <p>Premier League, Championship, League One, League Two, LaLiga, LaLiga2, Primera Federación, Serie A, Serie B, Serie C, Bundesliga, 2. Bundesliga, 3. Liga, Ligue 1, Ligue 2, Eredivisie, Primeira Liga, Liga Portugal 2, Süper Lig, Scottish Premiership, Belgian Pro League, Swiss Super League, Austrian Bundesliga, Danish Superliga, Allsvenskan, Eliteserien, Veikkausliiga, Greek Super League, Czech First League, Polish Ekstraklasa, Romanian Liga 1, Croatian HNL, Serbian SuperLiga, Bulgarian First League, Ukrainian Premier League, Hungarian NB I, Slovenian PrvaLiga, Bosnian Premier League, Macedonian First League, Albanian Superliga, Icelandic Úrvalsdeild, Latvian Virsliga, Lithuanian A Lyga, Estonian Meistriliiga, Faroe Islands Premier League, Welsh Premier League, Northern Irish Premiership, and many more lower divisions.</p>
         </div>
         <div class="region">
-          <h3>Europe (national)</h3>
-          <p>UEFA Nations League A/B/C/D, World Cup Qualification UEFA</p>
+          <h3>Europe (national / continental)</h3>
+          <p>UEFA Champions League, UEFA Europa League, UEFA Conference League, UEFA Nations League A/B/C/D, World Cup Qualification UEFA.</p>
         </div>
         <div class="region">
           <h3>MENA (club)</h3>
-          <p>Saudi Pro League, UAE Pro League, Qatar Stars League, Egyptian Premier League, Moroccan Botola Pro, Tunisia Ligue 1</p>
+          <p>Saudi Pro League, Saudi First Division, UAE Pro League, Qatar Stars League, Egyptian Premier League, Moroccan Botola Pro, Tunisian Ligue 1, Iranian Persian Gulf Pro League, Iranian Azadegan League, Israeli Ligat ha'Al, Jordanian Pro League, Omani League, Bahraini Premier League, Kuwaiti Premier League, Lebanese Premier League, Iraqi Premier League, Syrian Premier League, Palestinian Premier League, Sudan Premier League, Libyan Premier League, and MENA cups.</p>
         </div>
         <div class="region">
           <h3>MENA (national)</h3>
-          <p>AFCON Qualification, World Cup Qualification CAF, Asian Cup Qualification, World Cup Qualification AFC/CONCACAF, Arabian Gulf Cup</p>
+          <p>AFCON Qualification, World Cup Qualification CAF, Asian Cup Qualification, World Cup Qualification AFC/CONCACAF, Arabian Gulf Cup, WAFF Championship.</p>
         </div>
       </div>
     </section>

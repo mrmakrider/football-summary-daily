@@ -30,43 +30,131 @@ HEADERS = {
 }
 
 # Target competitions. `region` is used for grouping in the report.
+# The day feed returns ~145 leagues; collect_day() is now inclusive so every
+# European / MENA competition that appears gets captured even if it is not
+# listed here.  LEAGUES still drives (a) explicit region overrides and
+# (b) which competitions get standings tables fetched.
 LEAGUES: list[dict[str, Any]] = [
-    # Europe - club
+    # ---- Europe: top-flight club leagues ----
     {"id": 47, "name": "Premier League", "region": "Europe"},
     {"id": 87, "name": "LaLiga", "region": "Europe"},
     {"id": 55, "name": "Serie A", "region": "Europe"},
     {"id": 54, "name": "Bundesliga", "region": "Europe"},
     {"id": 53, "name": "Ligue 1", "region": "Europe"},
-    {"id": 42, "name": "Champions League", "region": "Europe"},
-    {"id": 73, "name": "Europa League", "region": "Europe"},
-    {"id": 10615, "name": "Conference League (Qual./League Phase)",
-     "region": "Europe"},
-    # Europe - national teams
-    {"id": 9806, "name": "UEFA Nations League A", "region": "Europe"},
-    {"id": 9807, "name": "UEFA Nations League B", "region": "Europe"},
-    {"id": 9808, "name": "UEFA Nations League C", "region": "Europe"},
-    {"id": 9809, "name": "UEFA Nations League D", "region": "Europe"},
-    {"id": 10195, "name": "World Cup Qualification UEFA", "region": "Europe"},
-    # MENA - club
+    {"id": 57, "name": "Eredivisie", "region": "Europe"},
+    {"id": 61, "name": "Liga Portugal", "region": "Europe"},
+    {"id": 71, "name": "Süper Lig", "region": "Europe"},
+    {"id": 64, "name": "Scottish Premiership", "region": "Europe"},
+    {"id": 40, "name": "Belgian Pro League", "region": "Europe"},
+    {"id": 51, "name": "Swiss Super League", "region": "Europe"},
+    {"id": 50, "name": "Austrian Bundesliga", "region": "Europe"},
+    {"id": 46, "name": "Danish Superliga", "region": "Europe"},
+    {"id": 67, "name": "Allsvenskan", "region": "Europe"},
+    {"id": 59, "name": "Norwegian Eliteserien", "region": "Europe"},
+    {"id": 43, "name": "Finnish Veikkausliiga", "region": "Europe"},
+    {"id": 58, "name": "Greek Super League", "region": "Europe"},
+    {"id": 60, "name": "Czech First League", "region": "Europe"},
+    {"id": 196, "name": "Polish Ekstraklasa", "region": "Europe"},
+    {"id": 135, "name": "Romanian Liga 1", "region": "Europe"},
+    {"id": 252, "name": "Croatian HNL", "region": "Europe"},
+    {"id": 231, "name": "Serbian SuperLiga", "region": "Europe"},
+    {"id": 133, "name": "Bulgarian First League", "region": "Europe"},
+    {"id": 270, "name": "Ukrainian Premier League", "region": "Europe"},
+    {"id": 212, "name": "Hungarian NB I", "region": "Europe"},
+    {"id": 173, "name": "Slovenian PrvaLiga", "region": "Europe"},
+    {"id": 229, "name": "Bosnian Premier League", "region": "Europe"},
+    {"id": 338, "name": "Macedonian First League", "region": "Europe"},
+    {"id": 260, "name": "Albanian Superliga", "region": "Europe"},
+    {"id": 215, "name": "Icelandic Úrvalsdeild", "region": "Europe"},
+    {"id": 226, "name": "Latvian Virsliga", "region": "Europe"},
+    {"id": 66, "name": "Lithuanian A Lyga", "region": "Europe"},
+    {"id": 248, "name": "Estonian Meistriliiga", "region": "Europe"},
+    {"id": 78, "name": "Faroe Islands Premier League", "region": "Europe"},
+    {"id": 250, "name": "Welsh Premier League", "region": "Europe"},
+    {"id": 262, "name": "Northern Irish Premiership", "region": "Europe"},
+    # ---- Europe: second divisions & cups ----
+    {"id": 82, "name": "English Championship", "region": "Europe"},
+    {"id": 83, "name": "English League One", "region": "Europe"},
+    {"id": 84, "name": "English League Two", "region": "Europe"},
+    {"id": 85, "name": "English National League", "region": "Europe"},
+    {"id": 140, "name": "LaLiga2", "region": "Europe"},
+    {"id": 8968, "name": "Primera Federación", "region": "Europe"},
+    {"id": 9138, "name": "Segunda Federación", "region": "Europe"},
+    {"id": 146, "name": "2. Bundesliga", "region": "Europe"},
+    {"id": 208, "name": "3. Liga", "region": "Europe"},
+    {"id": 86, "name": "Serie B", "region": "Europe"},
+    {"id": 147, "name": "Serie C", "region": "Europe"},
+    {"id": 185, "name": "Liga Portugal 2", "region": "Europe"},
+    {"id": 197, "name": "Polish I Liga", "region": "Europe"},
+    {"id": 8974, "name": "J. League 2", "region": "Europe"},
+    # ---- Europe: continental club competitions ----
+    {"id": 42, "name": "UEFA Champions League", "region": "International"},
+    {"id": 73, "name": "UEFA Europa League", "region": "International"},
+    {"id": 10615, "name": "UEFA Conference League", "region": "International"},
+    # ---- Europe: national teams ----
+    {"id": 9806, "name": "UEFA Nations League A", "region": "International"},
+    {"id": 9807, "name": "UEFA Nations League B", "region": "International"},
+    {"id": 9808, "name": "UEFA Nations League C", "region": "International"},
+    {"id": 9809, "name": "UEFA Nations League D", "region": "International"},
+    # ---- MENA: top-flight club leagues ----
     {"id": 536, "name": "Saudi Pro League", "region": "MENA"},
     {"id": 538, "name": "UAE Pro League", "region": "MENA"},
     {"id": 535, "name": "Qatar Stars League", "region": "MENA"},
     {"id": 519, "name": "Egyptian Premier League", "region": "MENA"},
     {"id": 530, "name": "Moroccan Botola Pro", "region": "MENA"},
-    {"id": 544, "name": "Tunisia Ligue Professionnelle 1", "region": "MENA"},
+    {"id": 544, "name": "Tunisian Ligue 1", "region": "MENA"},
+    {"id": 9372, "name": "Iranian Azadegan League", "region": "MENA"},
+    {"id": 523, "name": "Persian Gulf Pro League", "region": "MENA"},
+    {"id": 127, "name": "Israeli Ligat ha'Al", "region": "MENA"},
+    {"id": 176, "name": "Jordanian Pro League", "region": "MENA"},
+    {"id": 273, "name": "Omani League", "region": "MENA"},
+    {"id": 335, "name": "Bahraini Premier League", "region": "MENA"},
+    {"id": 337, "name": "Kuwaiti Premier League", "region": "MENA"},
+    {"id": 199, "name": "Lebanese Premier League", "region": "MENA"},
+    {"id": 274, "name": "Iraqi Premier League", "region": "MENA"},
+    {"id": 249, "name": "Syrian Premier League", "region": "MENA"},
+    {"id": 339, "name": "Palestinian Premier League", "region": "MENA"},
+    {"id": 533, "name": "Sudan Premier League", "region": "MENA"},
+    {"id": 336, "name": "Libyan Premier League", "region": "MENA"},
+    # ---- MENA: cups & second tiers ----
+    {"id": 9490, "name": "MENA Cup", "region": "MENA"},
+    {"id": 10195, "name": "World Cup Qualification UEFA", "region": "Europe"},
     # MENA - national teams
     {"id": 10608, "name": "Africa Cup of Nations Qualification", "region": "MENA"},
     {"id": 10196, "name": "World Cup Qualification CAF", "region": "MENA"},
     {"id": 10609, "name": "Asian Cup Qualification", "region": "MENA"},
     {"id": 10197, "name": "World Cup Qualification AFC", "region": "MENA"},
     {"id": 10198, "name": "World Cup Qualification CONCACAF", "region": "MENA"},
-    {"id": 523, "name": "Persian Gulf Pro League", "region": "MENA"},
-    {"id": 329, "name": "Arabian Gulf Cup (Khaleeji)", "region": "MENA"},
     # International friendlies (filtered to our regions by the data)
     {"id": 114, "name": "International Friendlies", "region": "International"},
 ]
 
 LEAGUE_BY_ID = {lg["id"]: lg for lg in LEAGUES}
+
+# MENA country keywords used to infer region for leagues not in LEAGUE_BY_ID.
+MENA_KEYWORDS = (
+    "saudi", "emirati", "uae", "qatar", "egypt", "egyptian", "morocco",
+    "moroccan", "tunisia", "tunisian", "algeria", "algerian", "jordan",
+    "oman", "bahrain", "kuwait", "lebanon", "iraqi", "iraq", "palestine",
+    "syria", "yemen", "libya", "libyan", "sudan", "israel", "israeli",
+    "iranian", "persian gulf", "azadegan",
+)
+
+
+def infer_region(league_id: int | None, league_name: str) -> str:
+    """Determine the region for a league.
+
+    Priority: explicit LEAGUE_BY_ID mapping  >  MENA name heuristic
+    >  default Europe.
+    """
+    if league_id is not None:
+        meta = LEAGUE_BY_ID.get(league_id)
+        if meta:
+            return meta["region"]
+    name_lower = (league_name or "").lower()
+    if any(kw in name_lower for kw in MENA_KEYWORDS):
+        return "MENA"
+    return "Europe"
 
 
 class FetchError(RuntimeError):
@@ -193,17 +281,20 @@ def normalise_match(ev: dict, league_id: int, league_name: str,
 
 
 def collect_day(client: Client, yyyymmdd: str) -> list[dict]:
-    """Return normalised matches for the given date, filtered to target leagues."""
+    """Return normalised matches for the given date, all competitions.
+
+    Every match in the day feed is captured, not just a hard-coded list.
+    Region is resolved via LEAGUE_BY_ID when available, otherwise via the
+    infer_region() heuristic (MENA name keywords, default Europe).
+    """
     data = client.day(yyyymmdd)
     out: list[dict] = []
     for lg in data.get("leagues") or []:
         lid = lg.get("primaryId")
-        meta = LEAGUE_BY_ID.get(lid)
-        if not meta:
-            continue
+        lname = lg.get("name") or ""
+        region = infer_region(lid, lname)
         for ev in lg.get("matches") or []:
-            out.append(normalise_match(ev, meta["id"], meta["name"],
-                                       meta["region"]))
+            out.append(normalise_match(ev, lid or 0, lname, region))
     out.sort(key=lambda m: (m["utc"] or "", m["league"], m["home"]))
     return out
 
@@ -290,7 +381,7 @@ def standings_rows(league_data: dict, group: str = "all",
 
 
 def group_by_region(matches: Iterable[dict]) -> dict[str, list[dict]]:
-    out: dict[str, list[dict]] = {"Europe": [], "MENA": []}
+    out: dict[str, list[dict]] = {"Europe": [], "MENA": [], "International": []}
     for m in matches:
         out.setdefault(m["region"], []).append(m)
     return out
