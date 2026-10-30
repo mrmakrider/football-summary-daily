@@ -230,6 +230,7 @@ def _match_card(m: dict, tz: dt.tzinfo, detail: bool = True) -> str:
     <article class="card">
       <header class="card-head">
         <span class="league">{esc(m['league'])}</span>
+        {f'<span class="country">{esc(m["country"])}</span>' if m.get("country") else ''}
         {badge}
         <span class="kickoff">{esc(_fmt_time(m.get('utc'), tz))}</span>
       </header>
@@ -276,9 +277,10 @@ def _standings_table(lg: dict, rows: list[dict], max_rows: int = 8,
             for x in legend if x.get("color") and x.get("title"))
         if chips:
             legend_html = f'<p class="legend">{chips}</p>'
+    country = f' <span class="country muted">{esc(lg["country"])}</span>' if lg.get("country") else ""
     return f"""
     <div class="standings">
-      <h3>{esc(lg['name'])}</h3>
+      <h3>{esc(lg['name'])}{country}</h3>
       <table class="tbl">
         <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
         <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
@@ -311,6 +313,11 @@ padding:14px}
 font-size:.75rem;color:var(--muted);flex-wrap:wrap}
 .league{color:var(--accent2);font-weight:600;text-transform:uppercase;
 letter-spacing:.04em}
+.country{color:#7dd3b0;font-weight:500;text-transform:capitalize;
+letter-spacing:0;padding:1px 8px;border:1px solid #1f3a2e;border-radius:999px;
+background:#142a1e;font-size:.68rem}
+.country.muted{color:var(--muted);border-color:var(--line);background:transparent;
+font-size:.75rem;padding:0}
 .badge{padding:1px 7px;border-radius:999px;font-size:.68rem;font-weight:700;
 background:#2a3346;color:#cbd5e1}
 .badge.ft{background:#14532d;color:#86efac}
@@ -517,8 +524,15 @@ def render_html(day_matches: list[dict], standings: list[tuple[dict, list]],
         order = [l["name"] for l in LEAGUES]
         for lg in sorted(by_league, key=lambda n: order.index(n)
                          if n in order else 99):
+            country = ""
+            for m in by_league[lg]:
+                if m.get("country"):
+                    country = m["country"]
+                    break
+            country_html = (f' <span class="country muted">{esc(country)}</span>'
+                            if country else "")
             rows.append(f'<tr class="fxgroup"><td colspan="2">'
-                        f'{esc(lg)}</td></tr>')
+                        f'{esc(lg)}{country_html}</td></tr>')
             for m in by_league[lg]:
                 rows.append(_fixture_row(m, tz))
         parts.append('<div class="standings"><table class="fx">'

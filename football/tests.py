@@ -28,7 +28,7 @@ import backfill  # noqa: E402
 # --------------------------------------------------------------------------
 DAY_FIXTURE = {
     "leagues": [
-        {"primaryId": 47, "name": "Premier League", "matches": [
+        {"primaryId": 47, "ccode": "ENG", "name": "Premier League", "matches": [
             {"id": 1, "leagueId": 47, "time": "20.09.2026 15:30",
              "home": {"id": 10, "name": "Arsenal", "score": 3},
              "away": {"id": 11, "name": "Chelsea", "score": 1},
@@ -38,14 +38,14 @@ DAY_FIXTURE = {
                         "scoreStr": "3 - 1",
                         "reason": {"short": "FT",
                                    "shortKey": "finished"}}}]},
-        {"primaryId": 536, "name": "Saudi Pro League", "matches": [
+        {"primaryId": 536, "ccode": "KSA", "name": "Saudi Pro League", "matches": [
             {"id": 2, "leagueId": 536, "time": "21.09.2026 19:00",
              "home": {"id": 20, "name": "Al Hilal", "score": None},
              "away": {"id": 21, "name": "Al Nassr", "score": None},
              "status": {"utcTime": "2026-09-21T16:00:00.000Z",
                         "finished": False, "started": False,
                         "cancelled": False, "awarded": False}}]},
-        {"primaryId": 9999, "name": "Untracked League", "matches": [
+        {"primaryId": 9999, "ccode": "FRA", "name": "Untracked League", "matches": [
             {"id": 3, "home": {"name": "A", "score": 1},
              "away": {"name": "B", "score": 0},
              "status": {"utcTime": "2026-09-20T14:30:00.000Z",
@@ -187,9 +187,12 @@ class TestFetching(unittest.TestCase):
         ms = {m["id"]: m for m in fotmob.collect_day(c, "20260920")}
         self.assertEqual(ms[1]["status"], "FT")
         self.assertEqual(ms[1]["region"], "Europe")
+        self.assertEqual(ms[1]["country"], "England")
         self.assertEqual(ms[2]["status"], "SCHEDULED")
         self.assertEqual(ms[2]["region"], "MENA")
+        self.assertEqual(ms[2]["country"], "Saudi Arabia")
         self.assertIsNone(ms[2]["homeScore"])
+        self.assertEqual(ms[3]["country"], "France")
 
     def test_scorers_sorted_and_cleaned(self):
         goals = fotmob.extract_scorers(DETAILS_FIXTURE)
@@ -310,6 +313,12 @@ class TestRendering(unittest.TestCase):
         self.assertIn("45+4", h)
         self.assertIn("45+4&#x27;", h)
         self.assertIn("Total shots", h)
+
+    def test_cards_show_country(self):
+        h = self.render()
+        self.assertIn("England", h)
+        self.assertIn("Saudi Arabia", h)
+        self.assertIn("France", h)
 
     def test_scorer_summary_folds_repeated_scorers(self):
         # A hat-trick must read "X 12, 40, 77", not "X, X, X".

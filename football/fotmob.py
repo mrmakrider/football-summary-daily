@@ -140,6 +140,74 @@ MENA_KEYWORDS = (
     "iranian", "persian gulf", "azadegan",
 )
 
+# ISO 3166-1 alpha-3 -> English country name, covering every ccode that
+# appears in FotMob league feeds (Europe, MENA and beyond).
+COUNTRY_NAMES: dict[str, str] = {
+    "AFG": "Afghanistan", "ALB": "Albania", "ALG": "Algeria",
+    "AND": "Andorra", "ANG": "Angola", "ARG": "Argentina",
+    "ARM": "Armenia", "AUS": "Australia", "AUT": "Austria",
+    "AZE": "Azerbaijan", "BHR": "Bahrain", "BDI": "Burundi",
+    "BEL": "Belgium", "BEN": "Benin", "BLR": "Belarus",
+    "BIH": "Bosnia and Herzegovina", "BOL": "Bolivia", "BOT": "Botswana",
+    "BRA": "Brazil", "BRU": "Brunei", "BUL": "Bulgaria",
+    "BFA": "Burkina Faso", "CAM": "Cambodia", "CAN": "Canada",
+    "CHI": "Chile", "CHN": "China", "COL": "Colombia",
+    "CRC": "Costa Rica", "CRO": "Croatia", "CUB": "Cuba",
+    "CYP": "Cyprus", "CZE": "Czechia", "COD": "DR Congo",
+    "DEN": "Denmark", "DJI": "Djibouti", "DOM": "Dominican Republic",
+    "ECU": "Ecuador", "EGY": "Egypt", "ENG": "England",
+    "EQG": "Equatorial Guinea", "ERI": "Eritrea", "EST": "Estonia",
+    "ESW": "Eswatini", "ETH": "Ethiopia", "FRO": "Faroe Islands",
+    "FIN": "Finland", "FRA": "France", "GAB": "Gabon",
+    "GAM": "Gambia", "GEO": "Georgia", "GER": "Germany",
+    "GHA": "Ghana", "GRE": "Greece", "GLP": "Guadeloupe",
+    "GUA": "Guatemala", "GUI": "Guinea", "GBS": "Guinea-Bissau",
+    "GUY": "Guyana", "HAI": "Haiti", "HON": "Honduras",
+    "HKG": "Hong Kong", "HUN": "Hungary", "ISL": "Iceland",
+    "IND": "India", "IDN": "Indonesia", "IRN": "Iran",
+    "IRQ": "Iraq", "IRL": "Ireland", "ISR": "Israel",
+    "ITA": "Italy", "CIV": "Ivory Coast", "JAM": "Jamaica",
+    "JPN": "Japan", "JOR": "Jordan", "KAZ": "Kazakhstan",
+    "KEN": "Kenya", "KUW": "Kuwait", "KGZ": "Kyrgyzstan",
+    "LAO": "Laos", "LVA": "Latvia", "LBN": "Lebanon",
+    "LES": "Lesotho", "LBR": "Liberia", "LBY": "Libya",
+    "LTU": "Lithuania", "LUX": "Luxembourg", "MAD": "Madagascar",
+    "MWI": "Malawi", "MAS": "Malaysia", "MDV": "Maldives",
+    "MLI": "Mali", "MLT": "Malta", "MTN": "Mauritania",
+    "MRI": "Mauritius", "MEX": "Mexico", "MDA": "Moldova",
+    "MNG": "Mongolia", "MNE": "Montenegro", "MAR": "Morocco",
+    "MOZ": "Mozambique", "MYA": "Myanmar", "NAM": "Namibia",
+    "NED": "Netherlands", "NZL": "New Zealand", "NCA": "Nicaragua",
+    "NIG": "Niger", "NGA": "Nigeria", "MKD": "North Macedonia",
+    "NIR": "Northern Ireland", "NOR": "Norway", "OMA": "Oman",
+    "PAK": "Pakistan", "PAN": "Panama", "PNG": "Papua New Guinea",
+    "PAR": "Paraguay", "PER": "Peru", "PHI": "Philippines",
+    "POL": "Poland", "POR": "Portugal", "QAT": "Qatar",
+    "CGO": "Republic of the Congo", "ROU": "Romania", "RUS": "Russia",
+    "RWA": "Rwanda", "KSA": "Saudi Arabia", "SCO": "Scotland",
+    "SEN": "Senegal", "SRB": "Serbia", "SEY": "Seychelles",
+    "SLE": "Sierra Leone", "SIN": "Singapore", "SVK": "Slovakia",
+    "SVN": "Slovenia", "SOL": "Solomon Islands", "SOM": "Somalia",
+    "RSA": "South Africa", "KOR": "South Korea", "SSD": "South Sudan",
+    "ESP": "Spain", "SRI": "Sri Lanka", "SDN": "Sudan",
+    "SUR": "Suriname", "SWE": "Sweden", "SUI": "Switzerland",
+    "SYR": "Syria", "TPE": "Taiwan", "TJK": "Tajikistan",
+    "TAN": "Tanzania", "THA": "Thailand", "TGO": "Togo",
+    "TRI": "Trinidad and Tobago", "TUN": "Tunisia", "TUR": "Türkiye",
+    "TKM": "Turkmenistan", "UGA": "Uganda", "UKR": "Ukraine",
+    "UAE": "United Arab Emirates", "USA": "USA", "URU": "Uruguay",
+    "UZB": "Uzbekistan", "VAN": "Vanuatu", "VEN": "Venezuela",
+    "VIE": "Vietnam", "WAL": "Wales", "YEM": "Yemen",
+    "ZAM": "Zambia", "ZIM": "Zimbabwe",
+}
+
+
+def country_name(ccode: str | None) -> str:
+    """Return the English country name for a FotMob ccode (or '' if unknown)."""
+    if not ccode:
+        return ""
+    return COUNTRY_NAMES.get(str(ccode).upper(), "")
+
 
 def infer_region(league_id: int | None, league_name: str) -> str:
     """Determine the region for a league.
@@ -258,7 +326,7 @@ def _status(ev: dict) -> str:
 
 
 def normalise_match(ev: dict, league_id: int, league_name: str,
-                    league_region: str) -> dict:
+                    league_region: str, ccode: str | None = None) -> dict:
     st = ev.get("status") or {}
     utc = st.get("utcTime")
     home = ev.get("home") or {}
@@ -268,6 +336,8 @@ def normalise_match(ev: dict, league_id: int, league_name: str,
         "leagueId": league_id,
         "league": league_name,
         "region": league_region,
+        "ccode": (ccode or "").upper(),
+        "country": country_name(ccode),
         "utc": utc,
         "home": home.get("name") or home.get("longName") or "Home",
         "away": away.get("name") or away.get("longName") or "Away",
@@ -292,9 +362,10 @@ def collect_day(client: Client, yyyymmdd: str) -> list[dict]:
     for lg in data.get("leagues") or []:
         lid = lg.get("primaryId")
         lname = lg.get("name") or ""
+        ccode = lg.get("ccode")
         region = infer_region(lid, lname)
         for ev in lg.get("matches") or []:
-            out.append(normalise_match(ev, lid or 0, lname, region))
+            out.append(normalise_match(ev, lid or 0, lname, region, ccode))
     out.sort(key=lambda m: (m["utc"] or "", m["league"], m["home"]))
     return out
 

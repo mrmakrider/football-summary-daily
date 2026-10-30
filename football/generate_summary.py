@@ -208,6 +208,8 @@ def load_standings(client: Client, per_region: int) -> list[tuple[dict, list]]:
         if rows:
             entry = dict(lg)
             entry["legend"] = fotmob.extract_standings(data).get("legend", [])
+            entry["country"] = fotmob.country_name(
+                fotmob.extract_standings(data).get("ccode"))
             out.append((entry, rows))
             counts[region] = counts.get(region, 0) + 1
     return out
