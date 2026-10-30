@@ -1,0 +1,37 @@
+name: Daily football summary
+
+on:
+  schedule:
+    # 00:30 UTC = 03:30 UTC+3, shortly after the on-device 03:00 run so the
+    # two never collide; --skip-if-exists avoids double work.
+    - cron: "30 0 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-football
+  cancel-in-progress: false
+
+jobs:
+  generate-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Generate today's summary and push to GitHub Pages
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 football/generate_summary.py \
+            --out summaries \
+            --standings 6 \
+            --max-detail 20 \
+            --skip-if-exists \
+            --push
