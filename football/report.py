@@ -226,8 +226,9 @@ def _match_card(m: dict, tz: dt.tzinfo, detail: bool = True) -> str:
         pen_block = (f'<p class="pens">{esc(winner)} beat {esc(loser)} '
                      f'<b>{esc(pens[0])} &ndash; {esc(pens[1])}</b> '
                      f'on penalties</p>')
+    country_attr = esc(m.get("country")) if m.get("country") else ""
     return f"""
-    <article class="card">
+    <article class="card" data-country="{country_attr}">
       <header class="card-head">
         <span class="league">{esc(m['league'])}</span>
         {f'<span class="country">{esc(m["country"])}</span>' if m.get("country") else ''}
@@ -278,8 +279,9 @@ def _standings_table(lg: dict, rows: list[dict], max_rows: int = 8,
         if chips:
             legend_html = f'<p class="legend">{chips}</p>'
     country = f' <span class="country muted">{esc(lg["country"])}</span>' if lg.get("country") else ""
+    country_attr = esc(lg.get("country")) if lg.get("country") else ""
     return f"""
-    <div class="standings">
+    <div class="standings" data-country="{country_attr}">
       <h3>{esc(lg['name'])}{country}</h3>
       <table class="tbl">
         <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
@@ -403,6 +405,17 @@ display:flex;flex-wrap:wrap;gap:4px 10px}
 .small{font-size:.8rem}
 .empty{background:var(--card);border:1px dashed var(--line);border-radius:12px;
 padding:18px;color:var(--muted)}
+.filterbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+background:var(--card);border:1px solid var(--line);border-radius:12px;
+padding:10px 14px;margin-bottom:4px;position:sticky;top:8px;z-index:5;
+backdrop-filter:blur(6px)}
+.filterbar label{font-size:.85rem;font-weight:600;color:var(--muted)}
+.filterbar select{background:var(--card2);color:var(--fg);border:1px solid var(--line);
+border-radius:8px;padding:6px 10px;font-size:.88rem;min-width:170px}
+.filterbar .muted{font-size:.8rem}
+@media (max-width:640px){
+ .filterbar select{flex:1;min-width:0}
+}
 footer.page{margin-top:36px;padding:16px;border-top:1px solid var(--line);
 color:var(--muted);font-size:.78rem}
 a{color:var(--accent2)}
@@ -471,7 +484,22 @@ def render_html(day_matches: list[dict], standings: list[tuple[dict, list]],
 {len(finished)} completed, {len(live)} live, {len(upcoming)} upcoming
 &middot; Europe · MENA · International</p>
 </div></header>
-<div class="wrap">""")
+	<div class="wrap">""")
+
+    countries = sorted({m.get("country") for m in finished + live if m.get("country")})
+    opts = "".join(f'<option value="{esc(c)}">{esc(c)}</option>'
+                   for c in countries)
+    parts.append(f"""
+<div class="filterbar">
+  <label for="country-filter">🌍 Filter by country</label>
+  <select id="country-filter">
+    <option value="all">All countries</option>
+    {opts}
+  </select>
+  <span id="filter-count" class="muted small"></span>
+</div>
+<div id="filter-empty" class="empty" hidden>No matches for the selected country.</div>
+""")
 
     for region in REGION_ORDER:
         ms = regions.get(region, [])
@@ -562,5 +590,33 @@ tables from the data provider.</p>
 <p>Match insight lines are auto-generated from scoreline, goal and stat data.
 Generated automatically &middot; this page is informational only.</p>
 </footer>
-</div></body></html>""")
+</div>
+<script>
+(function () {{
+  var filter = document.getElementById('country-filter');
+  if (!filter) return;
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var blocks = Array.prototype.slice.call(document.querySelectorAll('.standings'));
+  var empty = document.getElementById('filter-empty');
+  var count = document.getElementById('filter-count');
+  function apply() {{
+    var v = filter.value;
+    var shown = 0;
+    cards.forEach(function (c) {{
+      var match = (v === 'all') || (c.getAttribute('data-country') === v);
+      c.style.display = match ? '' : 'none';
+      if (match) shown += 1;
+    }});
+    blocks.forEach(function (b) {{
+      var match = (v === 'all') || (b.getAttribute('data-country') === v);
+      b.style.display = match ? '' : 'none';
+    }});
+    empty.hidden = (v === 'all') || shown > 0;
+    count.textContent = (v === 'all') ? '' : (shown + ' match' + (shown === 1 ? '' : 'es'));
+  }}
+  filter.addEventListener('change', apply);
+  apply();
+}})();
+</script>
+</body></html>""")
     return "".join(parts)

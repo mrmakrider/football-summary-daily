@@ -320,6 +320,19 @@ class TestRendering(unittest.TestCase):
         self.assertIn("Saudi Arabia", h)
         self.assertIn("France", h)
 
+    def test_country_filter_bar_present(self):
+        h = self.render()
+        self.assertIn('<select id="country-filter">', h)
+        self.assertIn('<option value="all">All countries</option>', h)
+        self.assertIn('<option value="England">England</option>', h)
+        self.assertIn('<option value="France">France</option>', h)
+        # Scheduled (upcoming) matches are not in the results filter: the
+        # Saudi match is only in the fixtures table, not the filter options.
+        self.assertNotIn('<option value="Saudi Arabia">', h)
+        self.assertIn('data-country="England"', h)
+        self.assertIn('data-country="France"', h)
+        self.assertIn("filter.addEventListener('change', apply)", h)
+
     def test_scorer_summary_folds_repeated_scorers(self):
         # A hat-trick must read "X 12, 40, 77", not "X, X, X".
         goals = [
