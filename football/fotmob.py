@@ -105,7 +105,6 @@ LEAGUES: list[dict[str, Any]] = [
     {"id": 544, "name": "Tunisian Ligue 1", "region": "MENA"},
     {"id": 9372, "name": "Iranian Azadegan League", "region": "MENA"},
     {"id": 523, "name": "Persian Gulf Pro League", "region": "MENA"},
-    {"id": 127, "name": "Israeli Ligat ha'Al", "region": "MENA"},
     {"id": 176, "name": "Jordanian Pro League", "region": "MENA"},
     {"id": 273, "name": "Omani League", "region": "MENA"},
     {"id": 335, "name": "Bahraini Premier League", "region": "MENA"},
@@ -136,9 +135,14 @@ MENA_KEYWORDS = (
     "saudi", "emirati", "uae", "qatar", "egypt", "egyptian", "morocco",
     "moroccan", "tunisia", "tunisian", "algeria", "algerian", "jordan",
     "oman", "bahrain", "kuwait", "lebanon", "iraqi", "iraq", "palestine",
-    "syria", "yemen", "libya", "libyan", "sudan", "israel", "israeli",
+    "syria", "yemen", "libya", "libyan", "sudan",
     "iranian", "persian gulf", "azadegan",
 )
+
+# Country codes (ISO 3166-1 alpha-3) whose competitions are excluded from
+# the summary entirely: their matches never appear, and they get no
+# standings block or filter option.
+EXCLUDED_CCODES: frozenset[str] = frozenset({"ISR"})
 
 # ISO 3166-1 alpha-3 -> English country name, covering every ccode that
 # appears in FotMob league feeds (Europe, MENA and beyond).
@@ -363,6 +367,8 @@ def collect_day(client: Client, yyyymmdd: str) -> list[dict]:
         lid = lg.get("primaryId")
         lname = lg.get("name") or ""
         ccode = lg.get("ccode")
+        if ccode and str(ccode).upper() in EXCLUDED_CCODES:
+            continue
         region = infer_region(lid, lname)
         for ev in lg.get("matches") or []:
             out.append(normalise_match(ev, lid or 0, lname, region, ccode))

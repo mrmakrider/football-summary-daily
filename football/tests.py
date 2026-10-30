@@ -139,9 +139,10 @@ def _shootout_match():
 class FakeOpener:
     """Serves the fixtures above and records every requested URL."""
 
-    def __init__(self, fail_times=0):
+    def __init__(self, fail_times=0, payload=None):
         self.urls = []
         self.fail_times = fail_times
+        self.payload = payload or {}
 
     def __call__(self, req, timeout=None):
         url = req.full_url
@@ -150,7 +151,7 @@ class FakeOpener:
             self.fail_times -= 1
             raise OSError("simulated network error")
         if "matches?date=" in url:
-            return FakeResponse(DAY_FIXTURE)
+            return FakeResponse(self.payload.get("matches?date=", DAY_FIXTURE))
         if "matchDetails" in url:
             return FakeResponse(DETAILS_FIXTURE)
         if "leagues?id=" in url:
@@ -181,6 +182,31 @@ class TestFetching(unittest.TestCase):
         self.assertEqual(regions[1], "Europe")
         self.assertEqual(regions[2], "MENA")
         self.assertEqual(regions[3], "Europe")
+
+    def test_collect_day_excludes_israel(self):
+        payload = {"leagues": [
+            {"primaryId": 420, "ccode": "ISR", "name": "Israeli Ligat ha'Al",
+             "matches": [
+                 {"id": 91, "home": {"name": "Maccabi Haifa", "score": 2},
+                  "away": {"name": "Hapoel Tel Aviv", "score": 1},
+                  "status": {"utcTime": "2026-09-20T14:30:00.000Z",
+                             "finished": True, "started": True,
+                             "reason": {"shortKey": "finished"}}}]},
+            {"primaryId": 47, "ccode": "ENG", "name": "Premier League",
+             "matches": [
+                 {"id": 92, "home": {"name": "Arsenal", "score": 1},
+                  "away": {"name": "Chelsea", "score": 1},
+                  "status": {"utcTime": "2026-09-20T14:30:00.000Z",
+                             "finished": True, "started": True,
+                             "reason": {"shortKey": "finished"}}}]},
+        ]}
+        opener = FakeOpener(payload={"matches?date=": payload})
+        c = fotmob.Client(sleep=lambda _s: None, opener=opener, pause=0)
+        ms = fotmob.collect_day(c, "20260920")
+        ids = {m["id"] for m in ms}
+        self.assertNotIn(91, ids, "Israeli league must be excluded")
+        self.assertIn(92, ids)
+        self.assertTrue(all(m.get("country") != "Israel" for m in ms))
 
     def test_normalise_status_and_region(self):
         c, _ = make_client()

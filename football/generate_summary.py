@@ -392,7 +392,7 @@ footer a{{color:var(--accent2)}}
         </div>
         <div class="region">
           <h3>MENA (club)</h3>
-          <p>Saudi Pro League, Saudi First Division, UAE Pro League, Qatar Stars League, Egyptian Premier League, Moroccan Botola Pro, Tunisian Ligue 1, Iranian Persian Gulf Pro League, Iranian Azadegan League, Israeli Ligat ha'Al, Jordanian Pro League, Omani League, Bahraini Premier League, Kuwaiti Premier League, Lebanese Premier League, Iraqi Premier League, Syrian Premier League, Palestinian Premier League, Sudan Premier League, Libyan Premier League, and MENA cups.</p>
+          <p>Saudi Pro League, Saudi First Division, UAE Pro League, Qatar Stars League, Egyptian Premier League, Moroccan Botola Pro, Tunisian Ligue 1, Iranian Persian Gulf Pro League, Iranian Azadegan League, Jordanian Pro League, Omani League, Bahraini Premier League, Kuwaiti Premier League, Lebanese Premier League, Iraqi Premier League, Syrian Premier League, Palestinian Premier League, Sudan Premier League, Libyan Premier League, and MENA cups.</p>
         </div>
         <div class="region">
           <h3>MENA (national)</h3>
