@@ -1,0 +1,2680 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Football Daily Summary &ndash; 06 November 2026</title>
+<style>
+:root{--bg:#0e1117;--card:#161b25;--card2:#1c2230;--fg:#e8ecf3;--muted:#93a1b5;
+--accent:#4ade80;--accent2:#60a5fa;--line:#242c3a;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+line-height:1.5;}
+.wrap{max-width:1080px;margin:0 auto;padding:16px}
+header.page{background:linear-gradient(135deg,#16233c,#0e1117);padding:28px 16px;
+border-bottom:1px solid var(--line)}
+header.page .wrap{padding-bottom:4px}
+h1{margin:0 0 6px;font-size:1.6rem;letter-spacing:-.02em}
+.sub{color:var(--muted);margin:0;font-size:.95rem}
+h2{font-size:1.2rem;margin:28px 0 12px;padding-bottom:6px;
+border-bottom:1px solid var(--line)}
+h2 .count{color:var(--muted);font-size:.85rem;font-weight:400;margin-left:8px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+padding:14px}
+.card-head{display:flex;align-items:center;gap:8px;margin-bottom:10px;
+font-size:.75rem;color:var(--muted);flex-wrap:wrap}
+.league{color:var(--accent2);font-weight:600;text-transform:uppercase;
+letter-spacing:.04em}
+.country{color:#7dd3b0;font-weight:500;text-transform:capitalize;
+letter-spacing:0;padding:1px 8px;border:1px solid #1f3a2e;border-radius:999px;
+background:#142a1e;font-size:.68rem}
+.country.muted{color:var(--muted);border-color:var(--line);background:transparent;
+font-size:.75rem;padding:0}
+.badge{padding:1px 7px;border-radius:999px;font-size:.68rem;font-weight:700;
+background:#2a3346;color:#cbd5e1}
+.badge.ft{background:#14532d;color:#86efac}
+.badge.live{background:#7f1d1d;color:#fecaca}
+.badge.pen,.badge.aet{background:#4a2a0b;color:#fdba74}
+.pens{display:inline-block;margin:0 0 6px;padding:2px 9px;border-radius:8px;
+font-size:.78rem;background:#3a2410;color:#fdba74;font-weight:600;
+font-variant-numeric:tabular-nums}
+.pens b{color:#fff}
+.kickoff{margin-left:auto}
+/* Match highlights + player of the match, shown below the scoreline when
+   FotMob carries them (a minority of matches). */
+.extras{display:flex;flex-wrap:wrap;align-items:center;gap:8px;
+margin:8px 0 0;font-size:.8rem}
+.hl{display:inline-flex;align-items:center;gap:8px;background:#1c2230;
+border:1px solid var(--line);border-radius:10px;padding:4px 8px 4px 4px;
+color:var(--fg);text-decoration:none;transition:border-color .15s}
+.hl:hover{border-color:var(--accent2)}
+.hl img{width:64px;height:36px;object-fit:cover;border-radius:6px}
+.hl-cap{color:var(--muted)}
+.hl-tag{background:#7f1d1d;color:#fecaca;font-size:.62rem;font-weight:700;
+padding:1px 6px;border-radius:999px;letter-spacing:.03em}
+.potm{color:var(--accent);font-weight:600}
+.potm b{color:var(--fg)}
+/* Home / score / away share one column grid, so a long club name can never
+   push the score onto its own line or duplicate it. */
+.scorebox{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+gap:2px 10px;margin:0 0 2px}
+.scorebox .tname{font-weight:600;min-width:0;overflow-wrap:break-word}
+/* The away name is the second <span class="tname">, i.e. the 3rd grid child. */
+.scorebox .tname:nth-child(3){text-align:right}
+@media (max-width:400px){
+ .scorebox{grid-template-columns:1fr;gap:2px;text-align:center}
+ .scorebox .tname:nth-child(3){text-align:center}
+ .scorebox .sc{justify-self:center}
+}
+.scorebox .sc{font-variant-numeric:tabular-nums;font-weight:700;
+background:var(--card2);padding:2px 10px;border-radius:6px;min-width:62px;
+text-align:center}
+.scorebox.pending .sc{color:var(--muted);font-weight:400}
+.badge.tally{background:#1e3a5f;color:#93c5fd;padding:0 5px;font-size:.7rem;
+margin-left:2px}
+.meta{color:var(--muted);font-size:.78rem;margin:8px 0 0}
+.insight{margin:8px 0 0;font-size:.85rem;color:#cbd5e1;border-left:3px solid var(--accent);
+padding-left:8px}
+.scorers{list-style:none;margin:10px 0 0;padding:0;font-size:.85rem}
+.scorer{display:flex;gap:8px;padding:2px 0}
+.min{color:var(--muted);min-width:34px;text-align:right;
+font-variant-numeric:tabular-nums}
+.assist{color:var(--muted);font-size:.95em}
+.statgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:4px 12px;
+margin-top:10px;font-size:.8rem}
+.stat{display:flex;align-items:center;gap:6px}
+.stat .sv{min-width:26px;text-align:right;font-variant-numeric:tabular-nums;
+color:#cbd5e1}
+.stat .st{flex:1;text-align:center;color:var(--muted);font-size:.72rem}
+table.tbl,table.fx{width:100%;border-collapse:collapse;font-size:.83rem}
+table.tbl th{color:var(--muted);font-weight:600;font-size:.72rem;text-align:right;
+padding:4px 6px;border-bottom:1px solid var(--line);white-space:nowrap}
+table.tbl th:nth-child(2),table.tbl td.tm{text-align:left}
+table.tbl td{padding:4px 6px;text-align:right;border-bottom:1px solid #1e2534;
+font-variant-numeric:tabular-nums;white-space:nowrap}
+table.tbl td.pos{width:26px;min-width:26px}
+table.tbl td.tm{min-width:130px;white-space:normal}
+table.tbl td.pts{font-weight:700;color:var(--accent)}
+table.tbl tr:nth-child(even){background:#131824}
+.dot{display:inline-block;width:7px;height:7px;border-radius:2px;
+margin-left:4px;vertical-align:middle}
+.standings{background:var(--card);border:1px solid var(--line);border-radius:12px;
+padding:12px;overflow-x:auto}
+.standings h3{margin:0 0 8px;font-size:.95rem}
+.standings-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+gap:12px}
+table.fx td{padding:6px 8px;border-bottom:1px solid #1e2534}
+tr.fxgroup td{color:var(--accent2);font-size:.75rem;font-weight:600;
+text-transform:uppercase;letter-spacing:.04em;padding-top:12px}
+.fx-time{color:var(--muted);font-size:.78rem;white-space:nowrap;width:90px}
+.fx-teams{font-weight:600}
+.legend{margin:8px 0 0;font-size:.7rem;color:var(--muted);
+display:flex;flex-wrap:wrap;gap:4px 10px}
+.chip{display:inline-flex;align-items:center;gap:4px}
+.muted{color:var(--muted)}
+.small{font-size:.8rem}
+.empty{background:var(--card);border:1px dashed var(--line);border-radius:12px;
+padding:18px;color:var(--muted)}
+.filterbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+background:var(--card);border:1px solid var(--line);border-radius:12px;
+padding:10px 14px;margin-bottom:4px;position:sticky;top:8px;z-index:5;
+backdrop-filter:blur(6px)}
+.filterbar label{font-size:.85rem;font-weight:600;color:var(--muted)}
+.filterbar select{background:var(--card2);color:var(--fg);border:1px solid var(--line);
+border-radius:8px;padding:6px 10px;font-size:.88rem;min-width:170px}
+.filterbar .muted{font-size:.8rem}
+@media (max-width:640px){
+ .filterbar select{flex:1;min-width:0}
+}
+footer.page{margin-top:36px;padding:16px;border-top:1px solid var(--line);
+color:var(--muted);font-size:.78rem}
+a{color:var(--accent2)}
+@media (max-width:640px){
+ header.page h1{font-size:1.3rem}
+ .cards{grid-template-columns:1fr}
+ .wrap{padding:12px}
+ .statgrid{grid-template-columns:1fr}
+ .standings{padding:10px}
+ table.tbl{font-size:.76rem}
+ table.tbl td,table.tbl th{padding:4px 3px}
+ table.tbl td.tm{min-width:96px}
+ .fx-teams{font-size:.9rem}
+}
+</style>
+</head><body>
+<header class="page"><div class="wrap">
+<h1>&#9917; Football Daily Summary</h1>
+<p class="sub">Friday 06 November 2026 &middot; generated 07:12 UTC &middot;
+97 completed, 0 live, 225 upcoming
+&middot; Europe · MENA · International</p>
+</div></header>
+	<div class="wrap">
+<div class="filterbar">
+  <label for="country-filter">🌍 Filter by country</label>
+  <select id="country-filter">
+    <option value="all">All countries</option>
+    <option value="Argentina">Argentina</option><option value="Australia">Australia</option><option value="Brazil">Brazil</option><option value="Chile">Chile</option><option value="Colombia">Colombia</option><option value="Costa Rica">Costa Rica</option><option value="Cyprus">Cyprus</option><option value="Egypt">Egypt</option><option value="France">France</option><option value="Honduras">Honduras</option><option value="India">India</option><option value="Iran">Iran</option><option value="Iraq">Iraq</option><option value="Mexico">Mexico</option><option value="Paraguay">Paraguay</option><option value="Peru">Peru</option><option value="Qatar">Qatar</option><option value="Romania">Romania</option><option value="Russia">Russia</option><option value="Uruguay">Uruguay</option><option value="Uzbekistan">Uzbekistan</option>
+  </select>
+  <span id="filter-count" class="muted small"></span>
+</div>
+<div id="filter-empty" class="empty" hidden>No matches for the selected country.</div>
+<h2>Results &middot; Europe<span class="count">69 matches</span></h2><div class="cards">
+    <article class="card" data-country="Uruguay">
+      <header class="card-head">
+        <span class="league">Cup</span>
+        <span class="country">Uruguay</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 00:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Ferro Carril</span><span class="sc">1 &ndash; 2</span><span class="tname">Nacional</span></span>
+      
+      
+      <p class="insight">Nacional edged it by a single goal against Ferro Carril.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">6&#x27;</span><span class="pname">Maximiliano Silvera <span class="badge tally" title="multiple goals">2&times;</span></span></li><li class="scorer"><span class="min">20&#x27;</span><span class="pname">Maximiliano Silvera <span class="badge tally" title="multiple goals">2&times;</span></span></li><li class="scorer"><span class="min">45&#x27;</span><span class="pname">Natanael Tabarez</span></li></ul>
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="Egypt">
+      <header class="card-head">
+        <span class="league">Cup</span>
+        <span class="country">Egypt</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 12:30</span>
+      </header>
+      <span class="scorebox final"><span class="tname">El Gouna FC</span><span class="sc">4 &ndash; 1</span><span class="tname">Ittihad Al Shorta</span></span>
+      
+      
+      <p class="insight">El Gouna FC produced a comprehensive 3-goal victory over Ittihad Al Shorta.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="Egypt">
+      <header class="card-head">
+        <span class="league">Cup</span>
+        <span class="country">Egypt</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 15:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">National Bank</span><span class="sc">4 &ndash; 1</span><span class="tname">Bur Fouad</span></span>
+      
+      
+      <p class="insight">National Bank produced a comprehensive 3-goal victory over Bur Fouad.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="Russia">
+      <header class="card-head">
+        <span class="league">Cup</span>
+        <span class="country">Russia</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 16:30</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Volga Ulyanovsk</span><span class="sc">5 &ndash; 1</span><span class="tname">Chertanovo Moscow</span></span>
+      
+      
+      <p class="insight">Volga Ulyanovsk produced a comprehensive 4-goal victory over Chertanovo Moscow. It was a high-scoring thriller.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="Cyprus">
+      <header class="card-head">
+        <span class="league">Cup</span>
+        <span class="country">Cyprus</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 18:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Omonia 29 Maiou</span><span class="sc">6 &ndash; 2</span><span class="tname">AEP Polemidion</span></span>
+      
+      
+      <p class="insight">Omonia 29 Maiou produced a comprehensive 4-goal victory over AEP Polemidion. It was a high-scoring thriller.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="Uruguay">
+      <header class="card-head">
+        <span class="league">Cup</span>
+        <span class="country">Uruguay</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 19:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">CA Lito</span><span class="sc">4 &ndash; 0</span><span class="tname">Montevideo Wanderers</span></span>
+      
+      
+      <p class="insight">CA Lito produced a comprehensive 4-goal victory over Montevideo Wanderers.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="Uruguay">
+      <header class="card-head">
+        <span class="league">Cup</span>
+        <span class="country">Uruguay</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 21:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Gladiador</span><span class="sc">0 &ndash; 2</span><span class="tname">Liverpool FC</span></span>
+      
+      
+      <p class="insight">Liverpool FC beat Gladiador by two goals.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="Chile">
+      <header class="card-head">
+        <span class="league">Cup</span>
+        <span class="country">Chile</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 22:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Universidad de Chile</span><span class="sc">4 &ndash; 0</span><span class="tname">Antofagasta</span></span>
+      
+      
+      <p class="insight">Universidad de Chile produced a comprehensive 4-goal victory over Antofagasta.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="Uruguay">
+      <header class="card-head">
+        <span class="league">Cup</span>
+        <span class="country">Uruguay</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Fri 06 Nov · 00:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">CA Libertad</span><span class="sc">0 &ndash; 6</span><span class="tname">Montevideo City Torque</span></span>
+      
+      
+      <p class="insight">Montevideo City Torque produced a comprehensive 6-goal victory over CA Libertad. It was a high-scoring thriller.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="Costa Rica">
+      <header class="card-head">
+        <span class="league">Primera Division Apertura</span>
+        <span class="country">Costa Rica</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 00:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Puntarenas FC</span><span class="sc">0 &ndash; 1</span><span class="tname">Deportiva San Carlos</span></span>
+      
+      
+      <p class="insight">Deportiva San Carlos edged it by a single goal against Puntarenas FC. In a low-scoring affair.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">28&#x27;</span><span class="pname">Raúl Vidal <span class="assist">(ast. Kenneth Cerdas)</span></span></li></ul>
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="Costa Rica">
+      <header class="card-head">
+        <span class="league">Primera Division Apertura</span>
+        <span class="country">Costa Rica</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 02:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Escorpiones</span><span class="sc">1 &ndash; 4</span><span class="tname">LD Alajuelense</span></span>
+      
+      
+      <p class="insight">LD Alajuelense produced a comprehensive 3-goal victory over Escorpiones.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">24&#x27;</span><span class="pname">Yeison Molina (OG)</span></li><li class="scorer"><span class="min">25&#x27;</span><span class="pname">Ronaldo Cisneros</span></li><li class="scorer"><span class="min">77&#x27;</span><span class="pname">Ángel Zaldívar <span class="assist">(ast. Luis Díaz)</span></span></li><li class="scorer"><span class="min">90+3&#x27;</span><span class="pname">Juan Añor <span class="badge tally" title="multiple goals">2&times;</span></span></li><li class="scorer"><span class="min">90+5&#x27;</span><span class="pname">Juan Añor <span class="badge tally" title="multiple goals">2&times;</span></span></li></ul>
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="Costa Rica">
+      <header class="card-head">
+        <span class="league">Primera Division Apertura</span>
+        <span class="country">Costa Rica</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 23:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Inter San Carlos</span><span class="sc">1 &ndash; 1</span><span class="tname">C.S. Cartaginés</span></span>
+      
+      
+      <p class="insight">Honours were even in a draw.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="Costa Rica">
+      <header class="card-head">
+        <span class="league">Primera Division Apertura</span>
+        <span class="country">Costa Rica</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Fri 06 Nov · 02:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Club Sport Herediano</span><span class="sc">0 &ndash; 2</span><span class="tname">Deportivo Saprissa</span></span>
+      
+      
+      <p class="insight">Deportivo Saprissa beat Club Sport Herediano by two goals.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="Brazil">
+      <header class="card-head">
+        <span class="league">Série A</span>
+        <span class="country">Brazil</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 00:30</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Botafogo</span><span class="sc">1 &ndash; 0</span><span class="tname">Atlético-MG</span></span>
+      
+      <p class="meta">Estádio Olímpico Nilton Santos</p>
+      <p class="insight">Botafogo edged it by a single goal against Atlético-MG. In a low-scoring affair. Shot count 13-13 favoured Botafogo.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">19&#x27;</span><span class="pname">Edenílson <span class="assist">(ast. Vitinho)</span></span></li></ul>
+      <div class="extras"><a class="hl" href="https://www.youtube.com/watch?v=gKOpbYV0CVw" target="_blank" rel="noopener noreferrer"><span class="hl-tag">▶ Highlights</span><img src="https://i.ytimg.com/vi/gKOpbYV0CVw/maxresdefault.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"><span class="hl-cap">Watch full highlights</span></a><span class="potm">⭐ Player of the match: <b>Vitinho</b> · Botafogo (7.9)</span></div>
+      <div class="statgrid"><div class="stat"><span class="sv">32</span><span class="st">Ball possession</span><span class="sv">68</span></div><div class="stat"><span class="sv">1.68</span><span class="st">Expected goals (xG)</span><span class="sv">0.37</span></div><div class="stat"><span class="sv">13</span><span class="st">Total shots</span><span class="sv">13</span></div><div class="stat"><span class="sv">3</span><span class="st">Shots on target</span><span class="sv">3</span></div><div class="stat"><span class="sv">19</span><span class="st">Touches in opposition box</span><span class="sv">20</span></div><div class="stat"><span class="sv">3</span><span class="st">Big chances</span><span class="sv">0</span></div><div class="stat"><span class="sv">2</span><span class="st">Big chances missed</span><span class="sv">0</span></div><div class="stat"><span class="sv">243 (79%)</span><span class="st">Accurate passes</span><span class="sv">588 (91%)</span></div><div class="stat"><span class="sv">2</span><span class="st">Yellow cards</span><span class="sv">2</span></div><div class="stat"><span class="sv">4</span><span class="st">Corners</span><span class="sv">4</span></div></div>
+    </article>
+    <article class="card" data-country="Brazil">
+      <header class="card-head">
+        <span class="league">Série A</span>
+        <span class="country">Brazil</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 00:30</span>
+      </header>
+      <span class="scorebox final"><span class="tname">São Paulo</span><span class="sc">0 &ndash; 0</span><span class="tname">Corinthians</span></span>
+      
+      <p class="meta">Estádio Urbano Caldeira</p>
+      <p class="insight">Honours were even in a draw. In a cagey goalless contest. Shot count 21-18 favoured São Paulo.</p>
+      
+      <div class="extras"><span class="potm">⭐ Player of the match: <b>Pedro Lima</b> · São Paulo (8.3)</span></div>
+      <div class="statgrid"><div class="stat"><span class="sv">55</span><span class="st">Ball possession</span><span class="sv">45</span></div><div class="stat"><span class="sv">2.20</span><span class="st">Expected goals (xG)</span><span class="sv">1.33</span></div><div class="stat"><span class="sv">21</span><span class="st">Total shots</span><span class="sv">18</span></div><div class="stat"><span class="sv">5</span><span class="st">Shots on target</span><span class="sv">4</span></div><div class="stat"><span class="sv">32</span><span class="st">Touches in opposition box</span><span class="sv">22</span></div><div class="stat"><span class="sv">4</span><span class="st">Big chances</span><span class="sv">3</span></div><div class="stat"><span class="sv">4</span><span class="st">Big chances missed</span><span class="sv">3</span></div><div class="stat"><span class="sv">347 (83%)</span><span class="st">Accurate passes</span><span class="sv">268 (77%)</span></div><div class="stat"><span class="sv">5</span><span class="st">Yellow cards</span><span class="sv">4</span></div><div class="stat"><span class="sv">6</span><span class="st">Corners</span><span class="sv">8</span></div></div>
+    </article>
+    <article class="card" data-country="Brazil">
+      <header class="card-head">
+        <span class="league">Série A</span>
+        <span class="country">Brazil</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 22:30</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Palmeiras</span><span class="sc">6 &ndash; 1</span><span class="tname">Remo</span></span>
+      
+      
+      <p class="insight">Palmeiras produced a comprehensive 5-goal victory over Remo. It was a high-scoring thriller.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="Brazil">
+      <header class="card-head">
+        <span class="league">Série A</span>
+        <span class="country">Brazil</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Fri 06 Nov · 00:30</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Cruzeiro</span><span class="sc">3 &ndash; 2</span><span class="tname">Bahia</span></span>
+      
+      
+      <p class="insight">Cruzeiro edged it by a single goal against Bahia.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="Mexico">
+      <header class="card-head">
+        <span class="league">Liga de Expansión MX - Apertura - Quarter-finals</span>
+        <span class="country">Mexico</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 01:05</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Tlaxcala FC</span><span class="sc">0 &ndash; 1</span><span class="tname">Atlético La Paz</span></span>
+      
+      <p class="meta">Estadio Tlahuicole</p>
+      <p class="insight">Atlético La Paz edged it by a single goal against Tlaxcala FC. In a low-scoring affair. Shot count 16-9 favoured Tlaxcala FC.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">45+1&#x27;</span><span class="pname">Ulíses Jaimes <span class="assist">(ast. Marco García)</span></span></li></ul>
+      <div class="extras"><span class="potm">⭐ Player of the match: <b>Marco García</b> · Atlético La Paz (7.9)</span></div>
+      <div class="statgrid"><div class="stat"><span class="sv">49</span><span class="st">Ball possession</span><span class="sv">51</span></div><div class="stat"><span class="sv">0.76</span><span class="st">Expected goals (xG)</span><span class="sv">0.39</span></div><div class="stat"><span class="sv">16</span><span class="st">Total shots</span><span class="sv">9</span></div><div class="stat"><span class="sv">2</span><span class="st">Shots on target</span><span class="sv">3</span></div><div class="stat"><span class="sv">33</span><span class="st">Touches in opposition box</span><span class="sv">15</span></div><div class="stat"><span class="sv">0</span><span class="st">Big chances</span><span class="sv">2</span></div><div class="stat"><span class="sv">0</span><span class="st">Big chances missed</span><span class="sv">1</span></div><div class="stat"><span class="sv">296 (84%)</span><span class="st">Accurate passes</span><span class="sv">318 (84%)</span></div><div class="stat"><span class="sv">1</span><span class="st">Yellow cards</span><span class="sv">4</span></div><div class="stat"><span class="sv">7</span><span class="st">Corners</span><span class="sv">2</span></div></div>
+    </article>
+    <article class="card" data-country="Mexico">
+      <header class="card-head">
+        <span class="league">Liga de Expansión MX - Apertura - Quarter-finals</span>
+        <span class="country">Mexico</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Fri 06 Nov · 01:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Cancún FC</span><span class="sc">1 &ndash; 1</span><span class="tname">Piratas</span></span>
+      
+      
+      <p class="insight">Honours were even in a draw.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="Mexico">
+      <header class="card-head">
+        <span class="league">Liga de Expansión MX - Apertura - Quarter-finals</span>
+        <span class="country">Mexico</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Fri 06 Nov · 03:05</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Alacranes de Durango</span><span class="sc">1 &ndash; 0</span><span class="tname">Leones Negros</span></span>
+      
+      
+      <p class="insight">Alacranes de Durango edged it by a single goal against Leones Negros. In a low-scoring affair.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="Peru">
+      <header class="card-head">
+        <span class="league">Liga 1</span>
+        <span class="country">Peru</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 01:30</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Universitario de Deportes</span><span class="sc">2 &ndash; 2</span><span class="tname">Sport Boys</span></span>
+      
+      <p class="meta">Estadio Monumental U Marathon</p>
+      <p class="insight">Honours were even in a draw. Shot count 18-10 favoured Universitario de Deportes.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">27&#x27;</span><span class="pname">Christian Cueva</span></li><li class="scorer"><span class="min">83&#x27;</span><span class="pname">Carlos Liza <span class="assist">(ast. Rolando Díaz)</span></span></li><li class="scorer"><span class="min">88&#x27;</span><span class="pname">Álex Valera <span class="assist">(ast. Gianluca Lapadula)</span></span></li><li class="scorer"><span class="min">90+1&#x27;</span><span class="pname">Caín Fara <span class="assist">(ast. Andy Polo)</span></span></li></ul>
+      <div class="extras"><span class="potm">⭐ Player of the match: <b>Diego Melián</b> · Sport Boys (8.6)</span></div>
+      <div class="statgrid"><div class="stat"><span class="sv">70</span><span class="st">Ball possession</span><span class="sv">30</span></div><div class="stat"><span class="sv">18</span><span class="st">Total shots</span><span class="sv">10</span></div><div class="stat"><span class="sv">8</span><span class="st">Shots on target</span><span class="sv">4</span></div><div class="stat"><span class="sv">35</span><span class="st">Touches in opposition box</span><span class="sv">11</span></div><div class="stat"><span class="sv">1</span><span class="st">Big chances</span><span class="sv">2</span></div><div class="stat"><span class="sv">1</span><span class="st">Big chances missed</span><span class="sv">0</span></div><div class="stat"><span class="sv">489 (87%)</span><span class="st">Accurate passes</span><span class="sv">178 (70%)</span></div><div class="stat"><span class="sv">1</span><span class="st">Yellow cards</span><span class="sv">4</span></div><div class="stat"><span class="sv">7</span><span class="st">Corners</span><span class="sv">2</span></div><div class="stat"><span class="sv"></span><span class="st">Shots</span><span class="sv"></span></div></div>
+    </article>
+    <article class="card" data-country="Australia">
+      <header class="card-head">
+        <span class="league">Australian Championship Grp. C</span>
+        <span class="country">Australia</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 08:30</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Sydney Olympic</span><span class="sc">0 &ndash; 2</span><span class="tname">Oakleigh Cannons</span></span>
+      
+      
+      <p class="insight">Oakleigh Cannons beat Sydney Olympic by two goals.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">18&#x27;</span><span class="pname">Arion Sulemani</span></li><li class="scorer"><span class="min">50&#x27;</span><span class="pname">Lebib Lebib</span></li></ul>
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">SAFF Championship Grp. B</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 09:30</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Pakistan</span><span class="sc">2 &ndash; 3</span><span class="tname">India</span></span>
+      
+      <p class="meta">Bangabandhu National Stadium</p>
+      <p class="insight">India edged it by a single goal against Pakistan. Shot count 12-15 favoured India.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">14&#x27;</span><span class="pname">Suhail Ahmad Bhat <span class="badge tally" title="multiple goals">2&times;</span></span></li><li class="scorer"><span class="min">20&#x27;</span><span class="pname">Suhail Ahmad Bhat <span class="badge tally" title="multiple goals">2&times;</span></span></li><li class="scorer"><span class="min">32&#x27;</span><span class="pname">Manglenthang Kipgen</span></li><li class="scorer"><span class="min">90+1&#x27;</span><span class="pname">Najeeb Ullah</span></li><li class="scorer"><span class="min">90+4&#x27;</span><span class="pname">Alamgir Ghazi</span></li></ul>
+      <div class="extras"><a class="hl" href="https://www.youtube.com/watch?v=7RDfwnRpghM" target="_blank" rel="noopener noreferrer"><span class="hl-tag">▶ Highlights</span><img src="https://i.ytimg.com/vi/7RDfwnRpghM/maxresdefault.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"><span class="hl-cap">Watch full highlights</span></a><span class="potm">⭐ Player of the match: <b>Suhail Ahmad Bhat</b> · India (8.9)</span></div>
+      <div class="statgrid"><div class="stat"><span class="sv">45</span><span class="st">Ball possession</span><span class="sv">55</span></div><div class="stat"><span class="sv">12</span><span class="st">Total shots</span><span class="sv">15</span></div><div class="stat"><span class="sv">5</span><span class="st">Shots on target</span><span class="sv">4</span></div><div class="stat"><span class="sv">10</span><span class="st">Touches in opposition box</span><span class="sv">22</span></div><div class="stat"><span class="sv">2</span><span class="st">Big chances</span><span class="sv">5</span></div><div class="stat"><span class="sv">2</span><span class="st">Big chances missed</span><span class="sv">2</span></div><div class="stat"><span class="sv">209 (68%)</span><span class="st">Accurate passes</span><span class="sv">291 (77%)</span></div><div class="stat"><span class="sv">2</span><span class="st">Yellow cards</span><span class="sv">1</span></div><div class="stat"><span class="sv">6</span><span class="st">Corners</span><span class="sv">10</span></div><div class="stat"><span class="sv"></span><span class="st">Shots</span><span class="sv"></span></div></div>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">AFC Champions League Two - G</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 10:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Machida Zelvia</span><span class="sc">2 &ndash; 1</span><span class="tname">Shanghai Shenhua</span></span>
+      
+      <p class="meta">Machida Gion Stadium</p>
+      <p class="insight">Machida Zelvia edged it by a single goal against Shanghai Shenhua. Shot count 11-14 favoured Shanghai Shenhua.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">29&#x27;</span><span class="pname">Hokuto Shimoda</span></li><li class="scorer"><span class="min">59&#x27;</span><span class="pname">Rafael Ratão</span></li><li class="scorer"><span class="min">78&#x27;</span><span class="pname">Keiya Sento</span></li></ul>
+      <div class="extras"><a class="hl" href="https://www.youtube.com/watch?v=p_Uxvm9vhv4" target="_blank" rel="noopener noreferrer"><span class="hl-tag">▶ Highlights</span><img src="https://i.ytimg.com/vi/p_Uxvm9vhv4/maxresdefault.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"><span class="hl-cap">Watch full highlights</span></a><span class="potm">⭐ Player of the match: <b>Hokuto Shimoda</b> · Machida Zelvia (8.4)</span></div>
+      <div class="statgrid"><div class="stat"><span class="sv">48</span><span class="st">Ball possession</span><span class="sv">52</span></div><div class="stat"><span class="sv">11</span><span class="st">Total shots</span><span class="sv">14</span></div><div class="stat"><span class="sv">4</span><span class="st">Shots on target</span><span class="sv">7</span></div><div class="stat"><span class="sv">22</span><span class="st">Touches in opposition box</span><span class="sv">23</span></div><div class="stat"><span class="sv">3</span><span class="st">Big chances</span><span class="sv">2</span></div><div class="stat"><span class="sv">2</span><span class="st">Big chances missed</span><span class="sv">1</span></div><div class="stat"><span class="sv">372 (80%)</span><span class="st">Accurate passes</span><span class="sv">411 (83%)</span></div><div class="stat"><span class="sv">2</span><span class="st">Yellow cards</span><span class="sv">2</span></div><div class="stat"><span class="sv">4</span><span class="st">Corners</span><span class="sv">4</span></div><div class="stat"><span class="sv"></span><span class="st">Shots</span><span class="sv"></span></div></div>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">AFC Champions League Two - G</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 12:15</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Svay Rieng</span><span class="sc">2 &ndash; 0</span><span class="tname">Tampines Rovers FC</span></span>
+      
+      
+      <p class="insight">Svay Rieng beat Tampines Rovers FC by two goals.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">AFC Champions League Two - H</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 10:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Kitchee</span><span class="sc">2 &ndash; 1</span><span class="tname">Phnom Penh</span></span>
+      
+      <p class="meta">Mong Kok Stadium</p>
+      <p class="insight">Kitchee edged it by a single goal against Phnom Penh. Shot count 14-6 favoured Kitchee.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">2&#x27;</span><span class="pname">Ruslan Mingazov <span class="assist">(ast. Everton Camargo)</span></span></li><li class="scorer"><span class="min">85&#x27;</span><span class="pname">Guytho Mijland <span class="assist">(ast. Riku Matsuda)</span></span></li><li class="scorer"><span class="min">90+1&#x27;</span><span class="pname">Kendy <span class="assist">(ast. Adrián Revilla)</span></span></li></ul>
+      <div class="extras"><a class="hl" href="https://www.youtube.com/watch?v=uDpJjK5Wa_A" target="_blank" rel="noopener noreferrer"><span class="hl-tag">▶ Highlights</span><img src="https://i.ytimg.com/vi/uDpJjK5Wa_A/maxresdefault.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"><span class="hl-cap">Watch full highlights</span></a><span class="potm">⭐ Player of the match: <b>Everton Camargo</b> · Kitchee (8.5)</span></div>
+      <div class="statgrid"><div class="stat"><span class="sv">47</span><span class="st">Ball possession</span><span class="sv">53</span></div><div class="stat"><span class="sv">14</span><span class="st">Total shots</span><span class="sv">6</span></div><div class="stat"><span class="sv">7</span><span class="st">Shots on target</span><span class="sv">3</span></div><div class="stat"><span class="sv">26</span><span class="st">Touches in opposition box</span><span class="sv">8</span></div><div class="stat"><span class="sv">3</span><span class="st">Big chances</span><span class="sv">0</span></div><div class="stat"><span class="sv">1</span><span class="st">Big chances missed</span><span class="sv">0</span></div><div class="stat"><span class="sv">289 (79%)</span><span class="st">Accurate passes</span><span class="sv">344 (86%)</span></div><div class="stat"><span class="sv">2</span><span class="st">Yellow cards</span><span class="sv">2</span></div><div class="stat"><span class="sv">5</span><span class="st">Corners</span><span class="sv">5</span></div><div class="stat"><span class="sv"></span><span class="st">Shots</span><span class="sv"></span></div></div>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">AFC Champions League Two - H</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 12:15</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Kuching City</span><span class="sc">2 &ndash; 0</span><span class="tname">Gangwon FC</span></span>
+      
+      
+      <p class="insight">Kuching City beat Gangwon FC by two goals.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">AFC Champions League Two - F</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 11:30</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Lion City Sailors FC</span><span class="sc">5 &ndash; 0</span><span class="tname">Adelaide United</span></span>
+      
+      <p class="meta">Jalan Besar Stadium</p>
+      <p class="insight">Lion City Sailors FC produced a comprehensive 5-goal victory over Adelaide United. Shot count 18-10 favoured Lion City Sailors FC.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">5&#x27;</span><span class="pname">Matthias Phaëton <span class="badge tally" title="multiple goals">2&times;</span></span></li><li class="scorer"><span class="min">17&#x27;</span><span class="pname">Bailey Wright</span></li><li class="scorer"><span class="min">41&#x27;</span><span class="pname">Kyoga Nakamura <span class="assist">(ast. Lennart Thy)</span></span></li><li class="scorer"><span class="min">71&#x27;</span><span class="pname">Ilhan Fandi</span></li><li class="scorer"><span class="min">75&#x27;</span><span class="pname">Matthias Phaëton <span class="badge tally" title="multiple goals">2&times;</span> <span class="assist">(ast. Bart Ramselaar)</span></span></li></ul>
+      <div class="extras"><a class="hl" href="https://www.youtube.com/watch?v=f9vB5Y8ceUI" target="_blank" rel="noopener noreferrer"><span class="hl-tag">▶ Highlights</span><img src="https://i.ytimg.com/vi/f9vB5Y8ceUI/maxresdefault.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"><span class="hl-cap">Watch full highlights</span></a><span class="potm">⭐ Player of the match: <b>Matthias Phaëton</b> · Lion City Sailors FC (8.5)</span></div>
+      <div class="statgrid"><div class="stat"><span class="sv">48</span><span class="st">Ball possession</span><span class="sv">52</span></div><div class="stat"><span class="sv">18</span><span class="st">Total shots</span><span class="sv">10</span></div><div class="stat"><span class="sv">11</span><span class="st">Shots on target</span><span class="sv">3</span></div><div class="stat"><span class="sv">31</span><span class="st">Touches in opposition box</span><span class="sv">15</span></div><div class="stat"><span class="sv">5</span><span class="st">Big chances</span><span class="sv">1</span></div><div class="stat"><span class="sv">3</span><span class="st">Big chances missed</span><span class="sv">1</span></div><div class="stat"><span class="sv">288 (82%)</span><span class="st">Accurate passes</span><span class="sv">326 (82%)</span></div><div class="stat"><span class="sv">1</span><span class="st">Yellow cards</span><span class="sv">1</span></div><div class="stat"><span class="sv">7</span><span class="st">Corners</span><span class="sv">5</span></div><div class="stat"><span class="sv"></span><span class="st">Shots</span><span class="sv"></span></div></div>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">AFC Champions League Two - F</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 12:15</span>
+      </header>
+      <span class="scorebox final"><span class="tname">BG Pathum United</span><span class="sc">4 &ndash; 1</span><span class="tname">Tai Po</span></span>
+      
+      
+      <p class="insight">BG Pathum United produced a comprehensive 3-goal victory over Tai Po.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="India">
+      <header class="card-head">
+        <span class="league">Indian Super League</span>
+        <span class="country">India</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 11:30</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Churchill Brothers</span><span class="sc">0 &ndash; 2</span><span class="tname">Northeast United FC</span></span>
+      
+      <p class="meta">Jawaharlal Nehru Stadium Goa · Att. 4832</p>
+      <p class="insight">Northeast United FC beat Churchill Brothers by two goals. Shot count 15-9 favoured Churchill Brothers.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">18&#x27;</span><span class="pname">Ethyan González <span class="assist">(ast. Jithin Madathil Subran)</span></span></li><li class="scorer"><span class="min">90+3&#x27;</span><span class="pname">Antonio Moyano <span class="assist">(ast. Abdul Rabeeh)</span></span></li></ul>
+      <div class="extras"><a class="hl" href="https://www.youtube.com/watch?v=fPRAVnJJQYQ" target="_blank" rel="noopener noreferrer"><span class="hl-tag">▶ Highlights</span><img src="https://i.ytimg.com/vi/fPRAVnJJQYQ/maxresdefault.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"><span class="hl-cap">Watch full highlights</span></a><span class="potm">⭐ Player of the match: <b>Antonio Moyano</b> · Northeast United FC (8.1)</span></div>
+      <div class="statgrid"><div class="stat"><span class="sv">58</span><span class="st">Ball possession</span><span class="sv">42</span></div><div class="stat"><span class="sv">1.73</span><span class="st">Expected goals (xG)</span><span class="sv">0.48</span></div><div class="stat"><span class="sv">15</span><span class="st">Total shots</span><span class="sv">9</span></div><div class="stat"><span class="sv">5</span><span class="st">Shots on target</span><span class="sv">4</span></div><div class="stat"><span class="sv">22</span><span class="st">Touches in opposition box</span><span class="sv">21</span></div><div class="stat"><span class="sv">1</span><span class="st">Big chances</span><span class="sv">1</span></div><div class="stat"><span class="sv">1</span><span class="st">Big chances missed</span><span class="sv">0</span></div><div class="stat"><span class="sv">334 (82%)</span><span class="st">Accurate passes</span><span class="sv">207 (70%)</span></div><div class="stat"><span class="sv">1</span><span class="st">Yellow cards</span><span class="sv">4</span></div><div class="stat"><span class="sv">2</span><span class="st">Corners</span><span class="sv">3</span></div></div>
+    </article>
+    <article class="card" data-country="India">
+      <header class="card-head">
+        <span class="league">Indian Super League</span>
+        <span class="country">India</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 14:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Mohun Bagan SG</span><span class="sc">3 &ndash; 2</span><span class="tname">Odisha FC</span></span>
+      
+      
+      <p class="insight">Mohun Bagan SG edged it by a single goal against Odisha FC.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">CAF Women&#x27;s Champions League</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 12:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">FAR Rabat (W)</span><span class="sc">6 &ndash; 0</span><span class="tname">USFAS Bamako (W)</span></span>
+      
+      <p class="meta">Suez Canal Stadium</p>
+      <p class="insight">FAR Rabat (W) produced a comprehensive 6-goal victory over USFAS Bamako (W). It was a high-scoring thriller. Shot count 18-3 favoured FAR Rabat (W).</p>
+      <ul class="scorers"><li class="scorer"><span class="min">6&#x27;</span><span class="pname">Nouhaila Benzina <span class="assist">(ast. Fatima Tagnaout)</span></span></li><li class="scorer"><span class="min">8&#x27;</span><span class="pname">Doha El Madani <span class="assist">(ast. Imane Touriss)</span></span></li><li class="scorer"><span class="min">24&#x27;</span><span class="pname">Imane Touriss <span class="badge tally" title="multiple goals">2&times;</span></span></li><li class="scorer"><span class="min">44&#x27;</span><span class="pname">Imane Touriss <span class="badge tally" title="multiple goals">2&times;</span></span></li><li class="scorer"><span class="min">62&#x27;</span><span class="pname">Fatima Tagnaout <span class="assist">(ast. Doha El Madani)</span></span></li><li class="scorer"><span class="min">72&#x27;</span><span class="pname">Nadia Lftah</span></li></ul>
+      
+      <div class="statgrid"><div class="stat"><span class="sv">69</span><span class="st">Ball possession</span><span class="sv">31</span></div><div class="stat"><span class="sv">18</span><span class="st">Total shots</span><span class="sv">3</span></div><div class="stat"><span class="sv">6</span><span class="st">Shots on target</span><span class="sv">1</span></div><div class="stat"><span class="sv">0</span><span class="st">Big chances</span><span class="sv">0</span></div><div class="stat"><span class="sv">0</span><span class="st">Big chances missed</span><span class="sv">0</span></div><div class="stat"><span class="sv">479 (85%)</span><span class="st">Accurate passes</span><span class="sv">160 (66%)</span></div><div class="stat"><span class="sv">1</span><span class="st">Yellow cards</span><span class="sv">1</span></div><div class="stat"><span class="sv">5</span><span class="st">Corners</span><span class="sv">3</span></div><div class="stat"><span class="sv"></span><span class="st">Shots</span><span class="sv"></span></div><div class="stat"><span class="sv">18</span><span class="st">Total shots</span><span class="sv">3</span></div></div>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">CAF Women&#x27;s Champions League</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 15:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Ampem Darkoa Ladies (W)</span><span class="sc">2 &ndash; 1</span><span class="tname">Kawempe Muslim LFC (W)</span></span>
+      
+      
+      <p class="insight">Ampem Darkoa Ladies (W) edged it by a single goal against Kawempe Muslim LFC (W).</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="India">
+      <header class="card-head">
+        <span class="league">I League</span>
+        <span class="country">India</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 13:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Samaleswari SC</span><span class="sc">1 &ndash; 2</span><span class="tname">Dempo SC</span></span>
+      
+      
+      <p class="insight">Dempo SC edged it by a single goal against Samaleswari SC.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="Iraq">
+      <header class="card-head">
+        <span class="league">Stars League</span>
+        <span class="country">Iraq</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 13:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Al Kahrabaa</span><span class="sc">2 &ndash; 1</span><span class="tname">Zakho</span></span>
+      
+      
+      <p class="insight">Al Kahrabaa edged it by a single goal against Zakho.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="Iraq">
+      <header class="card-head">
+        <span class="league">Stars League</span>
+        <span class="country">Iraq</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 13:45</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Diyala</span><span class="sc">0 &ndash; 0</span><span class="tname">Al Minaa</span></span>
+      
+      
+      <p class="insight">Honours were even in a draw. In a cagey goalless contest.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="Iraq">
+      <header class="card-head">
+        <span class="league">Stars League</span>
+        <span class="country">Iraq</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 15:30</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Al-Mosul</span><span class="sc">0 &ndash; 1</span><span class="tname">Duhok</span></span>
+      
+      
+      <p class="insight">Duhok edged it by a single goal against Al-Mosul. In a low-scoring affair.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="Uzbekistan">
+      <header class="card-head">
+        <span class="league">Superliga</span>
+        <span class="country">Uzbekistan</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 13:30</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Bunyodkor Tashkent</span><span class="sc">1 &ndash; 2</span><span class="tname">Xorazm</span></span>
+      
+      
+      <p class="insight">Xorazm edged it by a single goal against Bunyodkor Tashkent.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">SAFF Championship Grp. A</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 14:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Bhutan</span><span class="sc">0 &ndash; 1</span><span class="tname">Bangladesh</span></span>
+      
+      
+      <p class="insight">Bangladesh edged it by a single goal against Bhutan. In a low-scoring affair.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="Qatar">
+      <header class="card-head">
+        <span class="league">Second Division</span>
+        <span class="country">Qatar</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 14:15</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Al Markhiya</span><span class="sc">2 &ndash; 0</span><span class="tname">Al-Waab SC</span></span>
+      
+      
+      <p class="insight">Al Markhiya beat Al-Waab SC by two goals.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="Qatar">
+      <header class="card-head">
+        <span class="league">Second Division</span>
+        <span class="country">Qatar</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 16:30</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Al-Rayyan II</span><span class="sc">1 &ndash; 1</span><span class="tname">Al-Kharaitiyat SC</span></span>
+      
+      
+      <p class="insight">Honours were even in a draw.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="Romania">
+      <header class="card-head">
+        <span class="league">Liga II</span>
+        <span class="country">Romania</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 15:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Chindia Târgoviște</span><span class="sc">4 &ndash; 1</span><span class="tname">Popești Leordeni</span></span>
+      
+      
+      <p class="insight">Chindia Târgoviște produced a comprehensive 3-goal victory over Popești Leordeni.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">Conference League</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 17:45</span>
+      </header>
+      <span class="scorebox final"><span class="tname">AGF</span><span class="sc">0 &ndash; 0</span><span class="tname">Braga</span></span>
+      
+      
+      <p class="insight">Honours were even in a draw. In a cagey goalless contest.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">Conference League</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 17:45</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Atalanta</span><span class="sc">1 &ndash; 1</span><span class="tname">Kairat Almaty</span></span>
+      
+      
+      <p class="insight">Honours were even in a draw.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">Conference League</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 17:45</span>
+      </header>
+      <span class="scorebox final"><span class="tname">FC Midtjylland</span><span class="sc">1 &ndash; 6</span><span class="tname">Ajax</span></span>
+      
+      
+      <p class="insight">Ajax produced a comprehensive 5-goal victory over FC Midtjylland. It was a high-scoring thriller.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">Conference League</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 17:45</span>
+      </header>
+      <span class="scorebox final"><span class="tname">FK Crvena Zvezda</span><span class="sc">2 &ndash; 1</span><span class="tname">Inter Club d&#x27;Escaldes</span></span>
+      
+      
+      <p class="insight">FK Crvena Zvezda edged it by a single goal against Inter Club d&#x27;Escaldes.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">Conference League</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 17:45</span>
+      </header>
+      <span class="scorebox final"><span class="tname">KuPS</span><span class="sc">0 &ndash; 0</span><span class="tname">Gent</span></span>
+      
+      
+      <p class="insight">Honours were even in a draw. In a cagey goalless contest.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">Conference League</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 17:45</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Lincoln Red Imps FC</span><span class="sc">1 &ndash; 0</span><span class="tname">Hajduk Split</span></span>
+      
+      
+      <p class="insight">Lincoln Red Imps FC edged it by a single goal against Hajduk Split. In a low-scoring affair.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">Conference League</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 17:45</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Mjällby</span><span class="sc">2 &ndash; 0</span><span class="tname">Borac Banja Luka</span></span>
+      
+      
+      <p class="insight">Mjällby beat Borac Banja Luka by two goals.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">Conference League</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 17:45</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Thun</span><span class="sc">3 &ndash; 1</span><span class="tname">Heart of Midlothian</span></span>
+      
+      
+      <p class="insight">Thun beat Heart of Midlothian by two goals.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">Conference League</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 17:45</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Trabzonspor</span><span class="sc">0 &ndash; 1</span><span class="tname">Freiburg</span></span>
+      
+      
+      <p class="insight">Freiburg edged it by a single goal against Trabzonspor. In a low-scoring affair.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">Conference League</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 20:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">FC København</span><span class="sc">2 &ndash; 1</span><span class="tname">Iberia 1999</span></span>
+      
+      
+      <p class="insight">FC København edged it by a single goal against Iberia 1999.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">Conference League</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 20:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">FC Twente</span><span class="sc">3 &ndash; 1</span><span class="tname">Pafos FC</span></span>
+      
+      
+      <p class="insight">FC Twente beat Pafos FC by two goals.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">Conference League</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 20:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Getafe</span><span class="sc">0 &ndash; 1</span><span class="tname">Brighton &amp; Hove Albion</span></span>
+      
+      
+      <p class="insight">Brighton &amp; Hove Albion edged it by a single goal against Getafe. In a low-scoring affair.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">Conference League</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 20:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Lugano</span><span class="sc">3 &ndash; 0</span><span class="tname">FK Kauno Žalgiris</span></span>
+      
+      
+      <p class="insight">Lugano produced a comprehensive 3-goal victory over FK Kauno Žalgiris.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">Conference League</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 20:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Monaco</span><span class="sc">2 &ndash; 0</span><span class="tname">Nordsjælland</span></span>
+      
+      
+      <p class="insight">Monaco beat Nordsjælland by two goals.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">Conference League</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 20:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Panathinaikos</span><span class="sc">2 &ndash; 1</span><span class="tname">CSKA Sofia</span></span>
+      
+      
+      <p class="insight">Panathinaikos edged it by a single goal against CSKA Sofia.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">Conference League</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 20:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Riga FC</span><span class="sc">1 &ndash; 1</span><span class="tname">Jablonec</span></span>
+      
+      
+      <p class="insight">Honours were even in a draw.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">Conference League</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 20:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">St.Truiden</span><span class="sc">1 &ndash; 1</span><span class="tname">Brann</span></span>
+      
+      
+      <p class="insight">Honours were even in a draw.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">Conference League</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 20:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Universitatea Craiova</span><span class="sc">2 &ndash; 0</span><span class="tname">Egnatia</span></span>
+      
+      
+      <p class="insight">Universitatea Craiova beat Egnatia by two goals.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="Argentina">
+      <header class="card-head">
+        <span class="league">Liga Profesional</span>
+        <span class="country">Argentina</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 18:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Aldosivi</span><span class="sc">0 &ndash; 2</span><span class="tname">River Plate</span></span>
+      
+      
+      <p class="insight">River Plate beat Aldosivi by two goals.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="Argentina">
+      <header class="card-head">
+        <span class="league">Liga Profesional</span>
+        <span class="country">Argentina</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 22:15</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Gimnasia LP</span><span class="sc">2 &ndash; 1</span><span class="tname">Belgrano</span></span>
+      
+      
+      <p class="insight">Gimnasia LP edged it by a single goal against Belgrano.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="France">
+      <header class="card-head">
+        <span class="league">Ligue 3</span>
+        <span class="country">France</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 19:45</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Valenciennes</span><span class="sc">2 &ndash; 2</span><span class="tname">Orléans</span></span>
+      
+      
+      <p class="insight">Honours were even in a draw.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="Mexico">
+      <header class="card-head">
+        <span class="league">Liga MX Femenil Apertura</span>
+        <span class="country">Mexico</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 21:45</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Atlante (W)</span><span class="sc">0 &ndash; 4</span><span class="tname">Tigres (W)</span></span>
+      
+      
+      <p class="insight">Tigres (W) produced a comprehensive 4-goal victory over Atlante (W).</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="Mexico">
+      <header class="card-head">
+        <span class="league">Liga MX Femenil Apertura</span>
+        <span class="country">Mexico</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 23:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Necaxa (W)</span><span class="sc">1 &ndash; 1</span><span class="tname">Atlas (W)</span></span>
+      
+      
+      <p class="insight">Honours were even in a draw.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="Mexico">
+      <header class="card-head">
+        <span class="league">Liga MX Femenil Apertura</span>
+        <span class="country">Mexico</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Fri 06 Nov · 01:06</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Querétaro (W)</span><span class="sc">1 &ndash; 1</span><span class="tname">Toluca (W)</span></span>
+      
+      
+      <p class="insight">Honours were even in a draw.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="Mexico">
+      <header class="card-head">
+        <span class="league">Liga MX Femenil Apertura</span>
+        <span class="country">Mexico</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Fri 06 Nov · 03:10</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Santos Laguna (W)</span><span class="sc">4 &ndash; 2</span><span class="tname">Club Tijuana (W)</span></span>
+      
+      
+      <p class="insight">Santos Laguna (W) beat Club Tijuana (W) by two goals. It was a high-scoring thriller.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="Brazil">
+      <header class="card-head">
+        <span class="league">Série B</span>
+        <span class="country">Brazil</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 22:30</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Botafogo SP</span><span class="sc">4 &ndash; 0</span><span class="tname">Londrina</span></span>
+      
+      
+      <p class="insight">Botafogo SP produced a comprehensive 4-goal victory over Londrina.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="Colombia">
+      <header class="card-head">
+        <span class="league">Primera B</span>
+        <span class="country">Colombia</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Fri 06 Nov · 00:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Unión Magdalena</span><span class="sc">1 &ndash; 1</span><span class="tname">Independiente Valle del Cauca</span></span>
+      
+      
+      <p class="insight">Honours were even in a draw.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article></div><h2>Results &middot; MENA<span class="count">11 matches</span></h2><div class="cards">
+    <article class="card" data-country="Paraguay">
+      <header class="card-head">
+        <span class="league">Division Profesional</span>
+        <span class="country">Paraguay</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 00:15</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Olimpia</span><span class="sc">4 &ndash; 1</span><span class="tname">Recoleta</span></span>
+      
+      <p class="meta">Estadio ueno Defensores del Chaco</p>
+      <p class="insight">Olimpia produced a comprehensive 3-goal victory over Recoleta. Shot count 12-11 favoured Olimpia.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">5&#x27;</span><span class="pname">Gabriel Ávalos <span class="badge tally" title="multiple goals">3&times;</span> <span class="assist">(ast. Fernando Cardozo)</span></span></li><li class="scorer"><span class="min">10&#x27;</span><span class="pname">Gabriel Ávalos <span class="badge tally" title="multiple goals">3&times;</span> <span class="assist">(ast. Romeo Benítez)</span></span></li><li class="scorer"><span class="min">15&#x27;</span><span class="pname">Gabriel Ávalos <span class="badge tally" title="multiple goals">3&times;</span></span></li><li class="scorer"><span class="min">40&#x27;</span><span class="pname">Romeo Benítez <span class="assist">(ast. Gabriel Ávalos)</span></span></li><li class="scorer"><span class="min">67&#x27;</span><span class="pname">Aldo González <span class="assist">(ast. Wilfrido Báez)</span></span></li></ul>
+      <div class="extras"><span class="potm">⭐ Player of the match: <b>Gabriel Ávalos</b> · Olimpia (9.7)</span></div>
+      <div class="statgrid"><div class="stat"><span class="sv">52</span><span class="st">Ball possession</span><span class="sv">48</span></div><div class="stat"><span class="sv">12</span><span class="st">Total shots</span><span class="sv">11</span></div><div class="stat"><span class="sv">8</span><span class="st">Shots on target</span><span class="sv">5</span></div><div class="stat"><span class="sv">17</span><span class="st">Touches in opposition box</span><span class="sv">17</span></div><div class="stat"><span class="sv">2</span><span class="st">Big chances</span><span class="sv">2</span></div><div class="stat"><span class="sv">0</span><span class="st">Big chances missed</span><span class="sv">1</span></div><div class="stat"><span class="sv">417 (85%)</span><span class="st">Accurate passes</span><span class="sv">361 (83%)</span></div><div class="stat"><span class="sv">0</span><span class="st">Yellow cards</span><span class="sv">1</span></div><div class="stat"><span class="sv">7</span><span class="st">Corners</span><span class="sv">7</span></div><div class="stat"><span class="sv"></span><span class="st">Shots</span><span class="sv"></span></div></div>
+    </article>
+    <article class="card" data-country="Paraguay">
+      <header class="card-head">
+        <span class="league">Division Profesional</span>
+        <span class="country">Paraguay</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 22:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Rubio Ñú</span><span class="sc">0 &ndash; 5</span><span class="tname">Luqueño</span></span>
+      
+      
+      <p class="insight">Luqueño produced a comprehensive 5-goal victory over Rubio Ñú.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="Colombia">
+      <header class="card-head">
+        <span class="league">Primera A</span>
+        <span class="country">Colombia</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 00:45</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Cúcuta</span><span class="sc">1 &ndash; 0</span><span class="tname">Santa Fe</span></span>
+      
+      <p class="meta">Estadio General Santander</p>
+      <p class="insight">Cúcuta edged it by a single goal against Santa Fe. In a low-scoring affair. Shot count 9-15 favoured Santa Fe.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">62&#x27;</span><span class="pname">Léider Berdugo <span class="assist">(ast. Jaime Peralta)</span></span></li></ul>
+      <div class="extras"><a class="hl" href="https://www.youtube.com/watch?v=jBg92Zq-IlU" target="_blank" rel="noopener noreferrer"><span class="hl-tag">▶ Highlights</span><img src="https://i.ytimg.com/vi/jBg92Zq-IlU/maxresdefault.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"><span class="hl-cap">Watch full highlights</span></a><span class="potm">⭐ Player of the match: <b>Léider Berdugo</b> · Cúcuta (8.3)</span></div>
+      <div class="statgrid"><div class="stat"><span class="sv">38</span><span class="st">Ball possession</span><span class="sv">62</span></div><div class="stat"><span class="sv">1.16</span><span class="st">Expected goals (xG)</span><span class="sv">0.73</span></div><div class="stat"><span class="sv">9</span><span class="st">Total shots</span><span class="sv">15</span></div><div class="stat"><span class="sv">3</span><span class="st">Shots on target</span><span class="sv">6</span></div><div class="stat"><span class="sv">16</span><span class="st">Touches in opposition box</span><span class="sv">21</span></div><div class="stat"><span class="sv">1</span><span class="st">Big chances</span><span class="sv">0</span></div><div class="stat"><span class="sv">0</span><span class="st">Big chances missed</span><span class="sv">0</span></div><div class="stat"><span class="sv">225 (75%)</span><span class="st">Accurate passes</span><span class="sv">409 (84%)</span></div><div class="stat"><span class="sv">1</span><span class="st">Yellow cards</span><span class="sv">2</span></div><div class="stat"><span class="sv">2</span><span class="st">Corners</span><span class="sv">6</span></div></div>
+    </article>
+    <article class="card" data-country="Colombia">
+      <header class="card-head">
+        <span class="league">Primera A</span>
+        <span class="country">Colombia</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 01:30</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Millonarios</span><span class="sc">0 &ndash; 0</span><span class="tname">América de Cali</span></span>
+      
+      <p class="meta">Estadio Nemesio Camacho El Campín</p>
+      <p class="insight">Honours were even in a draw. In a cagey goalless contest. Shot count 26-4 favoured Millonarios.</p>
+      
+      <div class="extras"><a class="hl" href="https://www.youtube.com/watch?v=7_OkxH7fvME" target="_blank" rel="noopener noreferrer"><span class="hl-tag">▶ Highlights</span><img src="https://i.ytimg.com/vi/7_OkxH7fvME/maxresdefault.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"><span class="hl-cap">Watch full highlights</span></a><span class="potm">⭐ Player of the match: <b>Jean</b> · América de Cali (8.1)</span></div>
+      <div class="statgrid"><div class="stat"><span class="sv">56</span><span class="st">Ball possession</span><span class="sv">44</span></div><div class="stat"><span class="sv">1.45</span><span class="st">Expected goals (xG)</span><span class="sv">0.66</span></div><div class="stat"><span class="sv">26</span><span class="st">Total shots</span><span class="sv">4</span></div><div class="stat"><span class="sv">8</span><span class="st">Shots on target</span><span class="sv">2</span></div><div class="stat"><span class="sv">24</span><span class="st">Touches in opposition box</span><span class="sv">9</span></div><div class="stat"><span class="sv">1</span><span class="st">Big chances</span><span class="sv">1</span></div><div class="stat"><span class="sv">1</span><span class="st">Big chances missed</span><span class="sv">1</span></div><div class="stat"><span class="sv">439 (86%)</span><span class="st">Accurate passes</span><span class="sv">320 (77%)</span></div><div class="stat"><span class="sv">1</span><span class="st">Yellow cards</span><span class="sv">3</span></div><div class="stat"><span class="sv">7</span><span class="st">Corners</span><span class="sv">4</span></div></div>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">Primera Division - Apertura</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 01:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Firpo</span><span class="sc">2 &ndash; 0</span><span class="tname">Alianza FC</span></span>
+      
+      
+      <p class="insight">Firpo beat Alianza FC by two goals.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">31&#x27;</span><span class="pname">Mauro González</span></li><li class="scorer"><span class="min">34&#x27;</span><span class="pname">Michell Mercado</span></li></ul>
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">Primera Division - Apertura</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 01:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Municipal Limeno</span><span class="sc">1 &ndash; 1</span><span class="tname">Fuerte San Francisco</span></span>
+      
+      
+      <p class="insight">Honours were even in a draw.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">60&#x27;</span><span class="pname">Joshua Gallardo</span></li><li class="scorer"><span class="min">62&#x27;</span><span class="pname">Gerson Mayén</span></li></ul>
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="Honduras">
+      <header class="card-head">
+        <span class="league">Liga Nacional - Apertura</span>
+        <span class="country">Honduras</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 01:30</span>
+      </header>
+      <span class="scorebox final"><span class="tname">CD Olimpia</span><span class="sc">8 &ndash; 0</span><span class="tname">Juticalpa</span></span>
+      
+      
+      <p class="insight">CD Olimpia produced a comprehensive 8-goal victory over Juticalpa. It was a high-scoring thriller.</p>
+      <ul class="scorers"><li class="scorer"><span class="min">4&#x27;</span><span class="pname">Jack Jean-Baptiste</span></li><li class="scorer"><span class="min">10&#x27;</span><span class="pname">Nicolás Dibble <span class="badge tally" title="multiple goals">2&times;</span></span></li><li class="scorer"><span class="min">26&#x27;</span><span class="pname">Jorge Benguché <span class="badge tally" title="multiple goals">3&times;</span></span></li><li class="scorer"><span class="min">33&#x27;</span><span class="pname">Nicolás Dibble <span class="badge tally" title="multiple goals">2&times;</span></span></li><li class="scorer"><span class="min">54&#x27;</span><span class="pname">Jorge Benguché <span class="badge tally" title="multiple goals">3&times;</span></span></li><li class="scorer"><span class="min">61&#x27;</span><span class="pname">Jorge Benguché <span class="badge tally" title="multiple goals">3&times;</span></span></li><li class="scorer"><span class="min">73&#x27;</span><span class="pname">Edwin Rodríguez</span></li><li class="scorer"><span class="min">85&#x27;</span><span class="pname">Michaell Chirinos</span></li></ul>
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="Honduras">
+      <header class="card-head">
+        <span class="league">Liga Nacional - Apertura</span>
+        <span class="country">Honduras</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 21:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Genesis FC</span><span class="sc">1 &ndash; 1</span><span class="tname">Real España</span></span>
+      
+      
+      <p class="insight">Honours were even in a draw.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="Honduras">
+      <header class="card-head">
+        <span class="league">Liga Nacional - Apertura</span>
+        <span class="country">Honduras</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 23:15</span>
+      </header>
+      <span class="scorebox final"><span class="tname">CD Choloma</span><span class="sc">0 &ndash; 0</span><span class="tname">Atletico Independiente</span></span>
+      
+      
+      <p class="insight">Honours were even in a draw. In a cagey goalless contest.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="Honduras">
+      <header class="card-head">
+        <span class="league">Liga Nacional - Apertura</span>
+        <span class="country">Honduras</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Fri 06 Nov · 01:30</span>
+      </header>
+      <span class="scorebox final"><span class="tname">CD Marathón</span><span class="sc">3 &ndash; 1</span><span class="tname">Platense FC</span></span>
+      
+      
+      <p class="insight">CD Marathón beat Platense FC by two goals.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="Iran">
+      <header class="card-head">
+        <span class="league">Persian Gulf</span>
+        <span class="country">Iran</span>
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 13:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Shams Azar Qazvin</span><span class="sc">0 &ndash; 1</span><span class="tname">Sanat Naft Abadan</span></span>
+      
+      
+      <p class="insight">Sanat Naft Abadan edged it by a single goal against Shams Azar Qazvin. In a low-scoring affair.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article></div><h2>Results &middot; International<span class="count">17 matches</span></h2><div class="cards">
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">Europa League</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 17:45</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Anderlecht</span><span class="sc">2 &ndash; 0</span><span class="tname">Salzburg</span></span>
+      
+      
+      <p class="insight">Anderlecht beat Salzburg by two goals.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">Europa League</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 17:45</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Crystal Palace</span><span class="sc">1 &ndash; 1</span><span class="tname">Hoffenheim</span></span>
+      
+      
+      <p class="insight">Honours were even in a draw.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">Europa League</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 17:45</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Levski Sofia</span><span class="sc">1 &ndash; 0</span><span class="tname">Jagiellonia Białystok</span></span>
+      
+      
+      <p class="insight">Levski Sofia edged it by a single goal against Jagiellonia Białystok. In a low-scoring affair.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">Europa League</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 17:45</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Lillestrøm</span><span class="sc">0 &ndash; 1</span><span class="tname">Viktoria Plzeň</span></span>
+      
+      
+      <p class="insight">Viktoria Plzeň edged it by a single goal against Lillestrøm. In a low-scoring affair.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">Europa League</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 17:45</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Milan</span><span class="sc">0 &ndash; 2</span><span class="tname">Ferencváros</span></span>
+      
+      
+      <p class="insight">Ferencváros beat Milan by two goals.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">Europa League</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 17:45</span>
+      </header>
+      <span class="scorebox final"><span class="tname">NEC Nijmegen</span><span class="sc">3 &ndash; 1</span><span class="tname">Omonia Nicosia</span></span>
+      
+      
+      <p class="insight">NEC Nijmegen beat Omonia Nicosia by two goals.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">Europa League</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 17:45</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Real Sociedad</span><span class="sc">1 &ndash; 1</span><span class="tname">Lyon</span></span>
+      
+      
+      <p class="insight">Honours were even in a draw.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">Europa League</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 17:45</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Sparta Prague</span><span class="sc">1 &ndash; 3</span><span class="tname">AFC Bournemouth</span></span>
+      
+      
+      <p class="insight">AFC Bournemouth beat Sparta Prague by two goals.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">Europa League</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 20:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">AZ Alkmaar</span><span class="sc">1 &ndash; 2</span><span class="tname">Juventus</span></span>
+      
+      
+      <p class="insight">Juventus edged it by a single goal against AZ Alkmaar.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">Europa League</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 20:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Bayer Leverkusen</span><span class="sc">0 &ndash; 1</span><span class="tname">Marseille</span></span>
+      
+      
+      <p class="insight">Marseille edged it by a single goal against Bayer Leverkusen. In a low-scoring affair.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">Europa League</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 20:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Benfica</span><span class="sc">3 &ndash; 1</span><span class="tname">Lech Poznań</span></span>
+      
+      
+      <p class="insight">Benfica beat Lech Poznań by two goals.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">Europa League</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 20:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Celta Vigo</span><span class="sc">1 &ndash; 2</span><span class="tname">Union St.Gilloise</span></span>
+      
+      
+      <p class="insight">Union St.Gilloise edged it by a single goal against Celta Vigo.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">Europa League</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 20:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Celtic</span><span class="sc">3 &ndash; 2</span><span class="tname">Beşiktaş</span></span>
+      
+      
+      <p class="insight">Celtic edged it by a single goal against Beşiktaş.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">Europa League</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 20:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Hapoel Beer Sheva</span><span class="sc">0 &ndash; 2</span><span class="tname">OFI Crete</span></span>
+      
+      
+      <p class="insight">OFI Crete beat Hapoel Beer Sheva by two goals.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">Europa League</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 20:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Sturm Graz</span><span class="sc">2 &ndash; 3</span><span class="tname">NK Celje</span></span>
+      
+      
+      <p class="insight">NK Celje edged it by a single goal against Sturm Graz.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">Europa League</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 20:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Sunderland</span><span class="sc">0 &ndash; 2</span><span class="tname">Dinamo Zagreb</span></span>
+      
+      
+      <p class="insight">Dinamo Zagreb beat Sunderland by two goals.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article>
+    <article class="card" data-country="">
+      <header class="card-head">
+        <span class="league">Europa League</span>
+        
+        <span class="badge ft">FT</span>
+        <span class="kickoff">Thu 05 Nov · 20:00</span>
+      </header>
+      <span class="scorebox final"><span class="tname">Torreense</span><span class="sc">3 &ndash; 2</span><span class="tname">Ararat Armenia</span></span>
+      
+      
+      <p class="insight">Torreense edged it by a single goal against Ararat Armenia.</p>
+      
+      
+      <p class="muted small">No detailed stats available.</p>
+    </article></div><h2>Match Reports &amp; Insights</h2><div class="standings"><ul class="insight-list"><li><strong>CD Olimpia 8&ndash;0 Juticalpa</strong> (Liga Nacional - Apertura): CD Olimpia produced a comprehensive 8-goal victory over Juticalpa. It was a high-scoring thriller. Scorers: Jack Jean-Baptiste 4; Nicolás Dibble 10, 33; Jorge Benguché 26, 54, 61; Edwin Rodríguez 73; Michaell Chirinos 85.</li><li><strong>FAR Rabat (W) 6&ndash;0 USFAS Bamako (W)</strong> (CAF Women&#x27;s Champions League): FAR Rabat (W) produced a comprehensive 6-goal victory over USFAS Bamako (W). It was a high-scoring thriller. Shot count 18-3 favoured FAR Rabat (W). Scorers: Nouhaila Benzina 6; Doha El Madani 8; Imane Touriss 24, 44; Fatima Tagnaout 62; Nadia Lftah 72.</li><li><strong>FC Midtjylland 1&ndash;6 Ajax</strong> (Conference League): Ajax produced a comprehensive 5-goal victory over FC Midtjylland. It was a high-scoring thriller.</li><li><strong>Omonia 29 Maiou 6&ndash;2 AEP Polemidion</strong> (Cup): Omonia 29 Maiou produced a comprehensive 4-goal victory over AEP Polemidion. It was a high-scoring thriller.</li><li><strong>Palmeiras 6&ndash;1 Remo</strong> (Série A): Palmeiras produced a comprehensive 5-goal victory over Remo. It was a high-scoring thriller.</li><li><strong>CA Libertad 0&ndash;6 Montevideo City Torque</strong> (Cup): Montevideo City Torque produced a comprehensive 6-goal victory over CA Libertad. It was a high-scoring thriller.</li></ul></div><h2>Upcoming Fixtures &middot; next 24 hours</h2><p class="muted small window-note">Fri 06 Nov 07:12 &rarr; Sat 07 Nov 07:12 (UTC)</p><div class="standings"><table class="fx"><tr class="fxgroup"><td colspan="2">Premier League <span class="country muted">Ukraine</span></td></tr>
+      <tr>
+        <td class="fx-time">11:00</td>
+        <td class="fx-teams">Obolon Kyiv <span class="muted">vs</span> Liviy Bereh</td>
+      </tr>
+      <tr>
+        <td class="fx-time">11:00</td>
+        <td class="fx-teams">Polissya Zhytomyr <span class="muted">vs</span> Veres Rivne</td>
+      </tr>
+      <tr>
+        <td class="fx-time">11:00</td>
+        <td class="fx-teams">Van <span class="muted">vs</span> Pyunik</td>
+      </tr>
+      <tr>
+        <td class="fx-time">14:00</td>
+        <td class="fx-teams">Qarabağ FK <span class="muted">vs</span> Turan Tovuz</td>
+      </tr>
+      <tr>
+        <td class="fx-time">14:25</td>
+        <td class="fx-teams">Al Fahaheel <span class="muted">vs</span> Al-Salibikhaet</td>
+      </tr>
+      <tr>
+        <td class="fx-time">15:00</td>
+        <td class="fx-teams">BKMA <span class="muted">vs</span> Alashkert FC</td>
+      </tr>
+      <tr>
+        <td class="fx-time">15:00</td>
+        <td class="fx-teams">Gomel <span class="muted">vs</span> Arsenal Dzerzhinsk</td>
+      </tr>
+      <tr>
+        <td class="fx-time">15:00</td>
+        <td class="fx-teams">Karela United <span class="muted">vs</span> Vision FC</td>
+      </tr>
+      <tr>
+        <td class="fx-time">16:00</td>
+        <td class="fx-teams">FK Neftchi <span class="muted">vs</span> FC Kapaz</td>
+      </tr>
+      <tr>
+        <td class="fx-time">16:30</td>
+        <td class="fx-teams">Lokomotiv Moscow <span class="muted">vs</span> Rubin Kazan</td>
+      </tr>
+      <tr>
+        <td class="fx-time">16:40</td>
+        <td class="fx-teams">Al-Shabab SC <span class="muted">vs</span> Al-Tadhamon</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:45</td>
+        <td class="fx-teams">Ammanford <span class="muted">vs</span> Briton Ferry Llansawel</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:45</td>
+        <td class="fx-teams">Cambrian United <span class="muted">vs</span> Barry Town</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:45</td>
+        <td class="fx-teams">Haverfordwest <span class="muted">vs</span> Cardiff Met FC</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:45</td>
+        <td class="fx-teams">Holywell Town <span class="muted">vs</span> Airbus UK Broughton</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:45</td>
+        <td class="fx-teams">Llandudno FC <span class="muted">vs</span> The New Saints</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:45</td>
+        <td class="fx-teams">Penybont <span class="muted">vs</span> Caernarfon</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:45</td>
+        <td class="fx-teams">Trefelin BGC <span class="muted">vs</span> Colwyn Bay</td>
+      </tr>
+      <tr>
+        <td class="fx-time">20:00</td>
+        <td class="fx-teams">Connah&#x27;s Quay Nomads <span class="muted">vs</span> Flint Town United</td>
+      </tr>
+      <tr>
+        <td class="fx-time">20:00</td>
+        <td class="fx-teams">Everton <span class="muted">vs</span> Coventry City</td>
+      </tr><tr class="fxgroup"><td colspan="2">LaLiga <span class="country muted">Spain</span></td></tr>
+      <tr>
+        <td class="fx-time">20:00</td>
+        <td class="fx-teams">Sevilla <span class="muted">vs</span> Deportivo Alavés</td>
+      </tr><tr class="fxgroup"><td colspan="2">Serie A <span class="country muted">Italy</span></td></tr>
+      <tr>
+        <td class="fx-time">19:45</td>
+        <td class="fx-teams">Venezia <span class="muted">vs</span> Udinese</td>
+      </tr><tr class="fxgroup"><td colspan="2">Bundesliga <span class="country muted">Austria</span></td></tr>
+      <tr>
+        <td class="fx-time">18:30</td>
+        <td class="fx-teams">Rapid Wien <span class="muted">vs</span> Wolfsberger AC</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:30</td>
+        <td class="fx-teams">Hamburger SV <span class="muted">vs</span> Borussia Mönchengladbach</td>
+      </tr><tr class="fxgroup"><td colspan="2">Ligue 1 <span class="country muted">France</span></td></tr>
+      <tr>
+        <td class="fx-time">19:45</td>
+        <td class="fx-teams">Toulouse <span class="muted">vs</span> Strasbourg</td>
+      </tr><tr class="fxgroup"><td colspan="2">Eredivisie <span class="country muted">Netherlands</span></td></tr>
+      <tr>
+        <td class="fx-time">19:00</td>
+        <td class="fx-teams">Willem II <span class="muted">vs</span> PEC Zwolle</td>
+      </tr><tr class="fxgroup"><td colspan="2">Liga Portugal <span class="country muted">Portugal</span></td></tr>
+      <tr>
+        <td class="fx-time">20:45</td>
+        <td class="fx-teams">Famalicão <span class="muted">vs</span> Arouca</td>
+      </tr><tr class="fxgroup"><td colspan="2">Belgian Pro League <span class="country muted">Belgium</span></td></tr>
+      <tr>
+        <td class="fx-time">19:45</td>
+        <td class="fx-teams">Standard Liège <span class="muted">vs</span> SK Beveren</td>
+      </tr><tr class="fxgroup"><td colspan="2">Allsvenskan <span class="country muted">Sweden</span></td></tr>
+      <tr>
+        <td class="fx-time">18:00</td>
+        <td class="fx-teams">Hammarby <span class="muted">vs</span> Elfsborg</td>
+      </tr><tr class="fxgroup"><td colspan="2">2. Bundesliga <span class="country muted">Germany</span></td></tr>
+      <tr>
+        <td class="fx-time">17:30</td>
+        <td class="fx-teams">Dynamo Dresden <span class="muted">vs</span> Greuther Fürth</td>
+      </tr>
+      <tr>
+        <td class="fx-time">17:30</td>
+        <td class="fx-teams">Eintracht Braunschweig <span class="muted">vs</span> Energie Cottbus</td>
+      </tr><tr class="fxgroup"><td colspan="2">3. Liga <span class="country muted">Germany</span></td></tr>
+      <tr>
+        <td class="fx-time">18:00</td>
+        <td class="fx-teams">Viktoria Köln 1904 <span class="muted">vs</span> Saarbrücken</td>
+      </tr><tr class="fxgroup"><td colspan="2">Serie B <span class="country muted">Italy</span></td></tr>
+      <tr>
+        <td class="fx-time">19:30</td>
+        <td class="fx-teams">Ascoli <span class="muted">vs</span> Palermo</td>
+      </tr><tr class="fxgroup"><td colspan="2">Liga Portugal 2 <span class="country muted">Portugal</span></td></tr>
+      <tr>
+        <td class="fx-time">18:45</td>
+        <td class="fx-teams">AVS Futebol SAD <span class="muted">vs</span> Vizela</td>
+      </tr><tr class="fxgroup"><td colspan="2">J. League 2 <span class="country muted">Japan</span></td></tr>
+      <tr>
+        <td class="fx-time">05:00</td>
+        <td class="fx-teams">Albirex Niigata <span class="muted">vs</span> FC Imabari</td>
+      </tr>
+      <tr>
+        <td class="fx-time">05:00</td>
+        <td class="fx-teams">Blaublitz Akita <span class="muted">vs</span> Oita Trinita</td>
+      </tr>
+      <tr>
+        <td class="fx-time">05:00</td>
+        <td class="fx-teams">Iwaki FC <span class="muted">vs</span> Montedio Yamagata</td>
+      </tr>
+      <tr>
+        <td class="fx-time">05:00</td>
+        <td class="fx-teams">Sagan Tosu <span class="muted">vs</span> Kataller Toyama</td>
+      </tr>
+      <tr>
+        <td class="fx-time">05:00</td>
+        <td class="fx-teams">Tokushima Vortis <span class="muted">vs</span> Tegevajaro Miyazaki</td>
+      </tr>
+      <tr>
+        <td class="fx-time">05:00</td>
+        <td class="fx-teams">Yokohama FC <span class="muted">vs</span> Fujieda MYFC</td>
+      </tr><tr class="fxgroup"><td colspan="2">Qatar Stars League <span class="country muted">Qatar</span></td></tr>
+      <tr>
+        <td class="fx-time">14:15</td>
+        <td class="fx-teams">Al-Arabi <span class="muted">vs</span> Al-Ahli</td>
+      </tr>
+      <tr>
+        <td class="fx-time">16:30</td>
+        <td class="fx-teams">Al-Wakrah <span class="muted">vs</span> Al-Shahaniya</td>
+      </tr><tr class="fxgroup"><td colspan="2">A-League Women <span class="country muted">Australia</span></td></tr>
+      <tr>
+        <td class="fx-time">08:00</td>
+        <td class="fx-teams">Adelaide United (W) <span class="muted">vs</span> Wellington Phoenix (W)</td>
+      </tr>
+      <tr>
+        <td class="fx-time">04:00</td>
+        <td class="fx-teams">Central Coast Mariners (W) <span class="muted">vs</span> Newcastle Jets (W)</td>
+      </tr>
+      <tr>
+        <td class="fx-time">06:00</td>
+        <td class="fx-teams">Brisbane Roar FC (W) <span class="muted">vs</span> Melbourne Victory (W)</td>
+      </tr><tr class="fxgroup"><td colspan="2">Australian Championship Grp. A <span class="country muted">Australia</span></td></tr>
+      <tr>
+        <td class="fx-time">08:30</td>
+        <td class="fx-teams">Canberra Croatia <span class="muted">vs</span> Sydney United 58</td>
+      </tr><tr class="fxgroup"><td colspan="2">Super League <span class="country muted">Indonesia</span></td></tr>
+      <tr>
+        <td class="fx-time">08:30</td>
+        <td class="fx-teams">PSIM Yogyakarta <span class="muted">vs</span> Dewa United FC</td>
+      </tr>
+      <tr>
+        <td class="fx-time">12:00</td>
+        <td class="fx-teams">Madura United <span class="muted">vs</span> Arema</td>
+      </tr><tr class="fxgroup"><td colspan="2">A-League <span class="country muted">Australia</span></td></tr>
+      <tr>
+        <td class="fx-time">08:40</td>
+        <td class="fx-teams">Sydney FC <span class="muted">vs</span> Central Coast Mariners</td>
+      </tr>
+      <tr>
+        <td class="fx-time">04:00</td>
+        <td class="fx-teams">Auckland FC <span class="muted">vs</span> Wellington Phoenix</td>
+      </tr><tr class="fxgroup"><td colspan="2">I League <span class="country muted">India</span></td></tr>
+      <tr>
+        <td class="fx-time">10:30</td>
+        <td class="fx-teams">Bengaluru United <span class="muted">vs</span> Mohammedan SC</td>
+      </tr>
+      <tr>
+        <td class="fx-time">13:00</td>
+        <td class="fx-teams">Shillong Lajong <span class="muted">vs</span> Chanmari FC</td>
+      </tr><tr class="fxgroup"><td colspan="2">V-League <span class="country muted">Vietnam</span></td></tr>
+      <tr>
+        <td class="fx-time">11:00</td>
+        <td class="fx-teams">Hong Linh Ha Tinh <span class="muted">vs</span> Nam Định</td>
+      </tr>
+      <tr>
+        <td class="fx-time">11:00</td>
+        <td class="fx-teams">Trường Tươi Đồng Nai <span class="muted">vs</span> Da Nẵng</td>
+      </tr><tr class="fxgroup"><td colspan="2">Persian Gulf <span class="country muted">Iran</span></td></tr>
+      <tr>
+        <td class="fx-time">12:00</td>
+        <td class="fx-teams">Aluminium Arak <span class="muted">vs</span> Mes Shahr Babak</td>
+      </tr>
+      <tr>
+        <td class="fx-time">12:00</td>
+        <td class="fx-teams">Sepahan <span class="muted">vs</span> Malavan</td>
+      </tr>
+      <tr>
+        <td class="fx-time">13:00</td>
+        <td class="fx-teams">Persepolis <span class="muted">vs</span> Fajr Sepasi</td>
+      </tr>
+      <tr>
+        <td class="fx-time">14:00</td>
+        <td class="fx-teams">Chadormalu Ardakan SC <span class="muted">vs</span> Foolad Khuzestan</td>
+      </tr><tr class="fxgroup"><td colspan="2">Prva Liga <span class="country muted">North Macedonia</span></td></tr>
+      <tr>
+        <td class="fx-time">12:00</td>
+        <td class="fx-teams">GFK Tikves Kavadarci <span class="muted">vs</span> FK Skopje</td>
+      </tr>
+      <tr>
+        <td class="fx-time">16:30</td>
+        <td class="fx-teams">Nafta <span class="muted">vs</span> Olimpija Ljubljana</td>
+      </tr><tr class="fxgroup"><td colspan="2">Thai League <span class="country muted">Thailand</span></td></tr>
+      <tr>
+        <td class="fx-time">12:00</td>
+        <td class="fx-teams">Lamphun Warrior <span class="muted">vs</span> Sukhothai FC</td>
+      </tr><tr class="fxgroup"><td colspan="2">Cup <span class="country muted">Egypt</span></td></tr>
+      <tr>
+        <td class="fx-time">12:30</td>
+        <td class="fx-teams">Smouha SC <span class="muted">vs</span> El Minya</td>
+      </tr>
+      <tr>
+        <td class="fx-time">15:00</td>
+        <td class="fx-teams">Al Sharkeyah-ENPPI <span class="muted">vs</span> Proxy</td>
+      </tr>
+      <tr>
+        <td class="fx-time">18:00</td>
+        <td class="fx-teams">Zamalek SC <span class="muted">vs</span> Misr Insurance FC</td>
+      </tr><tr class="fxgroup"><td colspan="2">Premier League 2 <span class="country muted">England</span></td></tr>
+      <tr>
+        <td class="fx-time">13:00</td>
+        <td class="fx-teams">Birmingham U21 <span class="muted">vs</span> West Ham United U21</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:00</td>
+        <td class="fx-teams">Brentford U21 <span class="muted">vs</span> Wolverhampton Wanderers U21</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:00</td>
+        <td class="fx-teams">Nottingham Forest U21 <span class="muted">vs</span> Leicester City U21</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:00</td>
+        <td class="fx-teams">Reading U21 <span class="muted">vs</span> Newcastle United U21</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:00</td>
+        <td class="fx-teams">Stoke City U21 <span class="muted">vs</span> Fulham U21</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:00</td>
+        <td class="fx-teams">Sunderland U21 <span class="muted">vs</span> Blackburn Rovers U21</td>
+      </tr><tr class="fxgroup"><td colspan="2">Regionalliga West <span class="country muted">Germany</span></td></tr>
+      <tr>
+        <td class="fx-time">13:00</td>
+        <td class="fx-teams">Schalke 04 II <span class="muted">vs</span> Borussia Mönchengladbach II</td>
+      </tr>
+      <tr>
+        <td class="fx-time">18:30</td>
+        <td class="fx-teams">VfB Hilden <span class="muted">vs</span> SV Rödinghausen</td>
+      </tr><tr class="fxgroup"><td colspan="2">Stars League <span class="country muted">Iraq</span></td></tr>
+      <tr>
+        <td class="fx-time">13:00</td>
+        <td class="fx-teams">Newroz <span class="muted">vs</span> Karbalaa</td>
+      </tr>
+      <tr>
+        <td class="fx-time">13:45</td>
+        <td class="fx-teams">Al Talaba <span class="muted">vs</span> Ghaz Al-Shamal SC</td>
+      </tr>
+      <tr>
+        <td class="fx-time">15:30</td>
+        <td class="fx-teams">Al-Karma <span class="muted">vs</span> Naft Maysan</td>
+      </tr><tr class="fxgroup"><td colspan="2">Superliga <span class="country muted">Uzbekistan</span></td></tr>
+      <tr>
+        <td class="fx-time">13:30</td>
+        <td class="fx-teams">Sogdiana <span class="muted">vs</span> Dinamo Samarkand</td>
+      </tr>
+      <tr>
+        <td class="fx-time">15:30</td>
+        <td class="fx-teams">UTA Arad <span class="muted">vs</span> Petrolul Ploiești</td>
+      </tr>
+      <tr>
+        <td class="fx-time">18:30</td>
+        <td class="fx-teams">FC Argeș Pitesti <span class="muted">vs</span> Dinamo București</td>
+      </tr><tr class="fxgroup"><td colspan="2">Indian Super League <span class="country muted">India</span></td></tr>
+      <tr>
+        <td class="fx-time">14:00</td>
+        <td class="fx-teams">FC Goa <span class="muted">vs</span> Bengaluru FC</td>
+      </tr><tr class="fxgroup"><td colspan="2">Saudi First Division <span class="country muted">Saudi Arabia</span></td></tr>
+      <tr>
+        <td class="fx-time">14:55</td>
+        <td class="fx-teams">Al-Zulfi <span class="muted">vs</span> Jeddah</td>
+      </tr><tr class="fxgroup"><td colspan="2">First Professional League <span class="country muted">Bulgaria</span></td></tr>
+      <tr>
+        <td class="fx-time">15:00</td>
+        <td class="fx-teams">Septemvri Sofia <span class="muted">vs</span> PFC Lokomotiv Sofia 1929</td>
+      </tr>
+      <tr>
+        <td class="fx-time">17:15</td>
+        <td class="fx-teams">Botev Plovdiv <span class="muted">vs</span> Dunav Ruse</td>
+      </tr><tr class="fxgroup"><td colspan="2">NPFL <span class="country muted">Nigeria</span></td></tr>
+      <tr>
+        <td class="fx-time">15:00</td>
+        <td class="fx-teams">Kun Khalifat <span class="muted">vs</span> Kano Pillars</td>
+      </tr><tr class="fxgroup"><td colspan="2">1. CFL <span class="country muted">Montenegro</span></td></tr>
+      <tr>
+        <td class="fx-time">16:00</td>
+        <td class="fx-teams">FK Bokelj <span class="muted">vs</span> Mornar</td>
+      </tr><tr class="fxgroup"><td colspan="2">1. Division <span class="country muted">Denmark</span></td></tr>
+      <tr>
+        <td class="fx-time">17:00</td>
+        <td class="fx-teams">Vejle Boldklub <span class="muted">vs</span> Fredericia</td>
+      </tr>
+      <tr>
+        <td class="fx-time">18:00</td>
+        <td class="fx-teams">AB <span class="muted">vs</span> Vendsyssel FF</td>
+      </tr>
+      <tr>
+        <td class="fx-time">18:00</td>
+        <td class="fx-teams">HB Køge <span class="muted">vs</span> AaB</td>
+      </tr><tr class="fxgroup"><td colspan="2">1. Lig <span class="country muted">Türkiye</span></td></tr>
+      <tr>
+        <td class="fx-time">17:00</td>
+        <td class="fx-teams">Antalyaspor <span class="muted">vs</span> Bursaspor</td>
+      </tr>
+      <tr>
+        <td class="fx-time">17:00</td>
+        <td class="fx-teams">Sarıyer <span class="muted">vs</span> Iğdır FK</td>
+      </tr><tr class="fxgroup"><td colspan="2">Botola Pro <span class="country muted">Morocco</span></td></tr>
+      <tr>
+        <td class="fx-time">17:00</td>
+        <td class="fx-teams">Hassania Agadir <span class="muted">vs</span> RS Berkane</td>
+      </tr>
+      <tr>
+        <td class="fx-time">20:00</td>
+        <td class="fx-teams">Union Touarga Sport <span class="muted">vs</span> US Amal Tiznit</td>
+      </tr><tr class="fxgroup"><td colspan="2">Cyprus League <span class="country muted">Cyprus</span></td></tr>
+      <tr>
+        <td class="fx-time">17:00</td>
+        <td class="fx-teams">AEK Larnaca <span class="muted">vs</span> Karmiotissa</td>
+      </tr>
+      <tr>
+        <td class="fx-time">17:00</td>
+        <td class="fx-teams">Nea Salamis <span class="muted">vs</span> Omonia Aradippou</td>
+      </tr><tr class="fxgroup"><td colspan="2">Damallsvenskan <span class="country muted">Sweden</span></td></tr>
+      <tr>
+        <td class="fx-time">17:00</td>
+        <td class="fx-teams">Djurgården (W) <span class="muted">vs</span> BK Häcken (W)</td>
+      </tr><tr class="fxgroup"><td colspan="2">Ekstraklasa <span class="country muted">Poland</span></td></tr>
+      <tr>
+        <td class="fx-time">17:00</td>
+        <td class="fx-teams">Motor Lublin <span class="muted">vs</span> Wisła Płock</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:30</td>
+        <td class="fx-teams">Wisła Kraków <span class="muted">vs</span> Cracovia</td>
+      </tr><tr class="fxgroup"><td colspan="2">FNL <span class="country muted">Czechia</span></td></tr>
+      <tr>
+        <td class="fx-time">17:00</td>
+        <td class="fx-teams">Dukla Praha <span class="muted">vs</span> Příbram</td>
+      </tr>
+      <tr>
+        <td class="fx-time">17:00</td>
+        <td class="fx-teams">Opava <span class="muted">vs</span> FC Vlašim</td>
+      </tr>
+      <tr>
+        <td class="fx-time">17:00</td>
+        <td class="fx-teams">Vysočina Jihlava <span class="muted">vs</span> Karviná</td>
+      </tr>
+      <tr>
+        <td class="fx-time">17:00</td>
+        <td class="fx-teams">Ústí nad Labem <span class="muted">vs</span> Žižkov</td>
+      </tr><tr class="fxgroup"><td colspan="2">HNL <span class="country muted">Croatia</span></td></tr>
+      <tr>
+        <td class="fx-time">17:00</td>
+        <td class="fx-teams">NK Lokomotiva <span class="muted">vs</span> Rudeš</td>
+      </tr><tr class="fxgroup"><td colspan="2">I Liga <span class="country muted">Poland</span></td></tr>
+      <tr>
+        <td class="fx-time">17:00</td>
+        <td class="fx-teams">Puszcza Niepołomice <span class="muted">vs</span> Miedź Legnica</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:30</td>
+        <td class="fx-teams">Odra Opole <span class="muted">vs</span> Skierniewice</td>
+      </tr><tr class="fxgroup"><td colspan="2">II Liga <span class="country muted">Poland</span></td></tr>
+      <tr>
+        <td class="fx-time">17:00</td>
+        <td class="fx-teams">Resovia <span class="muted">vs</span> Górnik Łęczna</td>
+      </tr><tr class="fxgroup"><td colspan="2">Super Lig <span class="country muted">Türkiye</span></td></tr>
+      <tr>
+        <td class="fx-time">17:00</td>
+        <td class="fx-teams">Gaziantep FK <span class="muted">vs</span> Kasımpaşa</td>
+      </tr><tr class="fxgroup"><td colspan="2">2. Liga <span class="country muted">Austria</span></td></tr>
+      <tr>
+        <td class="fx-time">17:30</td>
+        <td class="fx-teams">Austria Wien II <span class="muted">vs</span> First Vienna FC</td>
+      </tr>
+      <tr>
+        <td class="fx-time">17:30</td>
+        <td class="fx-teams">FC Liefering <span class="muted">vs</span> Austria Salzburg</td>
+      </tr>
+      <tr>
+        <td class="fx-time">17:30</td>
+        <td class="fx-teams">SKU Amstetten <span class="muted">vs</span> FC Wacker Innsbruck</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:30</td>
+        <td class="fx-teams">Admira Wacker <span class="muted">vs</span> SKN St. Pölten</td>
+      </tr><tr class="fxgroup"><td colspan="2">Frauen-Bundesliga <span class="country muted">Germany</span></td></tr>
+      <tr>
+        <td class="fx-time">17:30</td>
+        <td class="fx-teams">Bayern München (W) <span class="muted">vs</span> Werder Bremen (W)</td>
+      </tr>
+      <tr>
+        <td class="fx-time">17:30</td>
+        <td class="fx-teams">Eintracht Frankfurt (W) <span class="muted">vs</span> VfL Wolfsburg (W)</td>
+      </tr><tr class="fxgroup"><td colspan="2">2. Division <span class="country muted">Denmark</span></td></tr>
+      <tr>
+        <td class="fx-time">18:00</td>
+        <td class="fx-teams">B 93 <span class="muted">vs</span> Skive</td>
+      </tr>
+      <tr>
+        <td class="fx-time">18:00</td>
+        <td class="fx-teams">FC Roskilde <span class="muted">vs</span> HIK</td>
+      </tr>
+      <tr>
+        <td class="fx-time">18:00</td>
+        <td class="fx-teams">Thisted <span class="muted">vs</span> Fremad Amager</td>
+      </tr><tr class="fxgroup"><td colspan="2">3. Division <span class="country muted">Denmark</span></td></tr>
+      <tr>
+        <td class="fx-time">18:00</td>
+        <td class="fx-teams">Holbæk B&amp;I <span class="muted">vs</span> Brønshøj</td>
+      </tr>
+      <tr>
+        <td class="fx-time">18:00</td>
+        <td class="fx-teams">Sundby BK <span class="muted">vs</span> FC Helsingør</td>
+      </tr><tr class="fxgroup"><td colspan="2">Elitettan <span class="country muted">Sweden</span></td></tr>
+      <tr>
+        <td class="fx-time">18:00</td>
+        <td class="fx-teams">KIF Örebro (W) <span class="muted">vs</span> Linköpings FC (W)</td>
+      </tr><tr class="fxgroup"><td colspan="2">Liga Profesional <span class="country muted">Argentina</span></td></tr>
+      <tr>
+        <td class="fx-time">18:00</td>
+        <td class="fx-teams">Barracas Central <span class="muted">vs</span> Racing Club</td>
+      </tr>
+      <tr>
+        <td class="fx-time">22:15</td>
+        <td class="fx-teams">Independiente <span class="muted">vs</span> Deportivo Riestra</td>
+      </tr>
+      <tr>
+        <td class="fx-time">22:15</td>
+        <td class="fx-teams">San Lorenzo <span class="muted">vs</span> Club Atlético Platense</td>
+      </tr>
+      <tr>
+        <td class="fx-time">22:15</td>
+        <td class="fx-teams">Unión <span class="muted">vs</span> Vélez Sarsfield</td>
+      </tr>
+      <tr>
+        <td class="fx-time">01:00</td>
+        <td class="fx-teams">Banfield <span class="muted">vs</span> Atlético Tucumán</td>
+      </tr>
+      <tr>
+        <td class="fx-time">01:00</td>
+        <td class="fx-teams">Tigre <span class="muted">vs</span> Sarmiento</td>
+      </tr><tr class="fxgroup"><td colspan="2">Premiere Ligue <span class="country muted">France</span></td></tr>
+      <tr>
+        <td class="fx-time">18:00</td>
+        <td class="fx-teams">Nantes (W) <span class="muted">vs</span> Toulouse (W)</td>
+      </tr>
+      <tr>
+        <td class="fx-time">18:00</td>
+        <td class="fx-teams">Paris FC (W) <span class="muted">vs</span> Montpellier FC (W)</td>
+      </tr>
+      <tr>
+        <td class="fx-time">20:00</td>
+        <td class="fx-teams">Paris Saint Germain (W) <span class="muted">vs</span> Le Havre (W)</td>
+      </tr><tr class="fxgroup"><td colspan="2">Primera Federacion - Group 1 <span class="country muted">Spain</span></td></tr>
+      <tr>
+        <td class="fx-time">18:00</td>
+        <td class="fx-teams">Cacereño <span class="muted">vs</span> Lugo</td>
+      </tr>
+      <tr>
+        <td class="fx-time">20:15</td>
+        <td class="fx-teams">Real Avilés CF <span class="muted">vs</span> CD Extremadura</td>
+      </tr><tr class="fxgroup"><td colspan="2">Regionalliga Bayern <span class="country muted">Germany</span></td></tr>
+      <tr>
+        <td class="fx-time">18:00</td>
+        <td class="fx-teams">FV Illertissen <span class="muted">vs</span> Ansbach</td>
+      </tr><tr class="fxgroup"><td colspan="2">Regionalliga North <span class="country muted">Germany</span></td></tr>
+      <tr>
+        <td class="fx-time">18:00</td>
+        <td class="fx-teams">Kickers Emden <span class="muted">vs</span> Lübeck</td>
+      </tr><tr class="fxgroup"><td colspan="2">Regionalliga Northeast <span class="country muted">Germany</span></td></tr>
+      <tr>
+        <td class="fx-time">18:00</td>
+        <td class="fx-teams">BSG Chemie Leipzig <span class="muted">vs</span> RW Erfurt</td>
+      </tr>
+      <tr>
+        <td class="fx-time">18:00</td>
+        <td class="fx-teams">Carl Zeiss Jena <span class="muted">vs</span> BFC Preussen</td>
+      </tr>
+      <tr>
+        <td class="fx-time">18:00</td>
+        <td class="fx-teams">Hallescher FC <span class="muted">vs</span> FSV Luckenwalde</td>
+      </tr>
+      <tr>
+        <td class="fx-time">18:00</td>
+        <td class="fx-teams">VSG Altglienicke <span class="muted">vs</span> Tasmania Berlin</td>
+      </tr><tr class="fxgroup"><td colspan="2">Superligaen <span class="country muted">Denmark</span></td></tr>
+      <tr>
+        <td class="fx-time">18:00</td>
+        <td class="fx-teams">Silkeborg <span class="muted">vs</span> Lyngby</td>
+      </tr><tr class="fxgroup"><td colspan="2">Challenge League <span class="country muted">Switzerland</span></td></tr>
+      <tr>
+        <td class="fx-time">18:30</td>
+        <td class="fx-teams">Kriens <span class="muted">vs</span> FC Rapperswil-Jona</td>
+      </tr>
+      <tr>
+        <td class="fx-time">18:30</td>
+        <td class="fx-teams">Stade Nyonnais <span class="muted">vs</span> FC Stade Lausanne-Ouchy</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:15</td>
+        <td class="fx-teams">Aarau <span class="muted">vs</span> Wil</td>
+      </tr><tr class="fxgroup"><td colspan="2">Eerste Divisie <span class="country muted">Netherlands</span></td></tr>
+      <tr>
+        <td class="fx-time">19:00</td>
+        <td class="fx-teams">FC Dordrecht <span class="muted">vs</span> NAC Breda</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:00</td>
+        <td class="fx-teams">FC Eindhoven <span class="muted">vs</span> Jong Ajax</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:00</td>
+        <td class="fx-teams">Helmond Sport <span class="muted">vs</span> FC Volendam</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:00</td>
+        <td class="fx-teams">Heracles <span class="muted">vs</span> Roda JC Kerkrade</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:00</td>
+        <td class="fx-teams">Jong AZ Alkmaar <span class="muted">vs</span> Almere City FC</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:00</td>
+        <td class="fx-teams">TOP Oss <span class="muted">vs</span> RKC Waalwijk</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:00</td>
+        <td class="fx-teams">VVV-Venlo <span class="muted">vs</span> Jong PSV</td>
+      </tr><tr class="fxgroup"><td colspan="2">First Division B <span class="country muted">Belgium</span></td></tr>
+      <tr>
+        <td class="fx-time">19:00</td>
+        <td class="fx-teams">Genk U23 <span class="muted">vs</span> Gent U23</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:00</td>
+        <td class="fx-teams">Sporting Hasselt <span class="muted">vs</span> Patro Eisden</td>
+      </tr><tr class="fxgroup"><td colspan="2">Liga 3 Zona B <span class="country muted">Portugal</span></td></tr>
+      <tr>
+        <td class="fx-time">19:00</td>
+        <td class="fx-teams">Santarém <span class="muted">vs</span> Mafra</td>
+      </tr>
+      <tr>
+        <td class="fx-time">20:00</td>
+        <td class="fx-teams">CF Os Belenenses <span class="muted">vs</span> Lusitano de Évora</td>
+      </tr><tr class="fxgroup"><td colspan="2">Ligue 2 <span class="country muted">France</span></td></tr>
+      <tr>
+        <td class="fx-time">19:00</td>
+        <td class="fx-teams">Boulogne <span class="muted">vs</span> Annecy FC</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:00</td>
+        <td class="fx-teams">Dijon <span class="muted">vs</span> Red Star</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:00</td>
+        <td class="fx-teams">Dunkerque <span class="muted">vs</span> Guingamp</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:00</td>
+        <td class="fx-teams">Grenoble <span class="muted">vs</span> Reims</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:00</td>
+        <td class="fx-teams">Montpellier <span class="muted">vs</span> Metz</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:00</td>
+        <td class="fx-teams">Nancy <span class="muted">vs</span> Sochaux</td>
+      </tr><tr class="fxgroup"><td colspan="2">Championship <span class="country muted">Scotland</span></td></tr>
+      <tr>
+        <td class="fx-time">19:30</td>
+        <td class="fx-teams">Raith Rovers <span class="muted">vs</span> Dunfermline Athletic</td>
+      </tr>
+      <tr>
+        <td class="fx-time">20:00</td>
+        <td class="fx-teams">Derby County <span class="muted">vs</span> Bolton Wanderers</td>
+      </tr><tr class="fxgroup"><td colspan="2">FA Cup <span class="country muted">England</span></td></tr>
+      <tr>
+        <td class="fx-time">19:30</td>
+        <td class="fx-teams">Bristol Rovers <span class="muted">vs</span> Cambridge United</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:45</td>
+        <td class="fx-teams">Oxford City <span class="muted">vs</span> Leicester City</td>
+      </tr><tr class="fxgroup"><td colspan="2">Serie C Grp. A <span class="country muted">Italy</span></td></tr>
+      <tr>
+        <td class="fx-time">19:30</td>
+        <td class="fx-teams">Alcione Milano <span class="muted">vs</span> Lumezzane</td>
+      </tr>
+      <tr>
+        <td class="fx-time">19:30</td>
+        <td class="fx-teams">Union Brescia <span class="muted">vs</span> Arzignano Valchiampo</td>
+      </tr><tr class="fxgroup"><td colspan="2">Northern Premier Division <span class="country muted">England</span></td></tr>
+      <tr>
+        <td class="fx-time">19:45</td>
+        <td class="fx-teams">Quorn <span class="muted">vs</span> Alfreton Town</td>
+      </tr><tr class="fxgroup"><td colspan="2">Premiership <span class="country muted">Northern Ireland</span></td></tr>
+      <tr>
+        <td class="fx-time">19:45</td>
+        <td class="fx-teams">Cliftonville <span class="muted">vs</span> Larne</td>
+      </tr><tr class="fxgroup"><td colspan="2">Liga 1 <span class="country muted">Peru</span></td></tr>
+      <tr>
+        <td class="fx-time">20:00</td>
+        <td class="fx-teams">Atlético Grau <span class="muted">vs</span> Cusco FC</td>
+      </tr><tr class="fxgroup"><td colspan="2">Primera B <span class="country muted">Colombia</span></td></tr>
+      <tr>
+        <td class="fx-time">21:00</td>
+        <td class="fx-teams">Boca Juniors de Cali <span class="muted">vs</span> Envigado</td>
+      </tr><tr class="fxgroup"><td colspan="2">Série B <span class="country muted">Brazil</span></td></tr>
+      <tr>
+        <td class="fx-time">22:30</td>
+        <td class="fx-teams">Operário-PR <span class="muted">vs</span> Sport Recife</td>
+      </tr><tr class="fxgroup"><td colspan="2">Liga MX Femenil Apertura <span class="country muted">Mexico</span></td></tr>
+      <tr>
+        <td class="fx-time">23:00</td>
+        <td class="fx-teams">Pachuca (W) <span class="muted">vs</span> Puebla (W)</td>
+      </tr>
+      <tr>
+        <td class="fx-time">23:00</td>
+        <td class="fx-teams">Pumas (W) <span class="muted">vs</span> Atlético de San Luis (W)</td>
+      </tr>
+      <tr>
+        <td class="fx-time">01:00</td>
+        <td class="fx-teams">Cruz Azul (W) <span class="muted">vs</span> Club León (W)</td>
+      </tr>
+      <tr>
+        <td class="fx-time">01:06</td>
+        <td class="fx-teams">Chivas (W) <span class="muted">vs</span> CF América (W)</td>
+      </tr>
+      <tr>
+        <td class="fx-time">02:10</td>
+        <td class="fx-teams">FC Juárez (W) <span class="muted">vs</span> Monterrey (W)</td>
+      </tr><tr class="fxgroup"><td colspan="2">Primera A <span class="country muted">Colombia</span></td></tr>
+      <tr>
+        <td class="fx-time">23:00</td>
+        <td class="fx-teams">Chicó FC <span class="muted">vs</span> Internacional de Bogotá</td>
+      </tr>
+      <tr>
+        <td class="fx-time">01:00</td>
+        <td class="fx-teams">Fortaleza FC <span class="muted">vs</span> Independiente Medellín</td>
+      </tr><tr class="fxgroup"><td colspan="2">Primera División <span class="country muted">Bolivia</span></td></tr>
+      <tr>
+        <td class="fx-time">23:00</td>
+        <td class="fx-teams">Independiente Petrolero <span class="muted">vs</span> Real Tomayapo</td>
+      </tr><tr class="fxgroup"><td colspan="2">Série A <span class="country muted">Brazil</span></td></tr>
+      <tr>
+        <td class="fx-time">23:00</td>
+        <td class="fx-teams">Vitória <span class="muted">vs</span> Fluminense</td>
+      </tr><tr class="fxgroup"><td colspan="2">Primera Division - Apertura</td></tr>
+      <tr>
+        <td class="fx-time">00:00</td>
+        <td class="fx-teams">Inca Aruba <span class="muted">vs</span> Isidro Metapan</td>
+      </tr><tr class="fxgroup"><td colspan="2">USL Super League <span class="country muted">USA</span></td></tr>
+      <tr>
+        <td class="fx-time">00:00</td>
+        <td class="fx-teams">DC Power FC (W) <span class="muted">vs</span> Lexington SC (W)</td>
+      </tr>
+      <tr>
+        <td class="fx-time">00:30</td>
+        <td class="fx-teams">Fort Lauderdale United FC (W) <span class="muted">vs</span> Tampa Bay Sun FC (W)</td>
+      </tr><tr class="fxgroup"><td colspan="2">Liga MX <span class="country muted">Mexico</span></td></tr>
+      <tr>
+        <td class="fx-time">01:00</td>
+        <td class="fx-teams">Atlético de San Luis <span class="muted">vs</span> FC Juárez</td>
+      </tr>
+      <tr>
+        <td class="fx-time">01:00</td>
+        <td class="fx-teams">Necaxa <span class="muted">vs</span> Tijuana</td>
+      </tr>
+      <tr>
+        <td class="fx-time">03:00</td>
+        <td class="fx-teams">Atlante <span class="muted">vs</span> Santos Laguna</td>
+      </tr><tr class="fxgroup"><td colspan="2">National League Championship <span class="country muted">New Zealand</span></td></tr>
+      <tr>
+        <td class="fx-time">01:00</td>
+        <td class="fx-teams">Auckland City FC <span class="muted">vs</span> Birkenhead United</td>
+      </tr>
+      <tr>
+        <td class="fx-time">01:00</td>
+        <td class="fx-teams">Wellington Olympic <span class="muted">vs</span> Auckland United FC</td>
+      </tr>
+      <tr>
+        <td class="fx-time">03:00</td>
+        <td class="fx-teams">Ferrymead Bays <span class="muted">vs</span> Wellington Phoenix B</td>
+      </tr><tr class="fxgroup"><td colspan="2">LPF Apertura <span class="country muted">Panama</span></td></tr>
+      <tr>
+        <td class="fx-time">01:30</td>
+        <td class="fx-teams">Alianza FC <span class="muted">vs</span> CD Árabe Unido</td>
+      </tr>
+      <tr>
+        <td class="fx-time">01:30</td>
+        <td class="fx-teams">CD Plaza Amador <span class="muted">vs</span> Sporting San Miguelito</td>
+      </tr>
+      <tr>
+        <td class="fx-time">01:30</td>
+        <td class="fx-teams">UMECIT FC <span class="muted">vs</span> Tauro FC</td>
+      </tr><tr class="fxgroup"><td colspan="2">Liga Nacional Apertura <span class="country muted">Guatemala</span></td></tr>
+      <tr>
+        <td class="fx-time">02:00</td>
+        <td class="fx-teams">Guastatoya <span class="muted">vs</span> CD Suchitepéquez</td>
+      </tr><tr class="fxgroup"><td colspan="2">NWSL Playoff <span class="country muted">USA</span></td></tr>
+      <tr>
+        <td class="fx-time">03:00</td>
+        <td class="fx-teams">San Diego Wave FC (W) <span class="muted">vs</span> Utah Royals (W)</td>
+      </tr><tr class="fxgroup"><td colspan="2">Australian Championship Grp. B <span class="country muted">Australia</span></td></tr>
+      <tr>
+        <td class="fx-time">04:00</td>
+        <td class="fx-teams">APIA Leichhardt FC <span class="muted">vs</span> Broadmeadow Magic</td>
+      </tr><tr class="fxgroup"><td colspan="2">Australian Championship Grp. C <span class="country muted">Australia</span></td></tr>
+      <tr>
+        <td class="fx-time">04:00</td>
+        <td class="fx-teams">Marconi Stallions <span class="muted">vs</span> Bayswater City</td>
+      </tr><tr class="fxgroup"><td colspan="2">J. League <span class="country muted">Japan</span></td></tr>
+      <tr>
+        <td class="fx-time">04:00</td>
+        <td class="fx-teams">Shimizu S-Pulse <span class="muted">vs</span> Tokyo Verdy</td>
+      </tr>
+      <tr>
+        <td class="fx-time">05:00</td>
+        <td class="fx-teams">Nagoya Grampus <span class="muted">vs</span> Kyoto Sanga FC</td>
+      </tr>
+      <tr>
+        <td class="fx-time">05:00</td>
+        <td class="fx-teams">Yokohama F.Marinos <span class="muted">vs</span> Fagiano Okayama FC</td>
+      </tr>
+      <tr>
+        <td class="fx-time">06:00</td>
+        <td class="fx-teams">Avispa Fukuoka <span class="muted">vs</span> V-Varen Nagasaki</td>
+      </tr>
+      <tr>
+        <td class="fx-time">06:00</td>
+        <td class="fx-teams">FC Tokyo <span class="muted">vs</span> Kashima Antlers</td>
+      </tr>
+      <tr>
+        <td class="fx-time">07:00</td>
+        <td class="fx-teams">Kashiwa Reysol <span class="muted">vs</span> Kawasaki Frontale</td>
+      </tr><tr class="fxgroup"><td colspan="2">J. League 3 <span class="country muted">Japan</span></td></tr>
+      <tr>
+        <td class="fx-time">05:00</td>
+        <td class="fx-teams">FC Gifu <span class="muted">vs</span> Giravanz Kitakyushu</td>
+      </tr>
+      <tr>
+        <td class="fx-time">05:00</td>
+        <td class="fx-teams">Fukushima United <span class="muted">vs</span> FC Ryūkyū</td>
+      </tr>
+      <tr>
+        <td class="fx-time">05:00</td>
+        <td class="fx-teams">Nara Club <span class="muted">vs</span> Kochi United SC</td>
+      </tr>
+      <tr>
+        <td class="fx-time">05:00</td>
+        <td class="fx-teams">Thespa Gunma <span class="muted">vs</span> FC Osaka</td>
+      </tr>
+      <tr>
+        <td class="fx-time">05:30</td>
+        <td class="fx-teams">Matsumoto Yamaga <span class="muted">vs</span> Zweigen Kanazawa</td>
+      </tr>
+      <tr>
+        <td class="fx-time">07:00</td>
+        <td class="fx-teams">Ehime FC <span class="muted">vs</span> Reilac Shiga</td>
+      </tr><tr class="fxgroup"><td colspan="2">K League 2 <span class="country muted">South Korea</span></td></tr>
+      <tr>
+        <td class="fx-time">05:00</td>
+        <td class="fx-teams">Seongnam FC <span class="muted">vs</span> Daegu FC</td>
+      </tr>
+      <tr>
+        <td class="fx-time">05:00</td>
+        <td class="fx-teams">Suwon FC <span class="muted">vs</span> Gyeongnam FC</td>
+      </tr><tr class="fxgroup"><td colspan="2">K-League 1 Final Group B <span class="country muted">South Korea</span></td></tr>
+      <tr>
+        <td class="fx-time">05:00</td>
+        <td class="fx-teams">Jeju SK <span class="muted">vs</span> Gwangju FC</td>
+      </tr><tr class="fxgroup"><td colspan="2">K3 League <span class="country muted">South Korea</span></td></tr>
+      <tr>
+        <td class="fx-time">05:00</td>
+        <td class="fx-teams">Busan Transport Corp <span class="muted">vs</span> Jeonbuk Hyundai Motors FC Reserves</td>
+      </tr>
+      <tr>
+        <td class="fx-time">05:00</td>
+        <td class="fx-teams">Changwon City <span class="muted">vs</span> Gangneung City</td>
+      </tr>
+      <tr>
+        <td class="fx-time">05:00</td>
+        <td class="fx-teams">Daejeon Korail <span class="muted">vs</span> Yeoju FC</td>
+      </tr>
+      <tr>
+        <td class="fx-time">05:00</td>
+        <td class="fx-teams">FC Mokpo <span class="muted">vs</span> Siheung Citizen</td>
+      </tr>
+      <tr>
+        <td class="fx-time">05:00</td>
+        <td class="fx-teams">Gyeongju H &amp; N <span class="muted">vs</span> Chuncheon FC</td>
+      </tr>
+      <tr>
+        <td class="fx-time">05:00</td>
+        <td class="fx-teams">Pocheon Citizen FC <span class="muted">vs</span> Ulsan Citizen</td>
+      </tr>
+      <tr>
+        <td class="fx-time">05:00</td>
+        <td class="fx-teams">Yangpyeong <span class="muted">vs</span> Dangjin Citizen</td>
+      </tr><tr class="fxgroup"><td colspan="2">WE League <span class="country muted">Japan</span></td></tr>
+      <tr>
+        <td class="fx-time">05:00</td>
+        <td class="fx-teams">AC Nagano Parceiro Ladies (W) <span class="muted">vs</span> Cerezo Osaka Sakai (W)</td>
+      </tr>
+      <tr>
+        <td class="fx-time">05:00</td>
+        <td class="fx-teams">Mynavi Sendai Ladies (W) <span class="muted">vs</span> Urawa Ladies (W)</td>
+      </tr>
+      <tr>
+        <td class="fx-time">05:00</td>
+        <td class="fx-teams">Nojima Stella (W) <span class="muted">vs</span> NTV Tokyo Verdy Beleza (W)</td>
+      </tr><tr class="fxgroup"><td colspan="2">Australian Championship Grp. D <span class="country muted">Australia</span></td></tr>
+      <tr>
+        <td class="fx-time">06:00</td>
+        <td class="fx-teams">Wollongong Wolves <span class="muted">vs</span> Preston Lions</td>
+      </tr><tr class="fxgroup"><td colspan="2">China League <span class="country muted">China</span></td></tr>
+      <tr>
+        <td class="fx-time">06:30</td>
+        <td class="fx-teams">Dalian K&#x27;un City <span class="muted">vs</span> Meizhou Hakka</td>
+      </tr>
+      <tr>
+        <td class="fx-time">06:30</td>
+        <td class="fx-teams">Guangdong GZ-Power <span class="muted">vs</span> Nanjing City FC</td>
+      </tr>
+      <tr>
+        <td class="fx-time">06:30</td>
+        <td class="fx-teams">Nantong Zhiyun FC <span class="muted">vs</span> Foshan Nanshi</td>
+      </tr>
+      <tr>
+        <td class="fx-time">06:30</td>
+        <td class="fx-teams">Ningbo Professional <span class="muted">vs</span> Dingnan United</td>
+      </tr>
+      <tr>
+        <td class="fx-time">06:30</td>
+        <td class="fx-teams">Shaanxi Union <span class="muted">vs</span> Guangxi Hengchen</td>
+      </tr>
+      <tr>
+        <td class="fx-time">06:30</td>
+        <td class="fx-teams">Shenzhen Juniors <span class="muted">vs</span> Suzhou Dongwu</td>
+      </tr>
+      <tr>
+        <td class="fx-time">06:30</td>
+        <td class="fx-teams">Wuxi Wugo <span class="muted">vs</span> Changchun Yatai</td>
+      </tr>
+      <tr>
+        <td class="fx-time">06:30</td>
+        <td class="fx-teams">Yanbian Longding <span class="muted">vs</span> Shijiazhuang Gongfu</td>
+      </tr></table></div><h2>League Standings</h2><div class="standings-grid">
+    <div class="standings" data-country="England">
+      <h3>Premier League <span class="country muted">England</span></h3>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
+        <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
+        <tbody><tr><td class="pos">1<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Arsenal</td><td>9</td><td>8</td><td>0</td><td>1</td><td>14-5</td><td>9</td><td class="pts">24</td></tr><tr><td class="pos">2<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Manchester City</td><td>9</td><td>7</td><td>0</td><td>2</td><td>20-10</td><td>10</td><td class="pts">21</td></tr><tr><td class="pos">3<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Brighton &amp; Hove Albion</td><td>9</td><td>6</td><td>1</td><td>2</td><td>24-7</td><td>17</td><td class="pts">19</td></tr><tr><td class="pos">4<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Chelsea</td><td>9</td><td>5</td><td>1</td><td>3</td><td>19-15</td><td>4</td><td class="pts">16</td></tr><tr><td class="pos">5<span class="dot" style="background:#0046A7" title="European competition place"></span></td><td class="tm">Liverpool</td><td>9</td><td>4</td><td>3</td><td>2</td><td>11-9</td><td>2</td><td class="pts">15</td></tr><tr><td class="pos">6</td><td class="tm">Brentford</td><td>9</td><td>3</td><td>5</td><td>1</td><td>16-9</td><td>7</td><td class="pts">14</td></tr><tr><td class="pos">7</td><td class="tm">Everton</td><td>9</td><td>3</td><td>4</td><td>2</td><td>9-9</td><td>0</td><td class="pts">13</td></tr><tr><td class="pos">8</td><td class="tm">AFC Bournemouth</td><td>9</td><td>3</td><td>3</td><td>3</td><td>14-13</td><td>1</td><td class="pts">12</td></tr></tbody>
+      </table>
+      <p class="legend"><span class="chip"><span class="dot" style="background:#2AD572"></span>Champions League</span><span class="chip"><span class="dot" style="background:#0046A7"></span>Europa League</span><span class="chip"><span class="dot" style="background:#FF4646"></span>Relegation</span></p>
+    </div>
+    <div class="standings" data-country="Spain">
+      <h3>LaLiga <span class="country muted">Spain</span></h3>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
+        <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
+        <tbody><tr><td class="pos">1<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Barcelona</td><td>11</td><td>10</td><td>0</td><td>1</td><td>46-12</td><td>34</td><td class="pts">30</td></tr><tr><td class="pos">2<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Atlético Madrid</td><td>11</td><td>9</td><td>1</td><td>1</td><td>22-8</td><td>14</td><td class="pts">28</td></tr><tr><td class="pos">3<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Real Madrid</td><td>11</td><td>9</td><td>0</td><td>2</td><td>28-10</td><td>18</td><td class="pts">27</td></tr><tr><td class="pos">4<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Real Betis</td><td>11</td><td>7</td><td>2</td><td>2</td><td>18-15</td><td>3</td><td class="pts">23</td></tr><tr><td class="pos">5<span class="dot" style="background:#0046A7" title="European competition place"></span></td><td class="tm">Real Sociedad</td><td>11</td><td>6</td><td>1</td><td>4</td><td>20-20</td><td>0</td><td class="pts">19</td></tr><tr><td class="pos">6<span class="dot" style="background:#02CCF0" title="European competition place"></span></td><td class="tm">Sevilla</td><td>11</td><td>5</td><td>2</td><td>4</td><td>17-19</td><td>-2</td><td class="pts">17</td></tr><tr><td class="pos">7</td><td class="tm">Athletic Club</td><td>10</td><td>4</td><td>3</td><td>3</td><td>14-10</td><td>4</td><td class="pts">15</td></tr><tr><td class="pos">8</td><td class="tm">Deportivo A Coruña</td><td>11</td><td>3</td><td>5</td><td>3</td><td>15-14</td><td>1</td><td class="pts">14</td></tr></tbody>
+      </table>
+      <p class="legend"><span class="chip"><span class="dot" style="background:#2AD572"></span>Champions League</span><span class="chip"><span class="dot" style="background:#0046A7"></span>Europa League</span><span class="chip"><span class="dot" style="background:#02CCF0"></span>Conference League qualification</span><span class="chip"><span class="dot" style="background:#FF4646"></span>Relegation</span></p>
+    </div>
+    <div class="standings" data-country="Italy">
+      <h3>Serie A <span class="country muted">Italy</span></h3>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
+        <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
+        <tbody><tr><td class="pos">1<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Lazio</td><td>10</td><td>9</td><td>1</td><td>0</td><td>24-8</td><td>16</td><td class="pts">28</td></tr><tr><td class="pos">2<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Inter</td><td>10</td><td>8</td><td>1</td><td>1</td><td>26-13</td><td>13</td><td class="pts">25</td></tr><tr><td class="pos">3<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Roma</td><td>10</td><td>7</td><td>3</td><td>0</td><td>28-10</td><td>18</td><td class="pts">24</td></tr><tr><td class="pos">4<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Como</td><td>10</td><td>7</td><td>2</td><td>1</td><td>18-8</td><td>10</td><td class="pts">23</td></tr><tr><td class="pos">5<span class="dot" style="background:#0046A7" title="European competition place"></span></td><td class="tm">Milan</td><td>10</td><td>6</td><td>3</td><td>1</td><td>21-12</td><td>9</td><td class="pts">21</td></tr><tr><td class="pos">6<span class="dot" style="background:#02CCF0" title="European competition place"></span></td><td class="tm">Frosinone</td><td>10</td><td>6</td><td>2</td><td>2</td><td>24-14</td><td>10</td><td class="pts">20</td></tr><tr><td class="pos">7</td><td class="tm">Juventus</td><td>10</td><td>5</td><td>2</td><td>3</td><td>13-10</td><td>3</td><td class="pts">17</td></tr><tr><td class="pos">8</td><td class="tm">Napoli</td><td>10</td><td>4</td><td>2</td><td>4</td><td>17-13</td><td>4</td><td class="pts">14</td></tr></tbody>
+      </table>
+      <p class="legend"><span class="chip"><span class="dot" style="background:#2AD572"></span>Champions League</span><span class="chip"><span class="dot" style="background:#0046A7"></span>Europa League</span><span class="chip"><span class="dot" style="background:#02CCF0"></span>Conference League qualification</span><span class="chip"><span class="dot" style="background:#FF4646"></span>Relegation</span></p>
+    </div>
+    <div class="standings" data-country="Germany">
+      <h3>Bundesliga <span class="country muted">Germany</span></h3>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
+        <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
+        <tbody><tr><td class="pos">1<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Bayern München</td><td>8</td><td>5</td><td>3</td><td>0</td><td>27-8</td><td>19</td><td class="pts">18</td></tr><tr><td class="pos">2<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Borussia Dortmund</td><td>8</td><td>5</td><td>3</td><td>0</td><td>14-6</td><td>8</td><td class="pts">18</td></tr><tr><td class="pos">3<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Freiburg</td><td>8</td><td>5</td><td>1</td><td>2</td><td>18-10</td><td>8</td><td class="pts">16</td></tr><tr><td class="pos">4<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">RB Leipzig</td><td>8</td><td>5</td><td>0</td><td>3</td><td>22-11</td><td>11</td><td class="pts">15</td></tr><tr><td class="pos">5<span class="dot" style="background:#0046A7" title="European competition place"></span></td><td class="tm">Werder Bremen</td><td>8</td><td>4</td><td>3</td><td>1</td><td>17-14</td><td>3</td><td class="pts">15</td></tr><tr><td class="pos">6<span class="dot" style="background:#02CCF0" title="European competition place"></span></td><td class="tm">Bayer Leverkusen</td><td>8</td><td>4</td><td>1</td><td>3</td><td>18-16</td><td>2</td><td class="pts">13</td></tr><tr><td class="pos">7</td><td class="tm">Elversberg</td><td>8</td><td>4</td><td>1</td><td>3</td><td>16-16</td><td>0</td><td class="pts">13</td></tr><tr><td class="pos">8</td><td class="tm">Eintracht Frankfurt</td><td>8</td><td>3</td><td>2</td><td>3</td><td>13-18</td><td>-5</td><td class="pts">11</td></tr></tbody>
+      </table>
+      <p class="legend"><span class="chip"><span class="dot" style="background:#2AD572"></span>Champions League</span><span class="chip"><span class="dot" style="background:#0046A7"></span>Europa League</span><span class="chip"><span class="dot" style="background:#02CCF0"></span>Conference League qualification</span><span class="chip"><span class="dot" style="background:#FFA72F"></span>Relegation qualification</span><span class="chip"><span class="dot" style="background:#FF4646"></span>Relegation</span></p>
+    </div>
+    <div class="standings" data-country="France">
+      <h3>Ligue 1 <span class="country muted">France</span></h3>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
+        <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
+        <tbody><tr><td class="pos">1<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Paris Saint-Germain</td><td>9</td><td>6</td><td>2</td><td>1</td><td>21-10</td><td>11</td><td class="pts">20</td></tr><tr><td class="pos">2<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Lille</td><td>9</td><td>5</td><td>3</td><td>1</td><td>12-6</td><td>6</td><td class="pts">18</td></tr><tr><td class="pos">3<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Lyon</td><td>9</td><td>5</td><td>2</td><td>2</td><td>15-7</td><td>8</td><td class="pts">17</td></tr><tr><td class="pos">4<span class="dot" style="background:#FFD908" title="European competition place"></span></td><td class="tm">Paris FC</td><td>9</td><td>5</td><td>2</td><td>2</td><td>16-10</td><td>6</td><td class="pts">17</td></tr><tr><td class="pos">5<span class="dot" style="background:#0046A7" title="European competition place"></span></td><td class="tm">Rennes</td><td>9</td><td>5</td><td>1</td><td>3</td><td>20-19</td><td>1</td><td class="pts">16</td></tr><tr><td class="pos">6<span class="dot" style="background:#02CCF0" title="European competition place"></span></td><td class="tm">Marseille</td><td>9</td><td>5</td><td>0</td><td>4</td><td>20-13</td><td>7</td><td class="pts">15</td></tr><tr><td class="pos">7</td><td class="tm">Monaco</td><td>9</td><td>4</td><td>3</td><td>2</td><td>12-10</td><td>2</td><td class="pts">15</td></tr><tr><td class="pos">8</td><td class="tm">Nice</td><td>9</td><td>4</td><td>2</td><td>3</td><td>13-12</td><td>1</td><td class="pts">14</td></tr></tbody>
+      </table>
+      <p class="legend"><span class="chip"><span class="dot" style="background:#2AD572"></span>Champions League</span><span class="chip"><span class="dot" style="background:#FFD908"></span>Champions League qualification</span><span class="chip"><span class="dot" style="background:#0046A7"></span>Europa League</span><span class="chip"><span class="dot" style="background:#02CCF0"></span>Conference League qualification</span><span class="chip"><span class="dot" style="background:#FFA72F"></span>Relegation qualification</span><span class="chip"><span class="dot" style="background:#FF4646"></span>Relegation</span></p>
+    </div>
+    <div class="standings" data-country="Netherlands">
+      <h3>Eredivisie <span class="country muted">Netherlands</span></h3>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
+        <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
+        <tbody><tr><td class="pos">1<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Feyenoord</td><td>11</td><td>7</td><td>4</td><td>0</td><td>33-12</td><td>21</td><td class="pts">25</td></tr><tr><td class="pos">2<span class="dot" style="background:#FFD908" title="European competition place"></span></td><td class="tm">Ajax</td><td>11</td><td>7</td><td>3</td><td>1</td><td>30-13</td><td>17</td><td class="pts">24</td></tr><tr><td class="pos">3<span class="dot" style="background:#0294F0" title="European competition place"></span></td><td class="tm">PSV Eindhoven</td><td>11</td><td>7</td><td>2</td><td>2</td><td>35-13</td><td>22</td><td class="pts">23</td></tr><tr><td class="pos">4<span class="dot" style="background:#7FAEFF" title="European competition place"></span></td><td class="tm">FC Twente</td><td>11</td><td>7</td><td>2</td><td>2</td><td>28-10</td><td>18</td><td class="pts">23</td></tr><tr><td class="pos">5<span class="dot" style="background:#7FAEFF" title="European competition place"></span></td><td class="tm">AZ Alkmaar</td><td>11</td><td>6</td><td>2</td><td>3</td><td>20-13</td><td>7</td><td class="pts">20</td></tr><tr><td class="pos">6<span class="dot" style="background:#7FAEFF" title="European competition place"></span></td><td class="tm">Fortuna Sittard</td><td>11</td><td>5</td><td>4</td><td>2</td><td>18-18</td><td>0</td><td class="pts">19</td></tr><tr><td class="pos">7<span class="dot" style="background:#7FAEFF" title="European competition place"></span></td><td class="tm">SC Heerenveen</td><td>11</td><td>5</td><td>3</td><td>3</td><td>19-13</td><td>6</td><td class="pts">18</td></tr><tr><td class="pos">8</td><td class="tm">FC Groningen</td><td>11</td><td>4</td><td>3</td><td>4</td><td>26-24</td><td>2</td><td class="pts">15</td></tr></tbody>
+      </table>
+      <p class="legend"><span class="chip"><span class="dot" style="background:#2AD572"></span>Champions League</span><span class="chip"><span class="dot" style="background:#FFD908"></span>Champions League qualification</span><span class="chip"><span class="dot" style="background:#0294F0"></span>Europa League qualification</span><span class="chip"><span class="dot" style="background:#7FAEFF"></span>Conference League playoff</span><span class="chip"><span class="dot" style="background:#FFA72F"></span>Relegation qualification</span><span class="chip"><span class="dot" style="background:#FF4646"></span>Relegation</span></p>
+    </div>
+    <div class="standings" data-country="">
+      <h3>UEFA Champions League</h3>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
+        <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
+        <tbody><tr><td class="pos">1<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Paris Saint-Germain</td><td>4</td><td>4</td><td>0</td><td>0</td><td>20-5</td><td>15</td><td class="pts">12</td></tr><tr><td class="pos">2<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Real Madrid</td><td>4</td><td>4</td><td>0</td><td>0</td><td>13-7</td><td>6</td><td class="pts">12</td></tr><tr><td class="pos">3<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Arsenal</td><td>4</td><td>3</td><td>1</td><td>0</td><td>8-3</td><td>5</td><td class="pts">10</td></tr><tr><td class="pos">4<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Como</td><td>4</td><td>3</td><td>0</td><td>1</td><td>19-6</td><td>13</td><td class="pts">9</td></tr><tr><td class="pos">5<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Barcelona</td><td>4</td><td>3</td><td>0</td><td>1</td><td>14-6</td><td>8</td><td class="pts">9</td></tr><tr><td class="pos">6<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Aston Villa</td><td>4</td><td>3</td><td>0</td><td>1</td><td>12-6</td><td>6</td><td class="pts">9</td></tr><tr><td class="pos">7<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Manchester City</td><td>4</td><td>3</td><td>0</td><td>1</td><td>12-7</td><td>5</td><td class="pts">9</td></tr><tr><td class="pos">8<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Liverpool</td><td>4</td><td>3</td><td>0</td><td>1</td><td>14-10</td><td>4</td><td class="pts">9</td></tr></tbody>
+      </table>
+      <p class="legend"><span class="chip"><span class="dot" style="background:#2AD572"></span>Qualification to 1/8 finals</span><span class="chip"><span class="dot" style="background:#0294F0"></span>Qualification to 1/16 finals</span></p>
+    </div>
+    <div class="standings" data-country="">
+      <h3>UEFA Europa League</h3>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
+        <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
+        <tbody><tr><td class="pos">1<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Benfica</td><td>4</td><td>4</td><td>0</td><td>0</td><td>13-3</td><td>10</td><td class="pts">12</td></tr><tr><td class="pos">2<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">AFC Bournemouth</td><td>4</td><td>4</td><td>0</td><td>0</td><td>11-2</td><td>9</td><td class="pts">12</td></tr><tr><td class="pos">3<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Ferencváros</td><td>4</td><td>4</td><td>0</td><td>0</td><td>11-3</td><td>8</td><td class="pts">12</td></tr><tr><td class="pos">4<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Union St.Gilloise</td><td>4</td><td>3</td><td>1</td><td>0</td><td>10-2</td><td>8</td><td class="pts">10</td></tr><tr><td class="pos">5<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Juventus</td><td>4</td><td>3</td><td>1</td><td>0</td><td>11-4</td><td>7</td><td class="pts">10</td></tr><tr><td class="pos">6<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Olympiacos</td><td>4</td><td>3</td><td>1</td><td>0</td><td>4-1</td><td>3</td><td class="pts">10</td></tr><tr><td class="pos">7<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Bayer Leverkusen</td><td>4</td><td>3</td><td>0</td><td>1</td><td>8-1</td><td>7</td><td class="pts">9</td></tr><tr><td class="pos">8<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Beşiktaş</td><td>4</td><td>2</td><td>1</td><td>1</td><td>11-8</td><td>3</td><td class="pts">7</td></tr></tbody>
+      </table>
+      <p class="legend"><span class="chip"><span class="dot" style="background:#2AD572"></span>Qualification to 1/8 finals</span><span class="chip"><span class="dot" style="background:#0294F0"></span>Qualification to 1/16 finals</span></p>
+    </div>
+    <div class="standings" data-country="Saudi Arabia">
+      <h3>Saudi Pro League <span class="country muted">Saudi Arabia</span></h3>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
+        <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
+        <tbody><tr><td class="pos">1<span class="dot" style="background:#c9dd03" title="European competition place"></span></td><td class="tm">Al Hilal</td><td>11</td><td>10</td><td>0</td><td>1</td><td>32-9</td><td>23</td><td class="pts">30</td></tr><tr><td class="pos">2<span class="dot" style="background:#c9dd03" title="European competition place"></span></td><td class="tm">Al Qadsiah</td><td>12</td><td>9</td><td>1</td><td>2</td><td>32-12</td><td>20</td><td class="pts">28</td></tr><tr><td class="pos">3<span class="dot" style="background:#c9dd03" title="European competition place"></span></td><td class="tm">Al Nassr FC</td><td>11</td><td>9</td><td>1</td><td>1</td><td>28-11</td><td>17</td><td class="pts">28</td></tr><tr><td class="pos">4<span class="dot" style="background:#FFD908" title="European competition place"></span></td><td class="tm">Al Ittihad</td><td>11</td><td>7</td><td>3</td><td>1</td><td>21-11</td><td>10</td><td class="pts">24</td></tr><tr><td class="pos">5<span class="dot" style="background:#FFD908" title="European competition place"></span></td><td class="tm">Neom SC</td><td>12</td><td>7</td><td>1</td><td>4</td><td>18-10</td><td>8</td><td class="pts">22</td></tr><tr><td class="pos">6<span class="dot" style="background:#0046A7" title="European competition place"></span></td><td class="tm">Al Ahli</td><td>11</td><td>7</td><td>0</td><td>4</td><td>28-19</td><td>9</td><td class="pts">21</td></tr><tr><td class="pos">7</td><td class="tm">Al-Ettifaq</td><td>12</td><td>5</td><td>4</td><td>3</td><td>18-17</td><td>1</td><td class="pts">19</td></tr><tr><td class="pos">8</td><td class="tm">Al Diriyah</td><td>12</td><td>4</td><td>3</td><td>5</td><td>10-13</td><td>-3</td><td class="pts">15</td></tr></tbody>
+      </table>
+      <p class="legend"><span class="chip"><span class="dot" style="background:#c9dd03"></span>AFC Champions League</span><span class="chip"><span class="dot" style="background:#FFD908"></span>AFC Champions League Qualification</span><span class="chip"><span class="dot" style="background:#0046A7"></span>AFC Cup</span><span class="chip"><span class="dot" style="background:#FF4646"></span>Relegation</span></p>
+    </div>
+    <div class="standings" data-country="United Arab Emirates">
+      <h3>UAE Pro League <span class="country muted">United Arab Emirates</span></h3>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
+        <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
+        <tbody><tr><td class="pos">1<span class="dot" style="background:#c9dd03" title="European competition place"></span></td><td class="tm">Al-Jazira</td><td>6</td><td>4</td><td>2</td><td>0</td><td>13-4</td><td>9</td><td class="pts">14</td></tr><tr><td class="pos">2<span class="dot" style="background:#c9dd03" title="European competition place"></span></td><td class="tm">Shabab Al-Ahli Dubai FC</td><td>6</td><td>4</td><td>1</td><td>1</td><td>12-5</td><td>7</td><td class="pts">13</td></tr><tr><td class="pos">3<span class="dot" style="background:#FFD908" title="European competition place"></span></td><td class="tm">Al-Wasl</td><td>6</td><td>4</td><td>1</td><td>1</td><td>17-6</td><td>11</td><td class="pts">13</td></tr><tr><td class="pos">4<span class="dot" style="background:#0046A7" title="European competition place"></span></td><td class="tm">Al-Ain</td><td>6</td><td>4</td><td>1</td><td>1</td><td>12-7</td><td>5</td><td class="pts">13</td></tr><tr><td class="pos">5</td><td class="tm">Al-Wahda</td><td>6</td><td>4</td><td>0</td><td>2</td><td>9-7</td><td>2</td><td class="pts">12</td></tr><tr><td class="pos">6</td><td class="tm">Sharjah Cultural Club</td><td>6</td><td>4</td><td>0</td><td>2</td><td>13-8</td><td>5</td><td class="pts">12</td></tr><tr><td class="pos">7</td><td class="tm">Ajman</td><td>6</td><td>3</td><td>0</td><td>3</td><td>12-15</td><td>-3</td><td class="pts">9</td></tr><tr><td class="pos">8</td><td class="tm">Al-Nasr SC</td><td>6</td><td>2</td><td>2</td><td>2</td><td>8-7</td><td>1</td><td class="pts">8</td></tr></tbody>
+      </table>
+      <p class="legend"><span class="chip"><span class="dot" style="background:#c9dd03"></span>AFC Champions League</span><span class="chip"><span class="dot" style="background:#FFD908"></span>AFC Champions League Qualification</span><span class="chip"><span class="dot" style="background:#0046A7"></span>AFC Cup</span><span class="chip"><span class="dot" style="background:#FF4646"></span>Relegation</span></p>
+    </div>
+    <div class="standings" data-country="Qatar">
+      <h3>Qatar Stars League <span class="country muted">Qatar</span></h3>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
+        <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
+        <tbody><tr><td class="pos">1<span class="dot" style="background:#c9dd03" title="European competition place"></span></td><td class="tm">Al-Sadd</td><td>8</td><td>6</td><td>0</td><td>2</td><td>31-14</td><td>17</td><td class="pts">18</td></tr><tr><td class="pos">2<span class="dot" style="background:#FFD908" title="European competition place"></span></td><td class="tm">Al-Rayyan</td><td>8</td><td>5</td><td>3</td><td>0</td><td>16-3</td><td>13</td><td class="pts">18</td></tr><tr><td class="pos">3<span class="dot" style="background:#0046A7" title="European competition place"></span></td><td class="tm">Al-Duhail SC</td><td>8</td><td>5</td><td>3</td><td>0</td><td>18-7</td><td>11</td><td class="pts">18</td></tr><tr><td class="pos">4</td><td class="tm">Al-Arabi</td><td>8</td><td>3</td><td>4</td><td>1</td><td>16-8</td><td>8</td><td class="pts">13</td></tr><tr><td class="pos">5</td><td class="tm">Al-Ahli</td><td>8</td><td>3</td><td>2</td><td>3</td><td>14-15</td><td>-1</td><td class="pts">11</td></tr><tr><td class="pos">6</td><td class="tm">Al-Wakrah</td><td>8</td><td>3</td><td>2</td><td>3</td><td>14-16</td><td>-2</td><td class="pts">11</td></tr><tr><td class="pos">7</td><td class="tm">Lusail SC</td><td>8</td><td>2</td><td>3</td><td>3</td><td>10-9</td><td>1</td><td class="pts">9</td></tr><tr><td class="pos">8</td><td class="tm">Al-Gharafa</td><td>8</td><td>2</td><td>3</td><td>3</td><td>10-13</td><td>-3</td><td class="pts">9</td></tr></tbody>
+      </table>
+      <p class="legend"><span class="chip"><span class="dot" style="background:#c9dd03"></span>AFC Champions League</span><span class="chip"><span class="dot" style="background:#FFD908"></span>AFC Champions League Qualification</span><span class="chip"><span class="dot" style="background:#0046A7"></span>AFC Cup</span><span class="chip"><span class="dot" style="background:#FFA72F"></span>Relegation qualification</span><span class="chip"><span class="dot" style="background:#FF4646"></span>Relegation</span></p>
+    </div>
+    <div class="standings" data-country="Egypt">
+      <h3>Egyptian Premier League <span class="country muted">Egypt</span></h3>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
+        <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
+        <tbody><tr><td class="pos">1<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Pyramids FC</td><td>8</td><td>8</td><td>0</td><td>0</td><td>19-4</td><td>15</td><td class="pts">24</td></tr><tr><td class="pos">2<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Al Ahly SC</td><td>8</td><td>6</td><td>2</td><td>0</td><td>15-6</td><td>9</td><td class="pts">20</td></tr><tr><td class="pos">3<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Zamalek SC</td><td>8</td><td>6</td><td>1</td><td>1</td><td>11-4</td><td>7</td><td class="pts">19</td></tr><tr><td class="pos">4<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Ceramica Cleopatra</td><td>8</td><td>6</td><td>0</td><td>2</td><td>15-8</td><td>7</td><td class="pts">18</td></tr><tr><td class="pos">5<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Al Ittihad Alexandria</td><td>8</td><td>4</td><td>2</td><td>2</td><td>9-6</td><td>3</td><td class="pts">14</td></tr><tr><td class="pos">6<span class="dot" style="background:#2AD572" title="European competition place"></span></td><td class="tm">Modern Sport FC</td><td>8</td><td>4</td><td>1</td><td>3</td><td>12-10</td><td>2</td><td class="pts">13</td></tr><tr><td class="pos">7<span class="dot" style="background:#FFA72F" title="European competition place"></span></td><td class="tm">Al Mokawloon Al Arab</td><td>8</td><td>3</td><td>2</td><td>3</td><td>11-8</td><td>3</td><td class="pts">11</td></tr><tr><td class="pos">8<span class="dot" style="background:#FFA72F" title="European competition place"></span></td><td class="tm">National Bank</td><td>8</td><td>3</td><td>2</td><td>3</td><td>9-9</td><td>0</td><td class="pts">11</td></tr></tbody>
+      </table>
+      <p class="legend"><span class="chip"><span class="dot" style="background:#2AD572"></span>Championship playoff</span><span class="chip"><span class="dot" style="background:#FFA72F"></span>Relegation qualification</span></p>
+    </div>
+    <div class="standings" data-country="Morocco">
+      <h3>Moroccan Botola Pro <span class="country muted">Morocco</span></h3>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
+        <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
+        <tbody><tr><td class="pos">1<span class="dot" style="background:#FFD908" title="European competition place"></span></td><td class="tm">KACM</td><td>6</td><td>4</td><td>1</td><td>1</td><td>8-5</td><td>3</td><td class="pts">13</td></tr><tr><td class="pos">2<span class="dot" style="background:#FFD908" title="European competition place"></span></td><td class="tm">CODM Meknès</td><td>6</td><td>3</td><td>2</td><td>1</td><td>9-4</td><td>5</td><td class="pts">11</td></tr><tr><td class="pos">3<span class="dot" style="background:#0294F0" title="European competition place"></span></td><td class="tm">Wydad Casablanca</td><td>6</td><td>3</td><td>2</td><td>1</td><td>6-4</td><td>2</td><td class="pts">11</td></tr><tr><td class="pos">4</td><td class="tm">Ittihad Tanger</td><td>6</td><td>3</td><td>1</td><td>2</td><td>8-7</td><td>1</td><td class="pts">10</td></tr><tr><td class="pos">5</td><td class="tm">Widad Temara</td><td>6</td><td>3</td><td>0</td><td>3</td><td>7-4</td><td>3</td><td class="pts">9</td></tr><tr><td class="pos">6</td><td class="tm">Raja Casablanca</td><td>6</td><td>2</td><td>3</td><td>1</td><td>5-5</td><td>0</td><td class="pts">9</td></tr><tr><td class="pos">7</td><td class="tm">Hassania Agadir</td><td>6</td><td>2</td><td>2</td><td>2</td><td>12-10</td><td>2</td><td class="pts">8</td></tr><tr><td class="pos">8</td><td class="tm">FAR Rabat</td><td>5</td><td>2</td><td>2</td><td>1</td><td>6-4</td><td>2</td><td class="pts">8</td></tr></tbody>
+      </table>
+      <p class="legend"><span class="chip"><span class="dot" style="background:#FFD908"></span>CAF Champions League qualification</span><span class="chip"><span class="dot" style="background:#0294F0"></span>CAF Confederation Cup qualification</span><span class="chip"><span class="dot" style="background:#FFA72F"></span>Relegation qualification</span><span class="chip"><span class="dot" style="background:#FF4646"></span>Relegation</span></p>
+    </div>
+    <div class="standings" data-country="Tunisia">
+      <h3>Tunisian Ligue 1 <span class="country muted">Tunisia</span></h3>
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th>
+        <th>L</th><th>GF:GA</th><th>GD</th><th>Pts</th></tr></thead>
+        <tbody><tr><td class="pos">1<span class="dot" style="background:#FFD908" title="European competition place"></span></td><td class="tm">Ben Guerdane</td><td>7</td><td>5</td><td>2</td><td>0</td><td>12-6</td><td>6</td><td class="pts">17</td></tr><tr><td class="pos">2<span class="dot" style="background:#FFD908" title="European competition place"></span></td><td class="tm">Stade Tunisien</td><td>7</td><td>4</td><td>1</td><td>2</td><td>10-7</td><td>3</td><td class="pts">13</td></tr><tr><td class="pos">3<span class="dot" style="background:#0294F0" title="European competition place"></span></td><td class="tm">Espérance</td><td>6</td><td>4</td><td>1</td><td>1</td><td>10-7</td><td>3</td><td class="pts">13</td></tr><tr><td class="pos">4</td><td class="tm">US Monastir</td><td>6</td><td>3</td><td>3</td><td>0</td><td>8-5</td><td>3</td><td class="pts">12</td></tr><tr><td class="pos">5</td><td class="tm">Club Africain</td><td>6</td><td>4</td><td>0</td><td>2</td><td>8-6</td><td>2</td><td class="pts">12</td></tr><tr><td class="pos">6</td><td class="tm">PS Sakiet Eddaïer</td><td>6</td><td>3</td><td>2</td><td>1</td><td>5-2</td><td>3</td><td class="pts">11</td></tr><tr><td class="pos">7</td><td class="tm">CA Bizertin</td><td>7</td><td>3</td><td>2</td><td>2</td><td>8-7</td><td>1</td><td class="pts">11</td></tr><tr><td class="pos">8</td><td class="tm">JS Omrane</td><td>7</td><td>2</td><td>4</td><td>1</td><td>6-5</td><td>1</td><td class="pts">10</td></tr></tbody>
+      </table>
+      <p class="legend"><span class="chip"><span class="dot" style="background:#FFD908"></span>CAF Champions League qualification</span><span class="chip"><span class="dot" style="background:#0294F0"></span>CAF Confederation Cup qualification</span><span class="chip"><span class="dot" style="background:#FF4646"></span>Relegation</span></p>
+    </div></div>
+<footer class="page">
+<p><strong>Data sources:</strong> FotMob public JSON API (matches, matchDetails, league tables)</p>
+<p>Reporting window scanned: results (2 days), fixtures (2 days). Kick-off times shown in
+UTC. Standings are the latest published
+tables from the data provider.</p>
+<p>Match insight lines are auto-generated from scoreline, goal and stat data.
+Generated automatically &middot; this page is informational only.</p>
+</footer>
+</div>
+<script>
+(function () {
+  var filter = document.getElementById('country-filter');
+  if (!filter) return;
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var blocks = Array.prototype.slice.call(document.querySelectorAll('.standings'));
+  var empty = document.getElementById('filter-empty');
+  var count = document.getElementById('filter-count');
+  function apply() {
+    var v = filter.value;
+    var shown = 0;
+    cards.forEach(function (c) {
+      var match = (v === 'all') || (c.getAttribute('data-country') === v);
+      c.style.display = match ? '' : 'none';
+      if (match) shown += 1;
+    });
+    blocks.forEach(function (b) {
+      var match = (v === 'all') || (b.getAttribute('data-country') === v);
+      b.style.display = match ? '' : 'none';
+    });
+    empty.hidden = (v === 'all') || shown > 0;
+    count.textContent = (v === 'all') ? '' : (shown + ' match' + (shown === 1 ? '' : 'es'));
+  }
+  filter.addEventListener('change', apply);
+  apply();
+})();
+</script>
+</body></html>
